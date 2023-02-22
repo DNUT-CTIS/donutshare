@@ -42,18 +42,24 @@ const authUser = asyncHandler(async (req,res) => {
 
     const user = await User.findOne({email});
 
-    if(user && (await user.matchPassword(password))) {
+    if(user && (await user.matchPassword(password)) ) {
+
+        if(user.banned){
+        res.status(403);
+        throw new Error("You are banned from Donut Share");
+    }
         res.json({
         _id: user._id,
         username: user.name,
         email: user.email,
         token:generateToken(user._id)
         });
-    } else {
+    } 
+     
+    else {
     res.status(401);
     throw new Error("Invalid Email or Password");
    }
 });
-
 
 module.exports = {registerUser, authUser};
