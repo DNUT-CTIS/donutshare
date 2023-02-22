@@ -3,7 +3,7 @@ const User = require('../models/userModel')
 const generateToken = require("../config/generateToken")
 
 const registerUser = asyncHandler(async(req,res ) => {
-   const {username,email,password,usertype} = req.body;
+   const {username,email,password,userType} = req.body;
 
    if (!username || !email || !password) {
     res.status(400);
@@ -21,7 +21,7 @@ const registerUser = asyncHandler(async(req,res ) => {
     username,
     email,
     password,
-    usertype,
+    userType,
    })
 
    if(user) {
@@ -44,9 +44,9 @@ const authUser = asyncHandler(async (req,res) => {
 
     if(user && (await user.matchPassword(password)) ) {
 
-        if(user.banned){
+        if(user.isBanned){
         res.status(403);
-        throw new Error("You are banned from Donut Share");
+        throw new Error("You are Banned from Donut Share");
     }
         res.json({
         _id: user._id,
@@ -62,4 +62,23 @@ const authUser = asyncHandler(async (req,res) => {
    }
 });
 
-module.exports = {registerUser, authUser};
+const banUser = asyncHandler(async (req,res) => {
+    const {email} = req.body;
+    const user = await User.findOneAndUpdate({email},{ isBanned: true})
+
+    if(user) {
+        if(!user.isBanned){  
+            res.status(200);      
+    }
+        res.json({
+        email: user.email,
+        isBanned: user.isBanned
+        });
+    } 
+    else {
+    res.status(401);
+    throw new Error("There is no such user");
+   }
+});
+
+module.exports = {registerUser, authUser, banUser};
