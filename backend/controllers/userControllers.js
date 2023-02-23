@@ -67,9 +67,9 @@ const banUser = asyncHandler(async (req,res) => {
     const user = await User.findOneAndUpdate({email},{ isBanned: true})
 
     if(user) {
-        if(!user.isBanned){  
+      
             res.status(200);      
-    }
+    
         res.json({
         email: user.email,
         isBanned: user.isBanned
