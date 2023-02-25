@@ -67,9 +67,7 @@ const banUser = asyncHandler(async (req,res) => {
     const user = await User.findOneAndUpdate({email},{ isBanned: true})
 
     if(user) {
-      
-            res.status(200);      
-    
+        res.status(200);      
         res.json({
         email: user.email,
         isBanned: user.isBanned
@@ -81,4 +79,10 @@ const banUser = asyncHandler(async (req,res) => {
    }
 });
 
-module.exports = {registerUser, authUser, banUser};
+const allUsers = asyncHandler(async(req,res)=>{
+    const keyword = req.query.search
+
+    console.log(keyword);
+});
+
+module.exports = {registerUser, authUser, banUser, allUsers};
