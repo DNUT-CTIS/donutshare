@@ -20,6 +20,13 @@ const sendPost = asyncHandler(async(req,res) => {
     res.status(200).json(post)
 })
 
+const getPosts = asyncHandler(async (req, res) => {
+
+  const posts = await Post.find()
+
+  res.status(200).json({ posts });
+});
+
 const upvote = asyncHandler(async(req,res) =>{
   const {id} = req.body;
 
@@ -81,4 +88,4 @@ const deletePost = asyncHandler(async(req,res) => {
     res.status(200).json({ id: req.params.id,message: "Your post is deleted"} )
 })
 
-module.exports = { sendPost, upvote, downvote, deletePost }
+module.exports = { sendPost, upvote, downvote, deletePost, getPosts }
