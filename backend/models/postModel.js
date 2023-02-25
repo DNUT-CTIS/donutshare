@@ -5,6 +5,10 @@ const postModel = mongoose.Schema({
                 required: true,
                 ref:"User"
         },
+    username:{type: String,
+                trim: true,
+                required: true
+        },
     text:{type: String,
                 trim: true,
                 required: [true, 'Please add a text value']

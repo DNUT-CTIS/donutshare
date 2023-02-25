@@ -3,8 +3,8 @@ const asyncHandler = require('express-async-handler')
 const User = require('../models/userModel')
 const Post = require('../models/postModel')
 
-
 const sendPost = asyncHandler(async(req,res) => {
+
 
      if (!req.body.text) {
         res.status(400)
@@ -13,6 +13,7 @@ const sendPost = asyncHandler(async(req,res) => {
 
        const post = await Post.create({
          user: req.user.id,
+         username: req.user.username,
          text: req.body.text
       })
 
@@ -57,20 +58,18 @@ const downvote = asyncHandler(async(req,res) =>{
 
 const deletePost = asyncHandler(async(req,res) => {
     const {id} = req.body;
-    console.log(id)
+
      const post = await Post.findById(id)
-console.log(post)
+
         if(!post){
         res.status(400)
         throw new Error('Post not found')
     }
 
-
     if(!req.user) {
         res.status(401)
         throw new Error('User not found')
     }
-
 
     if(post.user.toString() !== req.user.id){
         res.status(401)
@@ -81,4 +80,5 @@ console.log(post)
 
     res.status(200).json({ id: req.params.id,message: "Your post is deleted"} )
 })
+
 module.exports = { sendPost, upvote, downvote, deletePost }
