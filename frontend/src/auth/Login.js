@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../shared/logo.png"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
 
 export function Login(props) {
     const navigate = useNavigate();
@@ -10,7 +11,32 @@ export function Login(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [token, setToken] = useState("");
 
+
+    const submitHandler = async (event) => {
+        event.preventDefault()
+        try {
+            const config = {
+                headers: {
+                    "Content-type": "application/json",
+                },
+            };
+            const { data } = await axios.post(
+                "http://localhost:3000/api/user/login",
+                {
+
+                    email: email,
+                    password: password,
+                },
+                config
+            );
+            setToken(data.token)
+            console.log(token)
+        } catch (error) {
+
+        }
+    };
     return (
         <div>
             <ToastContainer />
@@ -26,7 +52,7 @@ export function Login(props) {
                                 Login
                             </h1>
 
-                            <form className="space-y-4 md:space-y-6" action="#">
+                            <form className="space-y-4 md:space-y-6" action="#" onSubmit={submitHandler}>
                                 <div>
                                     <label htmlFor="email"
 

@@ -1,15 +1,40 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../shared/logo.png"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
 export function Register(props) {
     const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
+    const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+
+    const submitHandler = async (event) => {
+        event.preventDefault()
+        try {
+            const config = {
+                headers: {
+                    "Content-type": "application/json",
+                },
+            };
+            const { data } = await axios.post(
+                "http://localhost:3000/api/user/",
+                {
+                    username: user,
+                    email: email,
+                    password: password,
+                },
+                config
+            );
+        } catch (error) {
+
+        }
+    };
+
 
     return (
         <div>
@@ -26,7 +51,7 @@ export function Register(props) {
                                 Register
                             </h1>
 
-                            <form className="space-y-4 md:space-y-6" action="#">
+                            <form className="space-y-4 md:space-y-6" action="#" onSubmit={submitHandler}>
                                 <div>
                                     <label htmlFor="email"
 
@@ -39,18 +64,18 @@ export function Register(props) {
                                            placeholder="name@company.com" required=""/>
                                 </div>
                                 <div>
-                                    <label htmlFor="password"
-                                           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                                    <input type="password" name="password" id="password" placeholder="••••••••"
-                                           onChange={(e) => setPassword(e.target.value)}
+                                    <label htmlFor="username"
+                                           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">UserName</label>
+                                    <input type="username" name="username" id="username" placeholder=""
+                                           onChange={(e) => setUser(e.target.value)}
                                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-zinc-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-purple-500"
                                            required=""/>
                                 </div>
                                 <div>
-                                    <label htmlFor="confirmPassword"
-                                           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm Password</label>
-                                    <input type="password" name="confirmPassword" id="confirmPassword" placeholder="••••••••"
-                                           onChange={(e) => setConfirmPassword(e.target.value)}
+                                    <label htmlFor="password"
+                                           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                                    <input type="password" name="password" id="password" placeholder="••••••••"
+                                           onChange={(e) => setPassword(e.target.value)}
                                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-zinc-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-purple-500"
                                            required=""/>
                                 </div>
@@ -68,4 +93,5 @@ export function Register(props) {
         </div>
 
     );
+
 }
