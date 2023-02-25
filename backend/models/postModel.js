@@ -1,8 +1,14 @@
 const mongoose = require('mongoose')
 
 const postModel = mongoose.Schema({
-    sender :{type:mongoose.Schema.Types.ObjectId,ref:"User"},
-    content:{type: String, trim: true},
+    user :{type:mongoose.Schema.Types.ObjectId,
+                required: true,
+                ref:"User"
+        },
+    text:{type: String,
+                trim: true,
+                required: [true, 'Please add a text value']
+        },
     upvoteCount:{type: mongoose.Schema.Types.Number, default: 0},
     downvoteCount:{type: mongoose.Schema.Types.Number, default: 0}
 },

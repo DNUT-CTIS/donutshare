@@ -1,6 +1,6 @@
 const chats = [
   {
-    isGroupChat: false,
+    
     users: [
       {
         name: "John Doe",
@@ -15,7 +15,7 @@ const chats = [
     chatName: "John Doe",
   },
   {
-    isGroupChat: false,
+    
     users: [
       {
         name: "Guest User",
@@ -30,7 +30,7 @@ const chats = [
     chatName: "Guest User",
   },
   {
-    isGroupChat: false,
+    
     users: [
       {
         name: "Anthony",
@@ -45,8 +45,7 @@ const chats = [
     chatName: "Anthony",
   },
   {
-    isGroupChat: true,
-    users: [
+        users: [
       {
         name: "John Doe",
         email: "jon@example.com",
@@ -68,7 +67,7 @@ const chats = [
     },
   },
   {
-    isGroupChat: false,
+    
     users: [
       {
         name: "Jane Doe",
@@ -83,8 +82,7 @@ const chats = [
     chatName: "Jane Doe",
   },
   {
-    isGroupChat: true,
-    users: [
+        users: [
       {
         name: "John Doe",
         email: "jon@example.com",
