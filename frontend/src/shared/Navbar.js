@@ -1,5 +1,8 @@
 import React from 'react';
 import logo from './logo.png'
+import {Modal} from "flowbite";
+import SendModal from "./SendModal";
+
 export function Navbar() {
 
     return(
@@ -24,6 +27,9 @@ export function Navbar() {
                     <ul className="flex flex-col mt-4 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
                         <li>
                             <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.25 2.75a1.5 1.5 0 0 0-1.5 1.5v15.5a1.5 1.5 0 0 0 1.5 1.5h5.94a6.5 6.5 0 0 1 7.06-10.012V4.25a1.5 1.5 0 0 0-1.5-1.5H6.25Zm2.25 10.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm9 9.75a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Zm3.5-5.5a.5.5 0 0 1-.5.5h-4.793l1.647 1.646a.5.5 0 0 1-.708.708l-2.5-2.5a.5.5 0 0 1 0-.708l2.5-2.5a.5.5 0 0 1 .708.708L15.707 17H20.5a.5.5 0 0 1 .5.5Z" fill="#ffffff"/></svg>
+                        </li>
+                        <li>
+                            <SendModal></SendModal>
                         </li>
                     </ul>
                 </div>

@@ -1,21 +1,19 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
-import logo from "../shared/logo.png"
-import { ToastContainer, toast } from 'react-toastify';
+import React, {useEffect, useState} from 'react';
 import 'react-toastify/dist/ReactToastify.css';
-import ReactCardFlip from 'react-card-flip';
-import Upvote from "react-upvote/lib/ReactUpvote";
+import PostService from "../../service/postService";
 
-export function Rate() {
 
-    const [likeCount, setLikeCount] = useState(50);
+export function Rate(props) {
+
+    const [likeCount, setLikeCount] = useState(props.upvoteCount);
     const [dislikeCount, setDislikeCount] = useState(25);
-
+    const [id,setId] = useState(props.id);
     const [activeBtn, setActiveBtn] = useState("none");
 
     const handleLikeClick = () => {
         if (activeBtn === "none") {
             setLikeCount(likeCount + 1);
+
             setActiveBtn("like");
             return;
         }
@@ -31,6 +29,43 @@ export function Rate() {
             setDislikeCount(dislikeCount - 1);
             setActiveBtn("like");
         }
+    };
+
+    const upvotePost = async (event) => {
+        if (activeBtn === "none") {
+            setLikeCount(likeCount + 1);
+            event.preventDefault()
+            try {
+                await PostService.upvotePost(id).then(
+                    (response) => {
+                        // check for token and user already exists with 200
+                        //   console.log("Sign up successfully", response);
+
+
+                    },
+                    (error) => {
+                        console.log(error);
+                    }
+                );
+            } catch (err) {
+                console.log(err);
+            }
+            setActiveBtn("like");
+            return;
+        }
+
+        if (activeBtn === 'like'){
+            setLikeCount(likeCount - 1);
+            setActiveBtn("none");
+            return;
+        }
+
+        if (activeBtn === "dislike") {
+            setLikeCount(likeCount + 1);
+            setDislikeCount(dislikeCount - 1);
+            setActiveBtn("like");
+        }
+
     };
 
     const handleDisikeClick = () => {
@@ -55,10 +90,11 @@ export function Rate() {
 
     return (
         <div className="container">
+            {console.log(props)}
             <div className="btn-container">
                 <button
                     className={`btn ${activeBtn === "like" ? "like-active" : ""}`}
-                    onClick={handleLikeClick}
+                    onClick={upvotePost}
                 >
 
                     <div style={{ display: 'flex', alignItems: 'center' }}>
