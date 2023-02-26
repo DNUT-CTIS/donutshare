@@ -9,18 +9,20 @@ const reportRoutes = require("./routes/reportRoutes")
 const {notFound, errorHandler} = require("./middleware/errorMiddleware")
 const cors = require("cors");
 
-const corsOptions = {
-  origin: "http://localhost:3000/",
-};
 
-app.use(cors(corsOptions));
-dotenv.config();
 
 connectDB();
 const app = express()
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
+
+const corsOptions = {
+  origin: "*",
+};
+
+app.use(cors(corsOptions));
+dotenv.config();
 
 app.get('/', (req,res) => {
     res.send("API is Running")
