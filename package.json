@@ -4,7 +4,7 @@
   "description": "[![](https://i.ibb.co/9rMY14h/banner.png)](https://i.ibb.co/9rMY14h/banner.png)",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon backend/server.js"
+    "start": "node backend/server.js"
   },
   "repository": {
     "type": "git",
