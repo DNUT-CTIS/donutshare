@@ -7,7 +7,13 @@ const userRoutes = require("./routes/userRoutes");
 const postRoutes = require("./routes/postRoutes")
 const reportRoutes = require("./routes/reportRoutes")
 const {notFound, errorHandler} = require("./middleware/errorMiddleware")
+const cors = require("cors");
 
+const corsOptions = {
+  origin: "http://localhost:4000/",
+};
+
+app.use(cors(corsOptions));
 dotenv.config();
 
 connectDB();
