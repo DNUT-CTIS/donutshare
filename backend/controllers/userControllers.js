@@ -30,6 +30,7 @@ const registerUser = asyncHandler(async(req,res ) => {
         _id: user._id,
         username: user.username,
         email: user.email,
+        userType: user.userType,
         token:generateToken(user._id)
     });
    } else {
@@ -81,9 +82,11 @@ const banUser = asyncHandler(async (req,res) => {
 });
 
 const allUsers = asyncHandler(async(req,res)=>{
-    const keyword = req.query.search
+   const debater = await User.find({ userType: req.body.userType });
 
-    console.log(keyword);
+   res.status(200).json({ debater
+                        });
 });
+
 
 module.exports = {registerUser, authUser, banUser, allUsers};
