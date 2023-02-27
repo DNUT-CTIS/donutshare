@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.png'
 import {useNavigate} from "react-router-dom";
+import SendModal from "./SendModal";
 export function Navbar() {
     const navigate = useNavigate();
 
@@ -45,7 +46,7 @@ export function Navbar() {
                             <div>Jese Leos</div>
                             <div class="text-sm text-gray-500 dark:text-gray-400">user1@donutshare.com</div>
                         </div>
-
+                        <SendModal></SendModal>
                         <button>
 
                             <button onClick={logout}>
@@ -54,9 +55,11 @@ export function Navbar() {
 
                         </button>
 
-                        
 
-                        
+
+
+
+
 
                     </div>
                     
