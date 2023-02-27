@@ -1,6 +1,6 @@
 import logo from './shared/logo.svg';
 import './App.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import {Login} from "./pages/auth/Login";
 import {Register} from "./pages/auth/Register";
 import {Reason} from "./pages/dashboard/Reason";
@@ -15,11 +15,13 @@ function App() {
       <div>
         <BrowserRouter>
           <Routes>
-            <Route path="/login" element={<Login />}></Route>
+              <Route path="/" element={<Navigate to="/login" />} />
+              <Route path="/login" element={<Login />}></Route>
               <Route path="/sign-up" element={<Register/>}></Route>
               <Route path="/dashboard" element={<TempHome/>}></Route>
               <Route path="/chat" element={<SendPost/>}></Route>
           </Routes>
+
         </BrowserRouter>
       </div>
   );
