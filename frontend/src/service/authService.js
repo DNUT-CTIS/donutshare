@@ -27,11 +27,11 @@ const login = (email, password) => {
             password,
         })
         .then((response) => {
-            if (response.data.token) {
+                console.log(response.data.token)
                 localStorage.setItem("id", JSON.stringify(response.data._id))
                 localStorage.setItem("username", JSON.stringify(response.data.username))
                 localStorage.setItem("token", JSON.stringify(response.data.token));
-            }
+
 
             return response.data;
         });

@@ -10,6 +10,7 @@ import DebaterProfile from './debaterProfile';
 import AdminProfile from './adminProfile';
 import ModeratorProfile from './moderatorProfile';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import PrivateRoutes from "./shared/PrivateRoutes";
 
 
 
@@ -18,15 +19,19 @@ function App() {
       <div>
         <BrowserRouter>
           <Routes>
-              <Route path="/" element={<Navigate to="/login" />} />
-              <Route path="/login" element={<Login />}></Route>
-              <Route path="/sign-up" element={<Register/>}></Route>
+              <Route element={<PrivateRoutes />}>
               <Route path="/dashboard" element={<TempHome/>}></Route>
               <Route path="/chat" element={<SendPost/>}></Route>
               <Route path="/admin-profile" element={<AdminProfile />}></Route>
               <Route path="/mod-profile" element={<ModeratorProfile />} />
               <Route path="/profile" element={<DebaterProfile />} />
+              </Route>
+              <Route path="/" element={<Navigate to="/login" />} />
+              <Route path="/login" element={<Login />}></Route>
+              <Route path="/sign-up" element={<Register/>}></Route>
           </Routes>
+
+
           </BrowserRouter>
       </div>
   );
