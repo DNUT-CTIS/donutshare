@@ -39,15 +39,20 @@ export function Post() {
 
 
     return (
-        <div className="w-96">
-            {reason.map((item) => <div key={item._id}>
+        <div className="w-96 pb-8 ">
+            {reason.map((item) => <div key={item._id} className="border border-gray-200 shadow hover:bg-gray-100 rounded-lg dark:bg-pink-800 dark:border-gray-700 dark:hover:bg-pink-700 mb-8">
                 <a  href="#"
-                   className="block max-w-sm p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-pink-800 dark:border-gray-700 dark:hover:bg-pink-700">
+                   className="block max-w-sm p-6 b h-64">
                     <p className="font-bold text-gray-700 dark:text-white">{item.text} {item.upvoteCount}
                     </p>
-                    <hr className="dark:border-gray-900"></hr>
-                    <Rate upvoteCount={item.upvoteCount} id={item._id} downvoteCount={item.downvoteCount}></Rate>
                 </a>
+                <div className="inset-x-0 bottom-1">
+                <hr className="dark:border-gray-900 pt-2"></hr>
+                    <Rate upvoteCount={item.upvoteCount} id={item._id} downvoteCount={item.downvoteCount}></Rate>
+
+                </div>
+                
+                
             </div>)}
         </div>
 

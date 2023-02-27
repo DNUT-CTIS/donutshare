@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DebaterList from './debaterList';
 import AddTopic from './addTopic';
 import ModeratorList from './moderatorList';
-import { Navbar } from './Navbar';
+import { Navbar } from './shared/loginavbar';
 function AdminProfile() {
   
   const [selectedItem, setSelectedItem] = useState('general');
