@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DebaterList from './debaterList';
 import AddTopic from './addTopic';
-import { Navbar } from './Navbar';
+import { Navbar } from './shared/loginavbar';
 function ModeratorProfile() {
 
   const [selectedItem, setSelectedItem] = useState('general');
