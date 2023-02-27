@@ -30,8 +30,8 @@ function DebaterList(){
 
   }, [])
    
-      const handleDelete = () => {
-        // handle add moderator here
+      const handleDelete = (username) => {
+          setUser(user.filter(user => user.username !== username));
       };
       
 return(
@@ -56,7 +56,7 @@ return(
             <span>{debater.username}</span>
             <span
               className="text-red-500 cursor-pointer"
-              onClick={() => handleDelete(debater)}
+              onClick={() => handleDelete(debater.username)}
             >
             <AiOutlineClose/>
             </span>
