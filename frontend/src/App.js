@@ -11,6 +11,7 @@ import AdminProfile from './adminProfile';
 import ModeratorProfile from './moderatorProfile';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import PrivateRoutes from "./shared/PrivateRoutes";
+import {Auth} from "./pages/auth/Auth";
 
 
 
@@ -27,6 +28,7 @@ function App() {
               <Route path="/profile" element={<DebaterProfile />} />
               </Route>
               <Route path="/" element={<Navigate to="/login" />} />
+              <Route path="/auth" element={<Auth />}></Route>
               <Route path="/login" element={<Login />}></Route>
               <Route path="/sign-up" element={<Register/>}></Route>
           </Routes>
