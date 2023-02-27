@@ -1,47 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
+import modService from './service/modService';
+import { Link, useNavigate } from "react-router-dom";
 
-const usernames = [
-    'john_doe',
-    'jane_smith',
-    'peter_pan',
-    'alice_in_wonderland',
-    'bob_the_builder',
-    'sally_sparrow',
-    'michael_scott',
-    'jim_halpert',
-    'dwight_schrute',
-    'pam_beesly',
-    'andy_bernard',
-    'angela_martin',
-    'kevin_malone',
-    'oscar_martinez',
-    'meredith_palmer',
-    'ryan_howard',
-    'kelly_kapoor',
-    'toby_flenderson',
-    'creed_bratton',
-    'stanley_hudson',
-    'phyllis_vance',
-    'roy_anderson',
-    'darryl_philbin',
-    'holly_flax',
-    'erin_hannon',
-  ];
   
 function ModeratorList(){
+    const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState('');
-
-    const filteredUsernames = usernames.filter((username) =>
-      username.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
+    const [user, setUser] = useState([]);
+    const [deleted, setDeleted] = useState(false);
+    const [deletedUser, setDeletedUser] = useState("");
    
-      const handleDelete = () => {
-        // handle add moderator here
-      };
+    const filteredUsernames = user.filter((item) =>
+      item.username.toLowerCase().includes(searchTerm.toLowerCase())
+      
+    );
+    console.log(user)
+    console.log(filteredUsernames)
+    useEffect(() => {
+      try {
+        modService.getallusers("moderator").then(
+            (response) => {
+                // check for token and user already exists with 200
+                //   console.log("Sign up successfully", response);
+        //    console.log(response.userArr)
+            setUser(response.userArr)
+
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    } catch (err) {
+        console.log(err);
+    }
+
+  }, [])
+  const handleDelete = (username) => {
+    modService.DeleteMod(username)
+      .then((data) => {
+        // Success message or perform any other action
+        console.log(user)
+
+        setDeletedUser(username)
+        console.log(user)
+      })
+      .catch((error) => {
+        // Error message or perform any other action
+      });
+      setUser(user.filter(user => user.username !== username));
+  };
       const handleAddModerator = () => {
-        // handle add moderator here
+       navigate("/sign-up-mod")
       };
 return(
     <div className="flex flex-col items-center">
@@ -61,23 +71,32 @@ return(
           onChange={(event) => setSearchTerm(event.target.value)}
         />
       </div>
+      
       <div className="flex flex-col space-y-2">
-        {filteredUsernames.map((username) => (
-          <div
-            key={username}
-            className="flex items-center justify-between px-4 py-2 bg-white border border-gray-300 rounded-md"
-          >
-            <span>{username}</span>
-            <span
-              className="text-red-500 cursor-pointer"
-              onClick={() => handleDelete(username)}
-            >
-            <AiOutlineClose/>
-            </span>
-          </div>
-        ))}
-      </div>
+      {filteredUsernames.map((mod) => {
+  if (mod.username === deletedUser && deleted) { // Skip rendering the deleted username
+    return null;
+  }
+  return (
+    <div
+      key={mod}
+      className="flex items-center justify-between px-4 py-2 bg-white border border-gray-300 rounded-md"
+    >
+      <span>{mod.username}</span>
+      <span
+        className="text-red-500 cursor-pointer"
+        onClick={() => handleDelete(mod.username)}
+      >
+      <AiOutlineClose/>
+      </span>
     </div>
+  )
+})}
+        
+      </div>
+       
+    </div>
+       
   </div>
 )};
 export default ModeratorList

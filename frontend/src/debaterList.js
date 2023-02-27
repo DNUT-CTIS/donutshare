@@ -1,49 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
-const usernames = [
-    'john_doe',
-    'jane_smith',
-    'peter_pan',
-    'alice_in_wonderland',
-    'bob_the_builder',
-    'sally_sparrow',
-    'michael_scott',
-    'jim_halpert',
-    'dwight_schrute',
-    'pam_beesly',
-    'andy_bernard',
-    'angela_martin',
-    'kevin_malone',
-    'oscar_martinez',
-    'meredith_palmer',
-    'ryan_howard',
-    'kelly_kapoor',
-    'toby_flenderson',
-    'creed_bratton',
-    'stanley_hudson',
-    'phyllis_vance',
-    'roy_anderson',
-    'darryl_philbin',
-    'holly_flax',
-    'erin_hannon',
-  ];
+import DebaterService from './service/debeterService';
+
   
 function DebaterList(){
     const [searchTerm, setSearchTerm] = useState('');
-
-    const filteredUsernames = usernames.filter((username) =>
-      username.toLowerCase().includes(searchTerm.toLowerCase())
+    const [user, setUser] = useState([]);
+    
+    const filteredUsernames = user.filter((item) =>
+      item.username.toLowerCase().includes(searchTerm.toLowerCase())
     );
+    useEffect(() => {
+      try {
+        DebaterService.getallusers("debater").then(
+            (response) => {
+                // check for token and user already exists with 200
+                //   console.log("Sign up successfully", response);
+        //    console.log(response.userArr)
+            setUser(response.userArr)
 
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    } catch (err) {
+        console.log(err);
+    }
+
+  }, [])
    
-      const handleDelete = () => {
-        // handle add moderator here
+      const handleDelete = (username) => {
+        DebaterService.DeleteDebater(username)
+        .then((data) => {
+          // Success message or perform any other action
+          console.log(user)
+  
+          
+      
+          console.log(user)
+          
+        })
+        .catch((error) => {
+          // Error message or perform any other action
+        });
+        setUser(user.filter(user => user.username !== username));
       };
       
 return(
     
-    <div className="flex flex-col items-center">
-    <div className="w-full max-w-md">
+    <div className="flex flex-col items-center dark:bg-zinc-900">
+    <div className="w-full max-w-md ">
       <div className="mb-4">
         <input
           type="text"
@@ -53,16 +60,16 @@ return(
           onChange={(event) => setSearchTerm(event.target.value)}
         />
       </div>
-      <div className="flex flex-col space-y-2">
-        {filteredUsernames.map((username) => (
+      <div className="flex flex-col space-y-2 dark:bg-zinc-900">
+        {filteredUsernames.map((debater) => (
           <div
-            key={username}
+            key={debater}
             className="flex items-center justify-between px-4 py-2 bg-white border border-gray-300 rounded-md"
           >
-            <span>{username}</span>
+            <span>{debater.username}</span>
             <span
               className="text-red-500 cursor-pointer"
-              onClick={() => handleDelete(username)}
+              onClick={() => handleDelete(debater.username)}
             >
             <AiOutlineClose/>
             </span>
