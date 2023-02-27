@@ -6,10 +6,11 @@ import {Reason} from "./pages/dashboard/Reason";
 import {Home} from "./pages/dashboard/Home";
 import {SendPost} from "./pages/chat/SendPost";
 import {TempHome} from "./pages/dashboard/TempHome";
+import {Dashboard} from "./Dashboard";
 import DebaterProfile from './debaterProfile';
 import AdminProfile from './adminProfile';
 import ModeratorProfile from './moderatorProfile';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 
 
@@ -21,7 +22,7 @@ function App() {
               <Route path="/" element={<Navigate to="/login" />} />
               <Route path="/login" element={<Login />}></Route>
               <Route path="/sign-up" element={<Register/>}></Route>
-              <Route path="/dashboard" element={<TempHome/>}></Route>
+              <Route path="/dashboard" element={<Dashboard/>}></Route>
               <Route path="/chat" element={<SendPost/>}></Route>
           </Routes>
 
@@ -36,7 +37,6 @@ function App() {
               </Routes>
           </BrowserRouter>
       </div>
->>>>>>> main
   );
 }
 

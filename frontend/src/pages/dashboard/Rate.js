@@ -89,7 +89,7 @@ export function Rate(props) {
     };
 
     return (
-        <div className="container">
+        <div className="container top-100">
             {console.log(props)}
             <div className="btn-container">
                 <button
