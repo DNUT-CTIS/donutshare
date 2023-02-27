@@ -6,6 +6,7 @@ import {Reason} from "./pages/dashboard/Reason";
 import {Home} from "./pages/dashboard/Home";
 import {SendPost} from "./pages/chat/SendPost";
 import {TempHome} from "./pages/dashboard/TempHome";
+import {Dashboard} from "./Dashboard";
 import DebaterProfile from './debaterProfile';
 import AdminProfile from './adminProfile';
 import ModeratorProfile from './moderatorProfile';
@@ -31,6 +32,9 @@ function App() {
               <Route path="/auth" element={<Auth />}></Route>
               <Route path="/login" element={<Login />}></Route>
               <Route path="/sign-up" element={<Register/>}></Route>
+              <Route path="/dashboard" element={<Dashboard/>}></Route>
+              <Route path="/chat" element={<SendPost/>}></Route>
+
           </Routes>
 
 
