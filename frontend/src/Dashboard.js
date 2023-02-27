@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import logo from './logo.png'
-import { Navbar } from "./Navbar";
+import { Navbar } from "./shared/loginavbar";
 import './button.css';
 import { Post } from "./pages/dashboard/Post";
+import { Topic } from "./pages/dashboard/Topic";
 
 
 
@@ -26,7 +27,7 @@ export function Dashboard(props) {
 
 
                 <div
-                    className="dark flex flex-col gap-24 items-center justify-center px-6 py-8 mx-auto lg:py-0 ">
+                    className="dark flex flex-col gap-24 items-center justify-center px-6 py-8 mx-auto lg:py-0">
 
                     <div>
 
@@ -37,19 +38,8 @@ export function Dashboard(props) {
                     <a href="#" class="flex flex-col items-center justify-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 sticky top-0 md:h-fit">
 
 
-                        <div class="flex flex-col text-center p-4 leading-normal  ">
-                            <h1 class="mb-3 text-3xl font-bold text-gray-900 dark:text-white">Abortion Should be Legal or Illegal in Whole Country</h1>
+                        <Topic></Topic>
 
-
-                            <div class="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
-
-                                <div class="buttons">
-                                    <button>Agree</button>
-                                    <button>Disagree</button>
-                                </div>
-
-                            </div>
-                        </div>
                     </a>
 
 
@@ -57,9 +47,13 @@ export function Dashboard(props) {
 
 
                     <div>
-
+                        
                         <Post></Post>
                         <br></br>
+
+                        
+
+                        
                     </div>
 
 
