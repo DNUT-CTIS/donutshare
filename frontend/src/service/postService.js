@@ -17,9 +17,16 @@ const upvotePost = (id) => {
         id,
     }, config).then(console.log(id));
 }
+
+const downvotePost = (id) => {
+    return axios.put(API_URL + "/post/downvote", {
+        id,
+    }, config).then(console.log(id));
+}
 const postService = {
     sendPost,
-    upvotePost
+    upvotePost,
+    downvotePost,
 };
 
 export default postService;

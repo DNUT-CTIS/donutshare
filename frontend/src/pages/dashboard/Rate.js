@@ -6,7 +6,7 @@ import PostService from "../../service/postService";
 export function Rate(props) {
 
     const [likeCount, setLikeCount] = useState(props.upvoteCount);
-    const [dislikeCount, setDislikeCount] = useState(25);
+    const [dislikeCount, setDislikeCount] = useState(props.downvoteCount);
     const [id,setId] = useState(props.id);
     const [activeBtn, setActiveBtn] = useState("none");
 
@@ -68,6 +68,43 @@ export function Rate(props) {
 
     };
 
+    const downvotePost = async (event) => {
+        if (activeBtn === "none") {
+            setDislikeCount(dislikeCount - 1);
+            event.preventDefault()
+            try {
+                await PostService.downvotePost(id).then(
+                    (response) => {
+                        // check for token and user already exists with 200
+                        //   console.log("Sign up successfully", response);
+
+
+                    },
+                    (error) => {
+                        console.log(error);
+                    }
+                );
+            } catch (err) {
+                console.log(err);
+            }
+            setActiveBtn("dislike");
+            return;
+        }
+
+        if (activeBtn === 'dislike'){
+            setDislikeCount(dislikeCount + 1);
+            setActiveBtn("none");
+            return;
+        }
+
+        if (activeBtn === "like") {
+            setDislikeCount(dislikeCount - 1);
+            setLikeCount(likeCount - 1);
+            setActiveBtn("dislike");
+        }
+
+    };
+
     const handleDisikeClick = () => {
         if (activeBtn === "none") {
             setDislikeCount(dislikeCount + 1);
@@ -109,7 +146,7 @@ export function Rate(props) {
 
                 <button
                     className={`btn ${activeBtn === "dislike" ? "dislike-active" : ""}`}
-                    onClick={handleDisikeClick}
+                    onClick={downvotePost}
                 >
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

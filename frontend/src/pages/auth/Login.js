@@ -14,15 +14,14 @@ export function Login(props) {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [token, setToken] = useState("");
 
-    useEffect(() => {
-        localStorage.setItem('token', JSON.stringify(token));
-    }, [token]);
+
 
     const submitHandler = async (event) => {
         event.preventDefault()
         try {
             await AuthService.login(email, password).then(
                 () => {
+
                     navigate("/dashboard");
                 },
                 (error) => {
