@@ -8,7 +8,7 @@ function AdminProfile() {
   const [selectedItem, setSelectedItem] = useState('general');
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen dark:bg-zinc-900">
       <Navbar/>
       <div className="flex flex-row flex-1">
         <div className="w-1/6 bg-gray-200 h-full p-4">

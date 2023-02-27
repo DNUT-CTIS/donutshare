@@ -1,48 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
-
-const usernames = [
-    'john_doe',
-    'jane_smith',
-    'peter_pan',
-    'alice_in_wonderland',
-    'bob_the_builder',
-    'sally_sparrow',
-    'michael_scott',
-    'jim_halpert',
-    'dwight_schrute',
-    'pam_beesly',
-    'andy_bernard',
-    'angela_martin',
-    'kevin_malone',
-    'oscar_martinez',
-    'meredith_palmer',
-    'ryan_howard',
-    'kelly_kapoor',
-    'toby_flenderson',
-    'creed_bratton',
-    'stanley_hudson',
-    'phyllis_vance',
-    'roy_anderson',
-    'darryl_philbin',
-    'holly_flax',
-    'erin_hannon',
-  ];
+import modService from './service/modService';
   
 function ModeratorList(){
     const [searchTerm, setSearchTerm] = useState('');
-
-    const filteredUsernames = usernames.filter((username) =>
-      username.toLowerCase().includes(searchTerm.toLowerCase())
+    const [user, setUser] = useState([]);
+    const [userName,setUserName] = useState([]);
+    const filteredUsernames = user.filter((item) =>
+      item.username.toLowerCase().includes(searchTerm.toLowerCase())
+      
     );
 
-   
+    const usrArr = []
+    
+    console.log(userName)
+    useEffect(() => {
+      try {
+        modService.getallusers("moderator").then(
+            (response) => {
+                // check for token and user already exists with 200
+                //   console.log("Sign up successfully", response);
+        //    console.log(response.userArr)
+            setUser(response.userArr)
+
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    } catch (err) {
+        console.log(err);
+    }
+
+  }, [])
       const handleDelete = () => {
         // handle add moderator here
       };
       const handleAddModerator = () => {
         // handle add moderator here
       };
+      user.map((item) => {
+        usrArr.concat(...usrArr, item.username)
+      })
+      console.log(usrArr)
 return(
     <div className="flex flex-col items-center">
     <button
@@ -62,15 +62,15 @@ return(
         />
       </div>
       <div className="flex flex-col space-y-2">
-        {filteredUsernames.map((username) => (
+        {user.map((mod) => (
           <div
-            key={username}
+            key={mod}
             className="flex items-center justify-between px-4 py-2 bg-white border border-gray-300 rounded-md"
           >
-            <span>{username}</span>
+            <span>{mod.username}</span>
             <span
               className="text-red-500 cursor-pointer"
-              onClick={() => handleDelete(username)}
+              onClick={() => handleDelete(mod)}
             >
             <AiOutlineClose/>
             </span>

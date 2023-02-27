@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
-const usernames = [
+const usernames  = [
     'john_doe',
     'jane_smith',
     'peter_pan',
@@ -30,7 +30,7 @@ const usernames = [
   
 function DebaterList(){
     const [searchTerm, setSearchTerm] = useState('');
-
+    const [userName, setuserName] = useState([]);
     const filteredUsernames = usernames.filter((username) =>
       username.toLowerCase().includes(searchTerm.toLowerCase())
     );

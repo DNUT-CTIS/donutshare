@@ -10,27 +10,19 @@ import {TempHome} from "./pages/dashboard/TempHome";
 import DebaterProfile from './debaterProfile';
 import AdminProfile from './adminProfile';
 import ModeratorProfile from './moderatorProfile';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 
 
 function App() {
   return (
       <div>
-        <BrowserRouter>
-          <Routes>
-              <Route path="/" element={<Navigate to="/login" />} />
-              <Route path="/login" element={<Login />}></Route>
-              <Route path="/sign-up" element={<Register/>}></Route>
-              <Route path="/dashboard" element={<TempHome/>}></Route>
-              <Route path="/chat" element={<SendPost/>}></Route>
-          </Routes>
-
-        </BrowserRouter>
           <BrowserRouter>
               <Routes>
-                  <Route path="/" element={<AdminProfile />}>
-                  </Route>
+                  <Route path="/" element={<Navigate to="/login" />} />
+                  <Route path="/login" element={<Login />}></Route>
+                  <Route path="/sign-up" element={<Register />}></Route>
+                  <Route path="/dashboard" element={<TempHome />}></Route>
+                  <Route path="/chat" element={<SendPost />}></Route>
                   <Route path="/admin_profile" element={<AdminProfile />}></Route>
                   <Route path="/mod_profile" element={<ModeratorProfile />} />
                   <Route path="/profile" element={<DebaterProfile />} />

@@ -7,7 +7,7 @@ function ModeratorProfile() {
   const [selectedItem, setSelectedItem] = useState('general');
  
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen dark:bg-zinc-900">
       <Navbar/>
 
       <div className="flex flex-row flex-1">
