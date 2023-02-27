@@ -31,7 +31,20 @@ function DebaterList(){
   }, [])
    
       const handleDelete = (username) => {
-          setUser(user.filter(user => user.username !== username));
+        DebaterService.DeleteDebater(username)
+        .then((data) => {
+          // Success message or perform any other action
+          console.log(user)
+  
+          
+      
+          console.log(user)
+          
+        })
+        .catch((error) => {
+          // Error message or perform any other action
+        });
+        setUser(user.filter(user => user.username !== username));
       };
       
 return(

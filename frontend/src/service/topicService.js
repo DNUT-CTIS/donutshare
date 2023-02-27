@@ -41,11 +41,11 @@ const getCurrentUser = () => {
     return JSON.parse(localStorage.getItem("username"));
 };
 
-const DebaterService = {
+const topicService = {
     postTopic,
     login,
     logout,
     getCurrentUser,
 };
 
-export default DebaterService;
+export default topicService;

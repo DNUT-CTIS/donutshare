@@ -1,26 +1,22 @@
 import axios from "axios";
 
 const API_URL = "https://donutshare-api.onrender.com/api";
-const user = JSON.parse(localStorage.getItem("token"));
-const config = {
-    headers: { Authorization: `Bearer ${user}` }
-};
-const getallusers = (userType) => {
+
+const signupMod = (username, email, password) => {
     return axios
-        .post(API_URL + "/user/allUsers", {
-            userType
+        .post(API_URL + "/user", {
+            username,
+            email,
+            password,
+            userType:"moderator"
         })
         .then((response) => {
-            return response.data;
-        });
-};
+                console.log(response.data)
+                localStorage.setItem("id", JSON.stringify(response.data._id))
+                localStorage.setItem("username", JSON.stringify(response.data.username))
+                localStorage.setItem("token", JSON.stringify(response.data.token));
 
-const DeleteDebater = (username) => {
-    return axios
-        .put(API_URL + "/user/ban", {
-        username
-        }, config)
-        .then((response) => {
+
             return response.data;
         });
 };
@@ -54,12 +50,11 @@ const getCurrentUser = () => {
     return JSON.parse(localStorage.getItem("username"));
 };
 
-const DebaterService = {
-    getallusers,
+const authMod = {
+    signupMod,
     login,
     logout,
     getCurrentUser,
-    DeleteDebater
 };
 
-export default DebaterService;
+export default authMod;

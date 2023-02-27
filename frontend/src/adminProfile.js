@@ -4,7 +4,7 @@ import AddTopic from './addTopic';
 import ModeratorList from './moderatorList';
 import { Navbar } from './Navbar';
 function AdminProfile() {
-
+  
   const [selectedItem, setSelectedItem] = useState('general');
 
   return (

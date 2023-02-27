@@ -1,9 +1,22 @@
 import React, { useState } from 'react';
+import topicService from './service/topicService';
 
 function AddTopic(){
     const [topic, setTopic] = useState('');
   
     const handleSubmit = (event) => {
+
+      topicService.postTopic(event)
+      .then((data) => {
+        // Success message or perform any other action
+      })
+      .catch((error) => {
+        // Error message or perform any other action
+      });
+
+
+
+
       event.preventDefault();
       console.log('Submitted topic:', topic);
       // Add your logic to handle the submission here
@@ -20,7 +33,7 @@ function AddTopic(){
             value={topic}
             onChange={(event) => setTopic(event.target.value)}
           />
-          <button className="w-full text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Login
+          <button onClick={() => handleSubmit(topic)} className="w-full text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Login
 
             Submit
           </button>

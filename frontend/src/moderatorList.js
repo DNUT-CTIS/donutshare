@@ -1,8 +1,11 @@
 import React, { useState,useEffect } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import modService from './service/modService';
+import { Link, useNavigate } from "react-router-dom";
+
   
 function ModeratorList(){
+    const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState('');
     const [user, setUser] = useState([]);
     const [deleted, setDeleted] = useState(false);
@@ -40,15 +43,15 @@ function ModeratorList(){
         console.log(user)
 
         setDeletedUser(username)
-        setUser(username.filter((name) => name !== username));
         console.log(user)
       })
       .catch((error) => {
         // Error message or perform any other action
       });
+      setUser(user.filter(user => user.username !== username));
   };
       const handleAddModerator = () => {
-        // handle add moderator here
+       navigate("/sign-up-mod")
       };
 return(
     <div className="flex flex-col items-center">

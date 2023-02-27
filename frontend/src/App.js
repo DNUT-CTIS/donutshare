@@ -10,6 +10,7 @@ import {TempHome} from "./pages/dashboard/TempHome";
 import DebaterProfile from './debaterProfile';
 import AdminProfile from './adminProfile';
 import ModeratorProfile from './moderatorProfile';
+import { RegisterMod } from './pages/auth/Register-Mod';
 
 
 
@@ -18,6 +19,7 @@ function App() {
       <div>
           <BrowserRouter>
               <Routes>
+                  <Route path="/sign-up-mod" element={<RegisterMod/>}></Route>
                   <Route path="/" element={<Navigate to="/login" />} />
                   <Route path="/login" element={<Login />}></Route>
                   <Route path="/sign-up" element={<Register />}></Route>
