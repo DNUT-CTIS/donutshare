@@ -48,7 +48,6 @@ export function Post() {
 
                     <hr className="dark:border-gray-900"></hr>
                     <Rate upvoteCount={item.upvoteCount} id={item._id} downvoteCount={item.downvoteCount}></Rate>
-
                 </a>
                 <div className="inset-x-0 bottom-1">
                 <hr className="dark:border-gray-900 pt-2"></hr>

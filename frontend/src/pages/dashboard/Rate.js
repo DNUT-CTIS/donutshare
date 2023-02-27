@@ -6,6 +6,7 @@ import PostService from "../../service/postService";
 export function Rate(props) {
 
     const [likeCount, setLikeCount] = useState(props.upvoteCount);
+
     const [dislikeCount, setDislikeCount] = useState(25);
     const [id, setId] = useState(props.id);
     const [dislikeCount, setDislikeCount] = useState(props.downvoteCount);
