@@ -65,14 +65,15 @@ const authUser = asyncHandler(async (req,res) => {
 });
 
 const banUser = asyncHandler(async (req,res) => {
-    const {email} = req.body;
-    const user = await User.findOneAndUpdate({email},{ isBanned: true})
+    const {username} = req.body;
+    const user = await User.findOneAndUpdate({username},{ isBanned: true})
 
     if(user) {
         res.status(200);      
         res.json({
         email: user.email,
-        isBanned: user.isBanned
+        isBanned: user.isBanned,
+        message: "this user is banned"
         });
     } 
     else {
@@ -86,7 +87,6 @@ const allUsers = asyncHandler(async(req,res)=>{
 
    res.status(200).json({userArr});
 });
-
 
 const deleteModerator = asyncHandler(async (req, res) => {
   const { username } = req.body;
