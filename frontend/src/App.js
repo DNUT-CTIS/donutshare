@@ -22,7 +22,7 @@ function App() {
         <BrowserRouter>
           <Routes>
               <Route element={<PrivateRoutes />}>
-              <Route path="/dashboard" element={<TempHome/>}></Route>
+              <Route path="/dashboard2" element={<TempHome/>}></Route>
               <Route path="/chat" element={<SendPost/>}></Route>
               <Route path="/admin-profile" element={<AdminProfile />}></Route>
               <Route path="/mod-profile" element={<ModeratorProfile />} />

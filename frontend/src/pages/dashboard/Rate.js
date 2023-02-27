@@ -7,8 +7,6 @@ export function Rate(props) {
 
     const [likeCount, setLikeCount] = useState(props.upvoteCount);
 
-    const [dislikeCount, setDislikeCount] = useState(25);
-    const [id, setId] = useState(props.id);
     const [dislikeCount, setDislikeCount] = useState(props.downvoteCount);
     const [id,setId] = useState(props.id);
     const [activeBtn, setActiveBtn] = useState("none");
