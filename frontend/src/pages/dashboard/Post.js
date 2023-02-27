@@ -46,7 +46,7 @@ export function Post() {
                     <p className="font-bold text-gray-700 dark:text-white">{item.text} {item.upvoteCount}
                     </p>
                     <hr className="dark:border-gray-900"></hr>
-                    <Rate upvoteCount={item.upvoteCount} id={item._id}></Rate>
+                    <Rate upvoteCount={item.upvoteCount} id={item._id} downvoteCount={item.downvoteCount}></Rate>
                 </a>
             </div>)}
         </div>
