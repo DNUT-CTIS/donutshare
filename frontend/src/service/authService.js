@@ -10,11 +10,11 @@ const signup = (username, email, password) => {
             password,
         })
         .then((response) => {
-            if (response.data.token) {
-                localStorage.setItem("id", JSON.stringify(response.data.id))
+                console.log(response.data)
+                localStorage.setItem("id", JSON.stringify(response.data._id))
                 localStorage.setItem("username", JSON.stringify(response.data.username))
                 localStorage.setItem("token", JSON.stringify(response.data.token));
-            }
+
 
             return response.data;
         });
