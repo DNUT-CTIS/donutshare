@@ -7,6 +7,6 @@ const router = express.Router()
 router.route('/').post(registerUser)
 router.post('/login', authUser) 
 router.put('/ban', protect, banUser)
-router.get('/allUsers', allUsers)
+router.post('/allUsers', allUsers)
 
 module.exports = router;
