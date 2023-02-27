@@ -88,4 +88,25 @@ const allUsers = asyncHandler(async(req,res)=>{
 });
 
 
-module.exports = {registerUser, authUser, banUser, allUsers};
+const deleteModerator = asyncHandler(async (req, res) => {
+  const { username } = req.body;
+
+  const user = await User.findOne({ username: username});
+
+  if (!user) {
+    res.status(400);
+    throw new Error("User not found");
+  }
+
+  if(user.userType != "moderator")
+  {
+    res.status(400);
+    throw new Error("This user is not a Moderator")
+  }
+
+  await User.findByIdAndDelete(user._id);
+
+  res.status(200).json({ username: req.params.username, message: "This moderator is deleted" });
+});
+
+module.exports = {registerUser, authUser, banUser, allUsers, deleteModerator};
