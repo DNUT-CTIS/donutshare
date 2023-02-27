@@ -82,9 +82,9 @@ const banUser = asyncHandler(async (req,res) => {
 });
 
 const allUsers = asyncHandler(async(req,res)=>{
-   const debater = await User.find({ userType: req.body.userType });
+   const userArr = await User.find({ userType: req.body.userType });
 
-   res.status(200).json({ debater
+   res.status(200).json({ userArr
                         });
 });
 
