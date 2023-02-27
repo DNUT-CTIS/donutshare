@@ -10,10 +10,8 @@ function ModeratorList(){
       item.username.toLowerCase().includes(searchTerm.toLowerCase())
       
     );
-
-    const usrArr = []
-    
-    console.log(userName)
+    console.log(user)
+    console.log(filteredUsernames)
     useEffect(() => {
       try {
         modService.getallusers("moderator").then(
@@ -39,10 +37,6 @@ function ModeratorList(){
       const handleAddModerator = () => {
         // handle add moderator here
       };
-      user.map((item) => {
-        usrArr.concat(...usrArr, item.username)
-      })
-      console.log(usrArr)
 return(
     <div className="flex flex-col items-center">
     <button
@@ -62,7 +56,7 @@ return(
         />
       </div>
       <div className="flex flex-col space-y-2">
-        {user.map((mod) => (
+        {filteredUsernames.map((mod) => (
           <div
             key={mod}
             className="flex items-center justify-between px-4 py-2 bg-white border border-gray-300 rounded-md"
