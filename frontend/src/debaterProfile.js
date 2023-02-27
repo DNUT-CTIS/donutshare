@@ -19,7 +19,7 @@ function DebaterProfile() {
         </div>
 
         
-        <div className="flex-1 p-8">
+        <div className="flex-1 p-8 dark:bg-zinc-900">
           {selectedItem === 'security' ? (
             <div className="flex justify-center">
               <h2 className="text-xl font-bold">SECURITY PAGE</h2>

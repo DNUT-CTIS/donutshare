@@ -5,7 +5,9 @@ import modService from './service/modService';
 function ModeratorList(){
     const [searchTerm, setSearchTerm] = useState('');
     const [user, setUser] = useState([]);
-    const [userName,setUserName] = useState([]);
+    const [deleted, setDeleted] = useState(false);
+    const [deletedUser, setDeletedUser] = useState("");
+   
     const filteredUsernames = user.filter((item) =>
       item.username.toLowerCase().includes(searchTerm.toLowerCase())
       
@@ -31,9 +33,20 @@ function ModeratorList(){
     }
 
   }, [])
-      const handleDelete = () => {
-        // handle add moderator here
-      };
+  const handleDelete = (username) => {
+    modService.DeleteMod(username)
+      .then((data) => {
+        // Success message or perform any other action
+        console.log(user)
+
+        setDeletedUser(username)
+        setUser(username.filter((name) => name !== username));
+        console.log(user)
+      })
+      .catch((error) => {
+        // Error message or perform any other action
+      });
+  };
       const handleAddModerator = () => {
         // handle add moderator here
       };
@@ -55,23 +68,32 @@ return(
           onChange={(event) => setSearchTerm(event.target.value)}
         />
       </div>
+      
       <div className="flex flex-col space-y-2">
-        {filteredUsernames.map((mod) => (
-          <div
-            key={mod}
-            className="flex items-center justify-between px-4 py-2 bg-white border border-gray-300 rounded-md"
-          >
-            <span>{mod.username}</span>
-            <span
-              className="text-red-500 cursor-pointer"
-              onClick={() => handleDelete(mod)}
-            >
-            <AiOutlineClose/>
-            </span>
-          </div>
-        ))}
-      </div>
+      {filteredUsernames.map((mod) => {
+  if (mod.username === deletedUser && deleted) { // Skip rendering the deleted username
+    return null;
+  }
+  return (
+    <div
+      key={mod}
+      className="flex items-center justify-between px-4 py-2 bg-white border border-gray-300 rounded-md"
+    >
+      <span>{mod.username}</span>
+      <span
+        className="text-red-500 cursor-pointer"
+        onClick={() => handleDelete(mod.username)}
+      >
+      <AiOutlineClose/>
+      </span>
     </div>
+  )
+})}
+        
+      </div>
+       
+    </div>
+       
   </div>
 )};
 export default ModeratorList

@@ -33,7 +33,7 @@ function AdminProfile() {
         </div>
 
         
-        <div className="flex-1 p-8">
+        <div className="flex-1 p-8 dark:bg-zinc-900">
         {selectedItem === 'modlist' ? (
             <ModeratorList/>
           ) : selectedItem === 'dblist' ? (

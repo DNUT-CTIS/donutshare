@@ -12,19 +12,6 @@ const getallusers = (userType) => {
         });
 };
 
-const DeleteMod = (username) => {
-    return axios
-        .delete(API_URL + "/user/deleteModerator", {
-          data:{
-            username:username
-          }
-        })
-        .then((response) => {
-            return response.data;
-        });
-};
-
-
 const login = (email, password) => {
     return axios
         .post(API_URL + "/user/login", {
@@ -54,9 +41,11 @@ const getCurrentUser = () => {
     return JSON.parse(localStorage.getItem("username"));
 };
 
-const modService = {
+const DebaterService = {
     getallusers,
-    DeleteMod
+    login,
+    logout,
+    getCurrentUser,
 };
 
-export default modService;
+export default DebaterService;

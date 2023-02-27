@@ -3,7 +3,7 @@ import logo from './logo.png'
 export function Navbar() {
 
     return(
-        <nav className="p-3 border-gray-200 bg-gray-50 dark:bg-zinc-800 dark:border-gray-700">
+        <nav className="p-3 border-gray-200 bg-gray-50 dark:bg-zinc-800 dark:border-gray-700 relative top-0 left-0 right-0">
             <div className="container flex flex-wrap items-center justify-between mx-auto">
                 <a href="#" className="flex items-center">
                     <img src={logo} className="h-6 mr-3 sm:h-10"

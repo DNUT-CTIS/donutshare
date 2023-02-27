@@ -27,7 +27,7 @@ function ModeratorProfile() {
             </li>
           </ul>
         </div>
-        <div className="flex-1 p-8">
+        <div className="flex-1 p-8 dark:bg-zinc-900">
           {selectedItem === 'dblist' ? (
             <DebaterList/>
           ) : selectedItem === 'add' ? (
