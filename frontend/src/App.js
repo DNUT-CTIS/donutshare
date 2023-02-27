@@ -11,6 +11,8 @@ import DebaterProfile from './debaterProfile';
 import AdminProfile from './adminProfile';
 import ModeratorProfile from './moderatorProfile';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import PrivateRoutes from "./shared/PrivateRoutes";
+import {Auth} from "./pages/auth/Auth";
 
 
 
@@ -19,22 +21,23 @@ function App() {
       <div>
         <BrowserRouter>
           <Routes>
+              <Route element={<PrivateRoutes />}>
+              <Route path="/dashboard" element={<TempHome/>}></Route>
+              <Route path="/chat" element={<SendPost/>}></Route>
+              <Route path="/admin-profile" element={<AdminProfile />}></Route>
+              <Route path="/mod-profile" element={<ModeratorProfile />} />
+              <Route path="/profile" element={<DebaterProfile />} />
+              </Route>
               <Route path="/" element={<Navigate to="/login" />} />
+              <Route path="/auth" element={<Auth />}></Route>
               <Route path="/login" element={<Login />}></Route>
               <Route path="/sign-up" element={<Register/>}></Route>
               <Route path="/dashboard" element={<Dashboard/>}></Route>
               <Route path="/chat" element={<SendPost/>}></Route>
+
           </Routes>
 
-        </BrowserRouter>
-          <BrowserRouter>
-              <Routes>
-                  <Route path="/" element={<AdminProfile />}>
-                  </Route>
-                  <Route path="/admin_profile" element={<AdminProfile />}></Route>
-                  <Route path="/mod_profile" element={<ModeratorProfile />} />
-                  <Route path="/profile" element={<DebaterProfile />} />
-              </Routes>
+
           </BrowserRouter>
       </div>
   );

@@ -45,10 +45,10 @@ export function Post() {
                    className="block max-w-sm p-6 b h-64">
                     <p className="font-bold text-gray-700 dark:text-white">{item.text} {item.upvoteCount}
                     </p>
-                   
-                    
-                    
-                    
+
+                    <hr className="dark:border-gray-900"></hr>
+                    <Rate upvoteCount={item.upvoteCount} id={item._id} downvoteCount={item.downvoteCount}></Rate>
+
                 </a>
                 <div className="inset-x-0 bottom-1">
                 <hr className="dark:border-gray-900 pt-2"></hr>
