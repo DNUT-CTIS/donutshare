@@ -7,6 +7,10 @@ import {Reason} from "./pages/dashboard/Reason";
 import {Home} from "./pages/dashboard/Home";
 import {SendPost} from "./pages/chat/SendPost";
 import {TempHome} from "./pages/dashboard/TempHome";
+import DebaterProfile from './debaterProfile';
+import AdminProfile from './adminProfile';
+import ModeratorProfile from './moderatorProfile';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 
 
@@ -23,6 +27,15 @@ function App() {
           </Routes>
 
         </BrowserRouter>
+          <BrowserRouter>
+              <Routes>
+                  <Route path="/" element={<AdminProfile />}>
+                  </Route>
+                  <Route path="/admin_profile" element={<AdminProfile />}></Route>
+                  <Route path="/mod_profile" element={<ModeratorProfile />} />
+                  <Route path="/profile" element={<DebaterProfile />} />
+              </Routes>
+          </BrowserRouter>
       </div>
   );
 }
