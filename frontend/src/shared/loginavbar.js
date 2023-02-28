@@ -1,21 +1,40 @@
 import React from 'react';
 import logo from './logo.png'
 import {useNavigate} from "react-router-dom";
-import SendModal from "./SendModal";
+
+import SendModal from './SendModal';
+
 export function Navbar() {
     const navigate = useNavigate();
+    const username=JSON.parse(localStorage.getItem("username"))
+    const userData=JSON.parse(localStorage.getItem("userType"))
+    console.log(userData)
+    console.log(username)
 
     const logout = async (event) => {
         event.preventDefault()
         localStorage.removeItem("token");
         navigate("/login");
+        
+
+    };
+
+    const handleclick = async (event) => {
+        event.preventDefault()
+        if (userData === "debater") {
+            navigate("/profile");
+        }
+
+        if (userData === 'moderator') {
+            navigate("/mod-profile");
+        }
 
     };
 
     return (
         <nav className="p-3 border-gray-200 bg-gray-50 dark:bg-zinc-800 dark:border-gray-700">
             <div className="container flex flex-wrap items-center justify-between mx-auto">
-                <a href="#" className="flex items-center">
+                <a href="dashboard" className="flex items-center">
                     <img src={logo} className="h-6 mr-3 sm:h-10"
                         alt="Flowbite Logo" />
                 </a>
@@ -36,17 +55,19 @@ export function Navbar() {
                 <div className="hidden w-full md:block md:w-auto" id="navbar-solid-bg">
 
 
-
+                   
                     <div class="flex items-center space-x-4">
+                    <button onClick={handleclick}>
                         <div class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
                             <svg class="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
                         </div>
 
                         <div class="font-medium dark:text-white">
-                            <div>Jese Leos</div>
-                            <div class="text-sm text-gray-500 dark:text-gray-400">user1@donutshare.com</div>
+                            <div>{username}</div>
                         </div>
-                        <SendModal></SendModal>
+
+                    </button>
+                    <SendModal/>
                         <button>
 
                             <button onClick={logout}>

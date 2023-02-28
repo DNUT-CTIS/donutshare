@@ -1,15 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import PostService from "../../service/postService";
+import ReportModal from "../../shared/ReportModal";
 
 
 export function Rate(props) {
 
     const [likeCount, setLikeCount] = useState(props.upvoteCount);
-
+    const userData=JSON.parse(localStorage.getItem("userType"))
     const [dislikeCount, setDislikeCount] = useState(props.downvoteCount);
     const [id,setId] = useState(props.id);
     const [activeBtn, setActiveBtn] = useState("none");
+
+
+
+    const handleDelete = async (event) => {
+        event.preventDefault()
+        console.log(event)
+        try {
+           await PostService.DeletePost(id).then(
+                (response) => {
+                
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+
+
+
 
     const handleLikeClick = () => {
         if (activeBtn === "none") {
@@ -157,20 +181,17 @@ export function Rate(props) {
                     </div>
                 </button>
                 
-
-                <button>
+                <ReportModal id={props.id}></ReportModal>
+                {userData === "moderator" ?(
+                <button  onClick={handleDelete} >
                     <div style={{ display: 'flex', alignItems: 'center', right:0 }}>
-                        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3.747a.75.75 0 0 1 .75-.75h16.504a.75.75 0 0 1 .6 1.2L16.69 9.748l4.164 5.552a.75.75 0 0 1-.6 1.2H4.5v4.749a.75.75 0 0 1-.648.743L3.75 22a.75.75 0 0 1-.743-.648L3 21.249V3.747Z" fill="#ffffff" /></svg>
-
-                        
+                    <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21.5 6a1 1 0 0 1-.883.993L20.5 7h-.845l-1.231 12.52A2.75 2.75 0 0 1 15.687 22H8.313a2.75 2.75 0 0 1-2.737-2.48L4.345 7H3.5a1 1 0 0 1 0-2h5a3.5 3.5 0 1 1 7 0h5a1 1 0 0 1 1 1Zm-7.25 3.25a.75.75 0 0 0-.743.648L13.5 10v7l.007.102a.75.75 0 0 0 1.486 0L15 17v-7l-.007-.102a.75.75 0 0 0-.743-.648Zm-4.5 0a.75.75 0 0 0-.743.648L9 10v7l.007.102a.75.75 0 0 0 1.486 0L10.5 17v-7l-.007-.102a.75.75 0 0 0-.743-.648ZM12 3.5A1.5 1.5 0 0 0 10.5 5h3A1.5 1.5 0 0 0 12 3.5Z" fill="#ffffff"/></svg>
                     </div>
                     
                     
 
                 </button>
-                
-                
-
+                ): ""}
 
 
 

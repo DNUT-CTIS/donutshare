@@ -6,23 +6,36 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import AuthService from "../../service/authService";
 
+
+
+
 export function Login(props) {
     const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
+    
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [token, setToken] = useState("");
-
-
+    const[userType,setUserType]=useState("")
 
     const submitHandler = async (event) => {
         event.preventDefault()
         try {
             await AuthService.login(email, password).then(
-                () => {
-
+                (response) => {
+                    
+                   
+                    localStorage.setItem("userType", JSON.stringify(response.userType))
+                    localStorage.setItem("username", JSON.stringify(response.username))
+                    const data=JSON.parse(localStorage.getItem("userType"))
+                    
+                    if(data==="debater"){
                     navigate("/dashboard");
+                    }
+                    else if(data === "moderator"){
+                    navigate("/mod-profile");
+                    }
                 },
                 (error) => {
                     console.log(error);
