@@ -12,11 +12,17 @@ const sendPost = (username, text) => {
     }, config).then(console.log(text));
 };
 
+const reportPost = (id, text) => {
+    return axios.post(API_URL + "/report/post", {
+        id, text
+    }, config).then(console.log(text));
+};
+
 const DeletePost = (id) => {
     return axios
         .delete(API_URL + "/post/delete", {
-            headers: { Authorization: `Bearer ${user}` },data:{
-            _id:id
+            data:{
+            id:id
           }
         }).then(() => {
         
@@ -39,6 +45,7 @@ const postService = {
     upvotePost,
     downvotePost,
     DeletePost,
+    reportPost,
 };
 
 export default postService;
