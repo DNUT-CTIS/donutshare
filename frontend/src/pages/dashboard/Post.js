@@ -4,9 +4,11 @@ import logo from "../../shared/logo.png"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ReactCardFlip from 'react-card-flip';
+
 import Upvote from "react-upvote/lib/ReactUpvote";
 import {Rate} from "./Rate.js";
 import axios from "axios";
+import postService from '../../service/postService';
 
 export function Post() {
 
@@ -33,6 +35,9 @@ export function Post() {
 
     }, [])
 
+   
+
+
     const handleClick = (e) => {
         e.preventDefault();
     };
@@ -49,6 +54,7 @@ export function Post() {
                 <div className="inset-x-0 bottom-1">
                 <hr className="dark:border-gray-900 pt-2"></hr>
                     <Rate upvoteCount={item.upvoteCount} id={item._id} downvoteCount={item.downvoteCount}></Rate>
+        
 
                 </div>
                 

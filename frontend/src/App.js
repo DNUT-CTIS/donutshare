@@ -13,6 +13,7 @@ import ModeratorProfile from './moderatorProfile';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import PrivateRoutes from "./shared/PrivateRoutes";
 import {Auth} from "./pages/auth/Auth";
+import { RegisterMod } from './pages/auth/Register-Mod';
 
 
 
@@ -26,14 +27,17 @@ function App() {
               <Route path="/chat" element={<SendPost/>}></Route>
               <Route path="/admin-profile" element={<AdminProfile />}></Route>
               <Route path="/mod-profile" element={<ModeratorProfile />} />
+              <Route path="/sign-up-mod" element={<RegisterMod/>}></Route>
               <Route path="/profile" element={<DebaterProfile />} />
+              <Route path="/dashboard" element={<Dashboard/>}></Route>
+              <Route path="/chat" element={<SendPost/>}></Route>
               </Route>
               <Route path="/" element={<Navigate to="/login" />} />
               <Route path="/auth" element={<Auth />}></Route>
               <Route path="/login" element={<Login />}></Route>
               <Route path="/sign-up" element={<Register/>}></Route>
-              <Route path="/dashboard" element={<Dashboard/>}></Route>
-              <Route path="/chat" element={<SendPost/>}></Route>
+              
+           
 
           </Routes>
 

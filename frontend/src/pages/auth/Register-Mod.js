@@ -22,7 +22,7 @@ export function RegisterMod(props) {
                 (response) => {
                     // check for token and user already exists with 200
                     //   console.log("Sign up successfully", response);
-                    navigate("/admin_profile");
+                    navigate("/admin-profile");
 
                 },
                 (error) => {
