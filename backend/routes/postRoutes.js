@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.post('/', protect, sendPost)
 router.put("/upvote", upvote).put("/downvote", downvote)
-router.delete("/delete", protect, deletePost)
+router.delete("/delete", deletePost)
 router.get("/", getPosts)
 
 
