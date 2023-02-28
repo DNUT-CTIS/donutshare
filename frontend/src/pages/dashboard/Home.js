@@ -14,9 +14,6 @@ import PostService from "../../service/postService";
 export function Home() {
     const [isFlipped, setIsFlipped] = useState(false);
     const [txt, setTxt] = useState("");
-    const {state} = useLocation();
-    const { user } = state; 
-    console.log(user)
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -44,9 +41,9 @@ export function Home() {
 
     return (
             <div>
-                {user === "moderator"? (
+                
                     <Navbar></Navbar>
-                ):""}
+               
                     <div className="flex flex-col items-center justify-center h-screen dark:bg-zinc-900">
 
                         <Reason></Reason>

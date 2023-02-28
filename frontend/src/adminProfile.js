@@ -44,22 +44,22 @@ function AdminProfile() {
           <div className="flex flex-col items-center">
             <form className="w-full max-w-sm">
               <div className="mb-4">
-                <label htmlFor="name" className="block text-gray-700 font-bold mb-2">Name</label>
+                <label htmlFor="name" className="block text-gray-700 font-bold mb-2 dark:text-white">Name</label>
                 <input type="text" id="name" className="form-input w-full" placeholder="John Doe" />
               </div>
 
               <div className="mb-4">
-                <label htmlFor="email" className="block text-gray-700 font-bold mb-2">Email</label>
+                <label htmlFor="email" className="block text-gray-700 font-bold mb-2 dark:text-white">Email</label>
                 <input type="email" id="email" className="form-input w-full" placeholder="johndoe@example.com" />
               </div>
 
               <div className="mb-4">
-                <label htmlFor="password" className="block text-gray-700 font-bold mb-2">Password</label>
+                <label htmlFor="password" className="block text-gray-700 font-bold mb-2 dark:text-white">Password</label>
                 <input type="password" id="password" className="form-input w-full" />
               </div>
 
               <div className="mb-4">
-                <label htmlFor="confirmPassword" className="block text-gray-700 font-bold mb-2">Confirm Password</label>
+                <label htmlFor="confirmPassword" className="block text-gray-700 font-bold mb-2 dark:text-white">Confirm Password</label>
                 <input type="password" id="confirmPassword" className="form-input w-full" />
               </div>
 

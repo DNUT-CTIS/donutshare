@@ -27,7 +27,9 @@ export function Login(props) {
                     
                    
                     localStorage.setItem("userType", JSON.stringify(response.userType))
+                    localStorage.setItem("username", JSON.stringify(response.username))
                     const data=JSON.parse(localStorage.getItem("userType"))
+                    
                     if(data==="debater"){
                     navigate("/dashboard");
                     }
