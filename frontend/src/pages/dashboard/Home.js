@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Link, Navigate, useNavigate} from "react-router-dom";
+import {Link, Navigate, useNavigate,useLocation} from "react-router-dom";
 import logo from "../../shared/logo.png"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -41,7 +41,9 @@ export function Home() {
 
     return (
             <div>
+                
                     <Navbar></Navbar>
+               
                     <div className="flex flex-col items-center justify-center h-screen dark:bg-zinc-900">
 
                         <Reason></Reason>
@@ -49,6 +51,7 @@ export function Home() {
                         <Reason></Reason>
                     </div>
             </div>
+        
 
     );
 

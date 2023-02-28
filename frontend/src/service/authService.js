@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Link, useNavigate} from "react-router-dom";
 
 const API_URL = "https://donutshare-api.onrender.com/api";
 
@@ -10,7 +11,9 @@ const signup = (username, email, password) => {
             password,
         })
         .then((response) => {
+            
                 console.log(response.data)
+                
                 localStorage.setItem("id", JSON.stringify(response.data._id))
                 localStorage.setItem("username", JSON.stringify(response.data.username))
                 localStorage.setItem("token", JSON.stringify(response.data.token));
@@ -54,6 +57,7 @@ const authService = {
     login,
     logout,
     getCurrentUser,
+    
 };
 
 export default authService;
