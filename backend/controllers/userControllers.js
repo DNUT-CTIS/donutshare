@@ -1,6 +1,17 @@
 const asyncHandler = require("express-async-handler");
 const User = require('../models/userModel')
 const generateToken = require("../config/generateToken")
+const Realm  = require("realm")
+
+const id = "donut-share-rjjku"; 
+
+
+const config = {
+  id,
+};
+
+const app = new Realm.App(config);
+
 
 const registerUser = asyncHandler(async(req,res ) => {
    const {username,email,password,userType} = req.body;
@@ -17,15 +28,23 @@ const registerUser = asyncHandler(async(req,res ) => {
     res.status(400);
     throw new Error("User already exists");
    }
+    
 
+
+
+   
    const user = await User.create({
     username,
     email,
     password,
     userType,
    })
+  
+   const newToken = generateToken(user._id)
 
-   if(user) {
+      const realmUser = await app.Credentials.jwt(newToken);
+         console.log(realmUser);
+
     res.status(201).json({
         _id: user._id,
         username: user.username,
@@ -33,10 +52,7 @@ const registerUser = asyncHandler(async(req,res ) => {
         userType: user.userType,
         token:generateToken(user._id)
     });
-   } else {
-    res.status(400);
-    throw new Error("Failed to Create the User");
-   }
+   
 });
 
 const authUser = asyncHandler(async (req,res) => {
