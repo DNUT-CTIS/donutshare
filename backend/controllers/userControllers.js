@@ -31,6 +31,7 @@ const registerUser = asyncHandler(async(req,res ) => {
         username: user.username,
         email: user.email,
         userType: user.userType,
+        isVerified: user.isVerified,
         token:generateToken(user._id)
     });
    } else {

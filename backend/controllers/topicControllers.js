@@ -2,7 +2,6 @@ const asyncHandler = require("express-async-handler");
 
 const Topic = require("../models/topicModel");
 
-
 const addTopic = asyncHandler(async (req, res) => {
   if (!req.body.content) {
     res.status(400);

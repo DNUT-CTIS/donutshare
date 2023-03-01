@@ -1,17 +1,18 @@
 const mongoose = require('mongoose')
 const bcrypt = require("bcrypt")
 
-const userSchema = mongoose.Schema({
-    username:{type:String, required: true, unique:true},
-    email: {type: String, required:true, unique:true},
-    password:{type: String, required:true},
-    userType:{type: String, default:"debater"},
-    isBanned:{type:Boolean, default:"false"}
-
-},
-    {
-    timestamps:true,
-    }
+const userSchema = mongoose.Schema(
+  {
+    username: { type: String, required: true, unique: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    userType: { type: String, default: "debater" },
+    isVerified: { type: Boolean, default: false },
+    isBanned: { type: Boolean, default: false },
+  },
+  {
+    timestamps: true,
+  }
 );
 
 userSchema.methods.matchPassword=async function (enteredPassword) {
