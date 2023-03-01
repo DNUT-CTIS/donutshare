@@ -4,8 +4,7 @@ const User = require('../models/userModel')
 const Post = require('../models/postModel')
 
 const sendPost = asyncHandler(async(req,res) => {
-
-
+  
      if (!req.body.text) {
         res.status(400)
         throw new Error('Please add a text field')

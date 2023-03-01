@@ -10,8 +10,6 @@ const topicRoutes = require("./routes/topicRoutes")
 const {notFound, errorHandler} = require("./middleware/errorMiddleware")
 const cors = require("cors");
 
-
-
 connectDB();
 const app = express()
 
