@@ -7,6 +7,7 @@ const userRoutes = require("./routes/userRoutes");
 const postRoutes = require("./routes/postRoutes")
 const reportRoutes = require("./routes/reportRoutes")
 const topicRoutes = require("./routes/topicRoutes")
+const mailRoutes = require("./routes/mailRoutes");
 const {notFound, errorHandler} = require("./middleware/errorMiddleware")
 const cors = require("cors");
 
@@ -31,8 +32,7 @@ app.use('/api/user',userRoutes)
 app.use('/api/post',postRoutes)
 app.use('/api/report',reportRoutes)
 app.use('/api/topic',topicRoutes)
-
-
+app.use("/api/mail", mailRoutes);
 
 app.get("/api/chat", (req,res) => {
     res.send(chats)
