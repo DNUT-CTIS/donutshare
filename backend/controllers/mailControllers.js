@@ -10,31 +10,31 @@ dotenv.config();
 const confirmationPost = asyncHandler(async (req, res) => {
   // Find a matching token
 
-  const token = await Token.findOne({ token: req.params.token })
+  const token = await Token.findOne({ token: req.params.token });
 
-     if(!token){
+  if (!token) {
     res.status(400);
     throw new Error("Your token may have expired");
-    }
-      var user = await User.findOne(token._userId);
+  }
+  var user = await User.findOne(token._userId);
 
-      if(!user){
-         res.status(400);
+  if (!user) {
+    res.status(400);
     throw new Error("We were unable to find a user for this token.");
-      }
+  }
 
-      if (user.isVerified){
-           res.status(400);
-           throw new Error("This user has already been verified.");
-          }
+  if (user.isVerified) {
+    res.status(400);
+    throw new Error("This user has already been verified.");
+  }
 
-        user.isVerified = true
-        user.save();
-        res.status(200).send("The account has been verified. Please log in.");
+  user.isVerified = true;
+  user.save();
+  res.status(200).send("The account has been verified. Please log in.");
 });
 
-const resendConfimation = asyncHandler(async(req,res) => {
- const { email } = req.body;
+const resendConfimation = asyncHandler(async (req, res) => {
+  const { email } = req.body;
 
   User.findOne({ email }, function (err, user) {
     if (!user)
@@ -42,11 +42,9 @@ const resendConfimation = asyncHandler(async(req,res) => {
         .status(400)
         .send({ msg: "We were unable to find a user with that email." });
     if (user.isVerified)
-      return res
-        .status(400)
-        .send({
-          msg: "This account has already been verified. Please log in.",
-        });
+      return res.status(400).send({
+        msg: "This account has already been verified. Please log in.",
+      });
 
     // Create a verification token, save it, and send email
     var token = new Token({
@@ -87,6 +85,6 @@ const resendConfimation = asyncHandler(async(req,res) => {
       });
     });
   });
-})
+});
 
-module.exports = {confirmationPost, resendConfimation};
+module.exports = { confirmationPost, resendConfimation };
