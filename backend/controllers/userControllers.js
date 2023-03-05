@@ -1,6 +1,12 @@
 const asyncHandler = require("express-async-handler");
+const crypto = require("crypto");
+const nodemailer = require("nodemailer");
+const dotenv = require("dotenv");
 const User = require('../models/userModel')
+const Token = require('../models/tokenModel')
 const generateToken = require("../config/generateToken")
+
+dotenv.config();
 
 const registerUser = asyncHandler(async(req,res ) => {
    const {username,email,password,userType} = req.body;
@@ -13,11 +19,13 @@ const registerUser = asyncHandler(async(req,res ) => {
 
    const userExists = await User.findOne({email})
 
+   // Check if this user exists
    if (userExists){
     res.status(400);
     throw new Error("User already exists");
    }
 
+   // Create the user
    const user = await User.create({
     username,
     email,
@@ -25,20 +33,26 @@ const registerUser = asyncHandler(async(req,res ) => {
     userType,
    })
 
-   if(user) {
-    res.status(201).json({
-        _id: user._id,
-        username: user.username,
-        email: user.email,
-        userType: user.userType,
-        isVerified: user.isVerified,
-        token:generateToken(user._id)
+    // Create a verification token for this user
+        var token = new Token({ _userId: user._id, token: crypto.randomBytes(16).toString('hex') });
+ 
+        // Save the verification token
+        token.save(function (err) {
+            if (err) { return res.status(500).send({ msg: err.message }); }
+ 
+            // Send the email
+            var transporter = nodemailer.createTransport({
+              service: "Sendgrid",
+              auth: { user: "apikey", pass: process.env.SENDGRID_APIKEY },
+            });
+            var mailOptions = { from: 'donutshare.ctis@gmail.com', to: user.email, subject: 'Account Verification Token', text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + token.token + '.\n' };
+            transporter.sendMail(mailOptions, function (err) {
+                if (err) { return res.status(500).send({ msg: err.message }); }
+                res.status(200).send('A verification email has been sent to ' + user.email + '.');
+            });
+        });
     });
-   } else {
-    res.status(400);
-    throw new Error("Failed to Create the User");
-   }
-});
+
 
 const authUser = asyncHandler(async (req,res) => {
     const {email, password} = req.body;
@@ -46,6 +60,11 @@ const authUser = asyncHandler(async (req,res) => {
     const user = await User.findOne({email});
 
     if(user && (await user.matchPassword(password)) ) {
+
+        if (!user.isVerified) {
+          res.status(401);
+          throw new Error("Your account has not been verified");
+        }
 
         if(user.isBanned){
         res.status(403);

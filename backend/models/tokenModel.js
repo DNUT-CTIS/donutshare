@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const tokenSchema = new mongoose.Schema({
+const tokenModel = new mongoose.Schema({
   _userId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
@@ -11,5 +11,4 @@ const tokenSchema = new mongoose.Schema({
 });
 
 const Token = mongoose.model("Token", tokenModel);
-
 module.exports = Token;

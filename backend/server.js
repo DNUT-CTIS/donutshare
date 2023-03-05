@@ -32,6 +32,8 @@ app.use('/api/post',postRoutes)
 app.use('/api/report',reportRoutes)
 app.use('/api/topic',topicRoutes)
 
+
+
 app.get("/api/chat", (req,res) => {
     res.send(chats)
 })

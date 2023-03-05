@@ -10,4 +10,5 @@ router.put('/ban', protect, banUser)
 router.post('/allUsers', allUsers)
 router.delete('/deleteModerator', deleteModerator)
 
+
 module.exports = router;
