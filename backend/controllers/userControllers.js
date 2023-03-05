@@ -9,10 +9,11 @@ const generateToken = require("../config/generateToken")
 dotenv.config();
 
 const registerUser = asyncHandler(async(req,res ) => {
+
    const {username,email,password,userType} = req.body;
 
    if (!username || !email || !password) {
-    console.log(req.body)
+   
     res.status(400);
     throw new Error("Please Enter all the fields!");
    }
@@ -47,7 +48,7 @@ const registerUser = asyncHandler(async(req,res ) => {
             });
             var mailOptions = { from: "Donut Share " + process.env.SYSTEM_MAIL, to: user.email, subject: 'Account Verification Token', text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/api/mail/confirmation\/' + token.token + '\n' };
             if(user.userType == "moderator") {
-              mailOptions = { from: "Donut Share " + process.env.SYSTEM_MAIL, to: user.email, subject: 'Moderator Notification Email', text: 'Hello,\n\n' + 'Welcome to Donut Share! \nHere is your account information \n Username: ' +user.username + '\n Password: ' +req.body.password};
+              mailOptions = { from: "Donut Share " + process.env.SYSTEM_MAIL, to: user.email, subject: 'Moderator Notification Email', text: 'Hello,\n\n' + 'Welcome to Donut Share! \nHere is your account information \n Username: ' +user.username + '\n Password: ' +req.body.password+ 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/api/mail/confirmation\/' + token.token + '\n'};
             }
             transporter.sendMail(mailOptions, function (err) {
                 if (err) { return res.status(500).send({ msg: err.message }); }
@@ -64,30 +65,31 @@ const authUser = asyncHandler(async (req,res) => {
     const {email, password} = req.body;
 
     const user = await User.findOne({email});
+  
+    if (user && (await user.matchPassword(password))) {
 
-    if(user && (await user.matchPassword(password)) ) {
+      if (!user.isVerified) {
+        res.status(401);
+        throw new Error("Your account has not been verified");
+      }
 
-        if (!user.isVerified) {
-          res.status(401);
-          throw new Error("Your account has not been verified");
-        }
-
-        if(user.isBanned){
+      if (user.isBanned) {
         res.status(403);
         throw new Error("You are Banned from Donut Share");
-    }
-        res.json({
-        _id: user._id,
-        username: user.username,
-        userType: user.userType,
-        token:generateToken(user._id)
+      } 
+
+        res.status(200)
+           .json({
+          _id: user._id,
+          username: user.username,
+          userType: user.userType,
+          token: generateToken(user._id),
         });
-    } 
-     
-    else {
-    res.status(401);
-    throw new Error("Invalid Email or Password");
-   }
+      
+    } else {
+      res.status(401);
+      throw new Error("Invalid Email or Password");
+    }
 });
 
 const banUser = asyncHandler(async (req,res) => {

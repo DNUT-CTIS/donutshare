@@ -9,35 +9,28 @@ dotenv.config();
 
 const confirmationPost = asyncHandler(async (req, res) => {
   // Find a matching token
-  Token.findOne({ token: req.params.token }, function (err, token) {
-    if (!token)
-      res.status(400).send({
-        type: "not-verified",
-        msg: "We were unable to find a valid token. Your token my have expired.",
-      });
 
-    // If we found a token, find a matching user
-    User.findOne({ _id: token._userId }, function (err, user) {
-      if (!user)
-        return res
-          .status(400)
-          .send({ msg: "We were unable to find a user for this token." });
-      if (user.isVerified)
-        return res.status(400).send({
-          type: "already-verified",
-          msg: "This user has already been verified.",
-        });
+  const token = await Token.findOne({ token: req.params.token })
 
-      // Verify and save the user
-      user.isVerified = true;
-      user.save(function (err) {
-        if (err) {
-          return res.status(500).send({ msg: err.message });
-        }
+     if(!token){
+    res.status(400);
+    throw new Error("Your token may have expired");
+    }
+      var user = await User.findOne(token._userId);
+
+      if(!user){
+         res.status(400);
+    throw new Error("We were unable to find a user for this token.");
+      }
+
+      if (user.isVerified){
+           res.status(400);
+           throw new Error("This user has already been verified.");
+          }
+
+        user.isVerified = true
+        user.save();
         res.status(200).send("The account has been verified. Please log in.");
-      });
-    });
-  });
 });
 
 const resendConfimation = asyncHandler(async(req,res) => {
