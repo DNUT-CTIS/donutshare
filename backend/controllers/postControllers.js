@@ -13,7 +13,8 @@ const sendPost = asyncHandler(async(req,res) => {
        const post = await Post.create({
          user: req.user.id,
          username: req.user.username,
-         text: req.body.text
+         text: req.body.text,
+         opinion: req.body.opinion
       })
 
     res.status(200).json(post)

@@ -9,5 +9,4 @@ router.put("/upvote", upvote).put("/downvote", downvote)
 router.delete("/delete", deletePost)
 router.get("/", getPosts)
 
-
 module.exports = router;
