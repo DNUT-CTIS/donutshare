@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
-import modService from './service/modService';
+import modService from '../../../service/modService';
 import { Link, useNavigate } from "react-router-dom";
 
   

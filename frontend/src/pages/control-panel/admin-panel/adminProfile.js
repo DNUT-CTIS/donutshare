@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import DebaterList from './debaterList';
-import AddTopic from './addTopic';
+import DebaterList from '../shared/debaterList';
+import AddTopic from '../shared/addTopic';
 import ModeratorList from './moderatorList';
-import { Navbar } from './shared/loginavbar';
+import { Navbar } from '../../../shared/loginavbar';
 function AdminProfile() {
   
   const [selectedItem, setSelectedItem] = useState('general');

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import topicService from './service/topicService';
+import topicService from '../../../service/topicService';
 
 function AddTopic(){
     const [topic, setTopic] = useState('');
