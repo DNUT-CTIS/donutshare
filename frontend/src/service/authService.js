@@ -3,6 +3,9 @@ import { Link, useNavigate} from "react-router-dom";
 
 const API_URL = "https://donutshare-api.onrender.com/api";
 
+
+
+
 const signup = (username, email, password) => {
     return axios
         .post(API_URL + "/user", {
@@ -57,6 +60,7 @@ const authService = {
     login,
     logout,
     getCurrentUser,
+  
     
 };
 

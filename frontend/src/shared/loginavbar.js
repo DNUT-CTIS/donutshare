@@ -1,9 +1,7 @@
 import React from 'react';
 import logo from './logo.png'
 import {useNavigate} from "react-router-dom";
-
 import SendModal from './SendModal';
-
 export function Navbar() {
     const navigate = useNavigate();
     const username=JSON.parse(localStorage.getItem("username"))
@@ -65,7 +63,6 @@ export function Navbar() {
                         <div class="font-medium dark:text-white">
                             <div>{username}</div>
                         </div>
-
                     </button>
                     <SendModal/>
                         <button>
@@ -76,11 +73,9 @@ export function Navbar() {
 
                         </button>
 
+                        
 
-
-
-
-
+                        
 
                     </div>
                     
