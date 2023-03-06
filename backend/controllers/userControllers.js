@@ -94,20 +94,54 @@ const authUser = asyncHandler(async (req,res) => {
 
 const banUser = asyncHandler(async (req,res) => {
     const {username} = req.body;
-    const user = await User.findOneAndUpdate({username},{ isBanned: true})
+    console.log(username)
+    const user = await User.findOneAndUpdate({username})
+
+    if(user.isBanned){
+         res.status(403)
+         throw new Error("This user is banned already")       
+        }
 
     if(user) {
+        user.isBanned = true
+        user.save()
+
         res.status(200);      
         res.json({
-        email: user.email,
+        username: user.username,
         isBanned: user.isBanned,
-        message: "this user is banned"
+        message: "This user is banned"
         });
     } 
     else {
     res.status(401);
     throw new Error("There is no such user");
    }
+});
+
+const unbanUser = asyncHandler(async (req, res) => {
+  const { username } = req.body;
+  const user = await User.findOneAndUpdate({ username });
+
+  if (!user.isBanned) {
+    res.status(403);
+    throw new Error("This user is not banned already");
+  }
+
+  if (user) {
+    user.isBanned = false;
+    user.save();
+
+    res.status(200);
+    res.json({
+      username: user.username,
+      isBanned: user.isBanned,
+      message: "This user is unbanned",
+    });
+  } else {
+    res.status(401);
+    throw new Error("There is no such user");
+  }
 });
 
 const allUsers = asyncHandler(async(req,res)=>{
@@ -137,4 +171,4 @@ const deleteModerator = asyncHandler(async (req, res) => {
   res.status(200).json({ username: req.params.username, message: "This moderator is deleted" });
 });
 
-module.exports = {registerUser, authUser, banUser, allUsers, deleteModerator};
+module.exports = {registerUser, authUser, banUser, allUsers, deleteModerator, unbanUser};
