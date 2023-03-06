@@ -48,7 +48,7 @@ const registerUser = asyncHandler(async(req,res ) => {
             });
             var mailOptions = { from: "Donut Share " + process.env.SYSTEM_MAIL, to: user.email, subject: 'Account Verification Token', text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/api/mail/confirmation\/' + token.token + '\n' };
             if(user.userType == "moderator") {
-              mailOptions = { from: "Donut Share " + process.env.SYSTEM_MAIL, to: user.email, subject: 'Moderator Notification Email', text: 'Hello,\n\n' + 'Welcome to Donut Share! \nHere is your account information \n Username: ' +user.username + '\n Password: ' +req.body.password+ 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/api/mail/confirmation\/' + token.token + '\n'};
+              mailOptions = { from: "Donut Share " + process.env.SYSTEM_MAIL, to: user.email, subject: 'Moderator Notification Email', text: 'Hello,\n\n' + 'Welcome to Donut Share! \nHere is your account information \nUsername: ' +user.username + '\nPassword: ' +req.body.password+ '\n\nPlease verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/api/mail/confirmation\/' + token.token + '\n'};
             }
             transporter.sendMail(mailOptions, function (err) {
                 if (err) { return res.status(500).send({ msg: err.message }); }
