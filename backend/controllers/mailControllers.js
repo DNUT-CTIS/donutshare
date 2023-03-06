@@ -24,7 +24,7 @@ const confirmationPost = asyncHandler(async (req, res) => {
   }
 
   if (user.isVerified) {
-    res.status(400).redirect("https://donut-5dff6.web.app/dashboard");;
+    res.status(400).redirect("https://donut-5dff6.web.app/dashboard/verified");;
     throw new Error("This user has already been verified.");
   }
 
@@ -33,7 +33,7 @@ const confirmationPost = asyncHandler(async (req, res) => {
   res
     .status(200)
     .send("The account has been verified. Please log in.")
-    .redirect("https://donut-5dff6.web.app/dashboard");
+    .redirect("https://donut-5dff6.web.app/dashboard/already-verified");
 });
 
 const resendConfimation = asyncHandler(async (req, res) => {
