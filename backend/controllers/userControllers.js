@@ -176,7 +176,7 @@ const banUser = asyncHandler(async (req, res) => {
 
 const unbanUser = asyncHandler(async (req, res) => {
   const { username } = req.body;
-  const user = await User.findOneAndUpdate({ username });
+  const user = await User.findOne({ username });
 
   if (!user) {
     res.status(401);
@@ -227,12 +227,10 @@ const deleteModerator = asyncHandler(async (req, res) => {
 
   await User.findByIdAndDelete(user._id);
 
-  res
-    .status(200)
-    .json({
-      username: req.params.username,
-      message: "This moderator is deleted",
-    });
+  res.status(200).json({
+    username: req.params.username,
+    message: "This moderator is deleted",
+  });
 });
 
 module.exports = {
