@@ -24,13 +24,16 @@ const confirmationPost = asyncHandler(async (req, res) => {
   }
 
   if (user.isVerified) {
-    res.status(400);
+    res.status(400).redirect("https://donut-5dff6.web.app/dashboard");;
     throw new Error("This user has already been verified.");
   }
 
   user.isVerified = true;
   user.save();
-  res.status(200).send("The account has been verified. Please log in.");
+  res
+    .status(200)
+    .send("The account has been verified. Please log in.")
+    .redirect("https://donut-5dff6.web.app/dashboard");
 });
 
 const resendConfimation = asyncHandler(async (req, res) => {
