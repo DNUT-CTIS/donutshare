@@ -8,7 +8,7 @@ import AuthService from "../../service/authService";
 import ReactCardFlip from "react-card-flip";
 import {Register} from "./Register";
 import {RegisterSuccess} from "./RegisterSuccess";
-
+import {AnimatePresence, motion} from "framer-motion";
 
 export function Login() {
 
@@ -112,10 +112,19 @@ export function Login() {
         Login
       </button>
       <ToastContainer autoClose={2000} theme={"dark"}/>
+      <AnimatePresence>
       {showModal ? ( showSignUpForm ? (
           <div
             className='fixed z-50 inset-0 dark:bg-black dark:bg-opacity-25 backdrop-blur-sm flex justify-center items-center'>
-            <div className='w-[500px] flex flex-col'>
+            <motion.div
+              initial={{ scale: 0 }}
+              exit={{scale: 0 }}
+              animate={{ scale: 1 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 260,
+                          damping: 20
+                        }} className='w-[500px] flex flex-col'>
               <div className="dark:bg-zinc-800 p-2  rounded-lg dark:border dark:border-zinc-700 flex flex-col">
                 <button type="button"
                         className="place-self-end top-3 right-2.5 place-self-end text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto dark:hover:bg-zinc-700 dark:hover:text-white"
@@ -161,8 +170,8 @@ export function Login() {
                   </form>
                 </div>
               </div>
-            </div>
-          </div>) : (signupSuccess ? (    <div
+            </motion.div>
+          </div>) : (signupSuccess ? ( <div
           className='fixed z-50 inset-0 dark:bg-black dark:bg-opacity-25 backdrop-blur-sm flex justify-center items-center'>
           <div className='w-[500px] flex flex-col'>
             <div className="dark:bg-zinc-800 p-2  rounded-lg dark:border dark:border-zinc-700 flex flex-col">
@@ -190,7 +199,13 @@ export function Login() {
         </div>) : <div>
           <div
             className='fixed z-50 inset-0 dark:bg-black dark:bg-opacity-25 backdrop-blur-sm flex justify-center items-center'>
-            <div className='w-[500px] flex flex-col'>
+            <motion.div initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 260,
+                          damping: 20
+                        }} className='w-[500px] flex flex-col'>
               <div className="dark:bg-zinc-800 p-2 rounded-lg dark:border dark:border-zinc-700 flex flex-col">
                 <button type="button"
                         className="place-self-end top-3 right-2.5 place-self-end text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto dark:hover:bg-zinc-700 dark:hover:text-white"
@@ -256,10 +271,11 @@ export function Login() {
                 </div>
 
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>)
           ) : null}
+        </AnimatePresence>
     </div>
   );
 }
