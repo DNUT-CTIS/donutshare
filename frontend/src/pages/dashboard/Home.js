@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {Link, Navigate, useNavigate,useLocation} from "react-router-dom";
 import logo from "../../shared/logo.png"
 import { ToastContainer, toast } from 'react-toastify';
@@ -10,6 +10,7 @@ import {Reason} from "./Reason";
 import {Navbar} from "../../shared/Navbar";
 import AuthService from "../../service/authService";
 import PostService from "../../service/postService";
+import {Login} from "../auth/Login";
 
 export function Home() {
     const [isFlipped, setIsFlipped] = useState(false);
@@ -40,18 +41,21 @@ export function Home() {
     };
 
     return (
+      <Fragment>
             <div>
-                
+
                     <Navbar></Navbar>
-               
+
                     <div className="flex flex-col items-center justify-center h-screen dark:bg-zinc-900">
 
                         <Reason></Reason>
                         <br></br>
                         <Reason></Reason>
                     </div>
+
             </div>
-        
+
+      </Fragment>
 
     );
 
