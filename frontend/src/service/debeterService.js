@@ -24,6 +24,15 @@ const DeleteDebater = (username) => {
             return response.data;
         });
 };
+const UnBanDebater = (username) => {
+    return axios
+        .put(API_URL + "/user/unban", {
+        username
+        }, config)
+        .then((response) => {
+            return response.data;
+        });
+};
 
 const login = (email, password) => {
     return axios
@@ -59,7 +68,8 @@ const DebaterService = {
     login,
     logout,
     getCurrentUser,
-    DeleteDebater
+    DeleteDebater,
+    UnBanDebater
 };
 
 export default DebaterService;
