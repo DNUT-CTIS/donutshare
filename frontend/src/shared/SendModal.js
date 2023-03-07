@@ -17,7 +17,7 @@ const SendModal = () => {
     const submitPost = async (event) => {
         event.preventDefault()
         try {
-            await PostService.sendPost(username , txt).then(
+            await PostService.sendPost(username , txt, "agree").then(
                 (response) => {
                     // check for token and user already exists with 200
                     //   console.log("Sign up successfully", response);

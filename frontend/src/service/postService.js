@@ -1,14 +1,15 @@
 import axios from "axios";
 import authHeader from "./authHeader";
+import { toast } from 'react-toastify';
 
 const API_URL = "https://donutshare-api.onrender.com/api";
 const user = JSON.parse(localStorage.getItem("token"));
 const config = {
     headers: { Authorization: `Bearer ${user}` }
 };
-const sendPost = (username, text) => {
+const sendPost = (username, text, opinion) => {
     return axios.post(API_URL + "/post", {
-        username, text
+        username, text, opinion,
     }, config).then(console.log(text));
 };
 
