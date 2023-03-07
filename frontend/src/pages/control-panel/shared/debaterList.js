@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
-import DebaterService from './service/debeterService';
+import DebaterService from '../../../service/debeterService';
+
 
   
 function DebaterList(){
@@ -44,7 +45,7 @@ function DebaterList(){
         .catch((error) => {
           // Error message or perform any other action
         });
-        setUser(user.filter(user => user.username !== username));
+        
       };
       
 return(
@@ -66,13 +67,15 @@ return(
             key={debater}
             className="flex items-center justify-between px-4 py-2 bg-white border border-gray-300 rounded-md"
           >
-            <span>{debater.username}</span>
-            <span
-              className="text-red-500 cursor-pointer"
-              onClick={() => handleDelete(debater.username)}
-            >
-            <AiOutlineClose/>
-            </span>
+            {console.log(debater.isBanned)}
+           {!debater.isBanned ? (<><p>{debater.username}</p><button onClick={() => handleDelete(debater.username)} type="button" class="text-white bg-gradient-to-r from-pink-600 via-pink-600 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Ban Debater</button></>) :(<><p className='dark:text-red-700 line-through'>{debater.username}</p><button onClick={() => handleDelete(debater.username)} type="button" class="text-white bg-gradient-to-r from-blue-600 via-blue-600 to-blue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Unban Debater</button></>)}
+            
+              
+              
+          
+              
+              
+            
           </div>
         ))}
       </div>

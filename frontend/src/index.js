@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import AdminProfile from './adminProfile';
-import ModeratorProfile from './moderatorProfile';
+import AdminProfile from './pages/control-panel/admin-panel/adminProfile';
+import ModeratorProfile from './pages/control-panel/moderator-panel/moderatorProfile';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

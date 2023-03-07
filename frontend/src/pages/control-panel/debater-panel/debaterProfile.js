@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import DebaterList from './debaterList';
-import AddTopic from './addTopic';
-import { Navbar } from './shared/loginavbar';
-function ModeratorProfile() {
+import { Navbar } from '../../../shared/loginavbar';
+function DebaterProfile() {
 
   const [selectedItem, setSelectedItem] = useState('general');
- 
+
+
   return (
     <div className="flex flex-col h-screen dark:bg-zinc-900">
       <Navbar/>
-
       <div className="flex flex-row flex-1">
         <div className="w-1/6 bg-gray-200 h-full p-4">
           <ul>
@@ -17,26 +15,24 @@ function ModeratorProfile() {
               <a href="#" className="text-gray-800 font-bold hover:text-gray-700 block py-2 px-4 rounded-md"
                 onClick={() => setSelectedItem('general')}>Account Settings</a>
             </li>
-            <li className={`mb-4 ${selectedItem === 'dblist' ? 'bg-gray-300' : ''}`}>
-              <a href="#" className="text-gray-800 font-bold hover:text-gray-700 block py-2 px-4 rounded-md"
-                onClick={() => setSelectedItem('dblist')}>Debater List</a>
-            </li>
-            <li className={`mb-4 ${selectedItem === 'add' ? 'bg-gray-300' : ''}`}>
-              <a href="#" className="text-gray-800 font-bold hover:text-gray-700 block py-2 px-4 rounded-md"
-                onClick={() => setSelectedItem('add')}>Add Topic</a>
-            </li>
           </ul>
         </div>
+
+        
         <div className="flex-1 p-8 dark:bg-zinc-900">
-          {selectedItem === 'dblist' ? (
-            <DebaterList/>
-          ) : selectedItem === 'add' ? (
-           <AddTopic/>
+          {selectedItem === 'security' ? (
+            <div className="flex justify-center">
+              <h2 className="text-xl font-bold">SECURITY PAGE</h2>
+            </div>
+          ) : selectedItem === 'privacy' ? (
+            <div className="flex justify-center">
+              <h2 className="text-xl font-bold">PRIVACY PAGE</h2>
+            </div>
           ) : (
           <div className="flex flex-col items-center">
             <form className="w-full max-w-sm">
               <div className="mb-4">
-                <label htmlFor="name" className="block text-gray-700 font-bold mb-2 dark:text-white" >Name</label>
+                <label htmlFor="name" className="block text-gray-700 font-bold mb-2 dark:text-white">Name</label>
                 <input type="text" id="name" className="form-input w-full" placeholder="John Doe" />
               </div>
 
@@ -69,4 +65,4 @@ function ModeratorProfile() {
 );
 }
 
-export default ModeratorProfile;
+export default DebaterProfile;
