@@ -7,7 +7,7 @@
   }
   
   .buttons button {
-    --_c: #FFFF00;
+    --_c: #1140ee;
     flex: calc(1.25 + var(--_s,0));
     min-width: 0;
     font-size: 23px;
@@ -63,7 +63,6 @@
     box-shadow: inset 0 0 0 100vmax var(--_c);
     color: #fff;
   }
-  
   
   
   

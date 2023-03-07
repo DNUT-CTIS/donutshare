@@ -4,6 +4,7 @@ import {Modal} from "flowbite";
 import SendModal from "./SendModal";
 import AuthService from "../service/authService";
 import {useNavigate} from "react-router-dom";
+import {Login} from "../pages/auth/Login";
 
 export function Navbar() {
     const navigate = useNavigate();
@@ -41,6 +42,9 @@ export function Navbar() {
                         </li>
                         <li>
                             <SendModal></SendModal>
+                        </li>
+                        <li>
+                            <Login></Login>
                         </li>
                     </ul>
                 </div>

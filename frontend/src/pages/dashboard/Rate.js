@@ -2,17 +2,37 @@ import React, { useEffect, useState } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import PostService from "../../service/postService";
 import ReportModal from "../../shared/ReportModal";
+import {toast} from "react-toastify";
 
 
 export function Rate(props) {
 
     const [likeCount, setLikeCount] = useState(props.upvoteCount);
     const userData=JSON.parse(localStorage.getItem("userType"))
+    const username=JSON.parse(localStorage.getItem("username"))
     const [dislikeCount, setDislikeCount] = useState(props.downvoteCount);
     const [id,setId] = useState(props.id);
     const [activeBtn, setActiveBtn] = useState("none");
 
+    //const [upvotes, setUpvotes] = useState(post.upvotes);
+    const [hasUpvoted, setHasUpvoted] = useState(false);
+    useEffect(() => {
+        console.log(props.votes)
+        if (username) {
+            const vote = Object.values(props.votes).find(
+              (vote) => vote.username === username
+            );
+            console.log(vote)
+            if(vote && vote.rate === "upvote") {
+                setActiveBtn("like");
+            } else if(vote && vote.rate === "downvote") {
+                setActiveBtn("dislike");
+            }
+        }
 
+        //const userHasUpvoted = post.upvoters.includes(userId);
+        //setHasUpvoted(userHasUpvoted);
+    }, [props.post]);
 
     const handleDelete = async (event) => {
         event.preventDefault()
@@ -31,50 +51,28 @@ export function Rate(props) {
         }
     };
 
-
-
-
-
-    const handleLikeClick = () => {
-        if (activeBtn === "none") {
-            setLikeCount(likeCount + 1);
-
-            setActiveBtn("like");
-            return;
-        }
-
-        if (activeBtn === 'like') {
-            setLikeCount(likeCount - 1);
-            setActiveBtn("none");
-            return;
-        }
-
-        if (activeBtn === "dislike") {
-            setLikeCount(likeCount + 1);
-            setDislikeCount(dislikeCount - 1);
-            setActiveBtn("like");
-        }
-    };
-
     const upvotePost = async (event) => {
+        event.preventDefault()
+
         if (activeBtn === "none") {
-            setLikeCount(likeCount + 1);
-            event.preventDefault()
             try {
                 await PostService.upvotePost(id).then(
-                    (response) => {
-                        // check for token and user already exists with 200
-                        //   console.log("Sign up successfully", response);
+                  (response) => {
+                      // check for token and user already exists with 200
+                      //   console.log("Sign up successfully", response);
 
 
-                    },
-                    (error) => {
-                        console.log(error);
-                    }
+                  },
+                  (error) => {
+                      toast.error(error.response.data.message)
+                      console.log(error);
+                  }
                 );
             } catch (err) {
+                return;
                 console.log(err);
             }
+            setLikeCount(likeCount + 1);
             setActiveBtn("like");
             return;
         }
@@ -94,9 +92,9 @@ export function Rate(props) {
     };
 
     const downvotePost = async (event) => {
+        event.preventDefault()
+
         if (activeBtn === "none") {
-            setDislikeCount(dislikeCount - 1);
-            event.preventDefault()
             try {
                 await PostService.downvotePost(id).then(
                     (response) => {
@@ -106,38 +104,19 @@ export function Rate(props) {
 
                     },
                     (error) => {
+                        toast.error(error.response.data.message)
                         console.log(error);
                     }
                 );
             } catch (err) {
                 console.log(err);
             }
+            setDislikeCount(dislikeCount + 1)
             setActiveBtn("dislike");
             return;
         }
 
         if (activeBtn === 'dislike'){
-            setDislikeCount(dislikeCount + 1);
-            setActiveBtn("none");
-            return;
-        }
-
-        if (activeBtn === "like") {
-            setDislikeCount(dislikeCount - 1);
-            setLikeCount(likeCount - 1);
-            setActiveBtn("dislike");
-        }
-
-    };
-
-    const handleDisikeClick = () => {
-        if (activeBtn === "none") {
-            setDislikeCount(dislikeCount + 1);
-            setActiveBtn("dislike");
-            return;
-        }
-
-        if (activeBtn === 'dislike') {
             setDislikeCount(dislikeCount - 1);
             setActiveBtn("none");
             return;
@@ -148,11 +127,11 @@ export function Rate(props) {
             setLikeCount(likeCount - 1);
             setActiveBtn("dislike");
         }
+
     };
 
     return (
         <div className="container top-100">
-            {console.log(props)}
             <div className="btn-container">
                 <button
                     className={`btn ${activeBtn === "like" ? "like-active" : ""}`}
@@ -174,9 +153,14 @@ export function Rate(props) {
                     onClick={downvotePost}
                 >
                     <div style={{ display: 'flex', alignItems: 'center' }}>
+                        {activeBtn !== "dislike" ? (
                         <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15.057 14.183c.46 1.427.693 2.676.693 3.753 0 2.399-.939 4.248-2.5 4.248-.8 0-1.078-.45-1.383-1.547l-.27-1.021c-.1-.359-.276-.97-.526-1.831a.246.246 0 0 0-.03-.065l-2.866-4.486a5.886 5.886 0 0 0-2.855-2.327l-1.257-.48A1.75 1.75 0 0 1 2.97 8.458l.686-3.539A2.25 2.25 0 0 1 5.33 3.163l8.25-2.022a4.75 4.75 0 0 1 5.733 3.44l1.574 6.173a2.75 2.75 0 0 1-2.665 3.429h-3.165Z" fill="#ffffff" />
+                        </svg>) : (
+                        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.057 14.183c.46 1.427.693 2.676.693 3.753 0 2.399-.939 4.248-2.5 4.248-.8 0-1.078-.45-1.383-1.547l-.27-1.021c-.1-.359-.276-.97-.526-1.831a.246.246 0 0 0-.03-.065l-2.866-4.486a5.886 5.886 0 0 0-2.855-2.327l-1.257-.48A1.75 1.75 0 0 1 2.97 8.458l.686-3.539A2.25 2.25 0 0 1 5.33 3.163l8.25-2.022a4.75 4.75 0 0 1 5.733 3.44l1.574 6.173a2.75 2.75 0 0 1-2.665 3.429h-3.165Z" fill="#aaaaaa" />
                         </svg>
+                        )}
                         <span style={{ marginLeft: '4px' }} className="dark:text-white">{dislikeCount}</span>
                     </div>
                 </button>
