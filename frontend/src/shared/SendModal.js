@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import PostService from "../service/postService";
+import {motion} from "framer-motion";
 
 const SendModal = () => {
     const [showModal, setShowModal] = useState(false);
@@ -34,14 +35,20 @@ const SendModal = () => {
     };
     return (
         <>
-            <button
+            <motion.button initial={{opacity: 0, scale: 0.5}}
+                           animate={{opacity: 1, scale: 1}}
+                           transition={{
+                               duration: 0.8,
+                               delay: 0.5,
+                               ease: [0, 0.71, 0.2, 1.01]
+                           }}
                 className="bg-blue-200 text-black active:bg-blue-500
       font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
                 type="button"
                 onClick={() => setShowModal(true)}
             >
                Send Post
-            </button>
+            </motion.button>
             {showModal ? (
                 <>
                     <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">

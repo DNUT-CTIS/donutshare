@@ -103,14 +103,20 @@ export function Login() {
   };
   return (
     <div>
-      <button className="bg-pink-200 text-black active:bg-blue-500
+      <motion.button initial={{opacity: 0, scale: 0.5}}
+                     animate={{opacity: 1, scale: 1}}
+                     transition={{
+                       duration: 0.8,
+                       delay: 0.5,
+                       ease: [0, 0.71, 0.2, 1.01]
+                     }} className="bg-pink-200 text-black active:bg-blue-500
       font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
               type="button" onClick={() => {
         setShowModal(true);
         setShowSignUpForm(true);
       }}>
         Login
-      </button>
+      </motion.button>
       <ToastContainer autoClose={2000} theme={"dark"}/>
       <AnimatePresence>
       {showModal ? ( showSignUpForm ? (
