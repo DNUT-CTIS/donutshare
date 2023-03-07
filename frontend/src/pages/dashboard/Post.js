@@ -53,7 +53,7 @@ export function Post() {
                 </a>
                 <div className="inset-x-0 bottom-1">
                 <hr className="dark:border-gray-900 pt-2"></hr>
-                    <Rate upvoteCount={item.upvoteCount} id={item._id} downvoteCount={item.downvoteCount}></Rate>
+                    <Rate upvoteCount={item.upvoteCount} votes={item.votes} id={item._id} post={item} downvoteCount={item.downvoteCount}></Rate>
         
 
                 </div>
