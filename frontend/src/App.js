@@ -14,6 +14,9 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import PrivateRoutes from "./shared/PrivateRoutes";
 import {Auth} from "./pages/auth/Auth";
 import { RegisterMod } from './pages/auth/Register-Mod';
+import MaterialLogin from "./pages/auth/MaterialLogin";
+import {DashboardVerified} from "./pages/dashboard/DashboardVerified";
+import {DashboardAlreadyVerified} from "./pages/dashboard/DashboardAlreadyVerified";
 
 
 
@@ -29,11 +32,15 @@ function App() {
               <Route path="/mod-profile" element={<ModeratorProfile />} />
               <Route path="/sign-up-mod" element={<RegisterMod/>}></Route>
               <Route path="/profile" element={<DebaterProfile />} />
-              <Route path="/dashboard" element={<Dashboard/>}></Route>
               <Route path="/chat" element={<SendPost/>}></Route>
               </Route>
-              <Route path="/" element={<Navigate to="/login" />} />
+              <Route path="/dashboard" element={<Dashboard/>}>
+              </Route>
+              <Route path="/dashboard/verified" element={<DashboardVerified/>}/>
+              <Route path="/dashboard/already-verified" element={<DashboardAlreadyVerified/>}/>
+              <Route path="/" element={<Navigate to="/dashboard" />} />
               <Route path="/auth" element={<Auth />}></Route>
+              <Route path="/mat" element={<MaterialLogin />}></Route>
               <Route path="/login" element={<Login />}></Route>
               <Route path="/sign-up" element={<Register/>}></Route>
               
