@@ -9,7 +9,6 @@ dotenv.config();
 
 const confirmationPost = asyncHandler(async (req, res) => {
   // Find a matching token
-
   const token = await Token.findOne({ token: req.params.token });
 
   if (!token) {
@@ -24,7 +23,9 @@ const confirmationPost = asyncHandler(async (req, res) => {
   }
 
   if (user.isVerified) {
-    res.status(400).redirect("https://donut-5dff6.web.app/dashboard/already-verified");;
+    res
+      .status(400)
+      .redirect("https://donut-5dff6.web.app/dashboard/already-verified");
     throw new Error("This user has already been verified.");
   }
 

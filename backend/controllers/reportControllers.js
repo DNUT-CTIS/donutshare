@@ -1,5 +1,4 @@
 const asyncHandler = require("express-async-handler");
-
 const User = require("../models/userModel");
 const Post = require("../models/postModel");
 const Report = require("../models/reportModel");
@@ -29,10 +28,10 @@ const reportPost = asyncHandler(async (req, res) => {
 
   const offender = await User.findById(post.user);
 
-   if (req.user.id == offender.id) {
-     res.status(400);
-     throw new Error("You can't report your own post!");
-   }
+  if (req.user.id == offender.id) {
+    res.status(400);
+    throw new Error("You can't report your own post!");
+  }
 
   const report = await Report.create({
     complainant: req.user.username,
