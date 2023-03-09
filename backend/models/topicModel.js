@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 
 const topicModel = mongoose.Schema({
-    content:{type: String, trim: true}
+    sender :{type:mongoose.Schema.Types.ObjectId,ref:"User"},
+    content:{type: String, trim: true},
 },
     {
     timestamps:true,
