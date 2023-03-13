@@ -42,4 +42,10 @@ const reportPost = asyncHandler(async (req, res) => {
   res.status(200).json(report);
 });
 
-module.exports = { reportUser, reportPost };
+const allReports = asyncHandler(async (req, res) => {
+  const reportArr = await Report.find({});
+
+  res.status(200).json({ reportArr });
+});
+
+module.exports = { reportUser, reportPost, allReports };
