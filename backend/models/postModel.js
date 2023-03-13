@@ -43,8 +43,11 @@ postModel.methods.upvotePost = async function (userId) {
       return 1;
     }
    
-    if(vote.rate === "upvote"){
-      console.log("You already upvoted this post")
+    if(vote.rate === "upvote"){     
+      this.votes.pull(vote)
+      this.upvoteCount -= 1;
+      await this.save();
+      console.log("You deleted this upvote");
       return 2
     }
 
@@ -75,7 +78,10 @@ postModel.methods.downvotePost = async function (userId) {
   }
 
   if (vote.rate === "downvote") {
-    console.log("You already downvoted this post");
+      this.votes.pull(vote);
+      this.downvoteCount -= 1;
+      await this.save();
+      console.log("You deleted this downvote");
     return 2;
   }
 
