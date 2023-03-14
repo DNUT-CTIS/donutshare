@@ -3,6 +3,7 @@ import DebaterList from '../shared/debaterList';
 import AddTopic from '../shared/addTopic';
 import ModeratorList from './moderatorList';
 import { Navbar } from '../../../shared/loginavbar';
+import ReportedReason from '../shared/reportedReason';
 function AdminProfile() {
   
   const [selectedItem, setSelectedItem] = useState('general');
@@ -29,6 +30,10 @@ function AdminProfile() {
               <a href="#" className="text-gray-800 font-bold hover:text-gray-700 block py-2 px-4 rounded-md"
                 onClick={() => setSelectedItem('modlist')}>Moderator List</a>
             </li>
+            <li className={`mb-4 ${selectedItem === 'reportedReason' ? 'bg-gray-300' : ''}`}>
+              <a href="#" className="text-gray-800 font-bold hover:text-gray-700 block py-2 px-4 rounded-md"
+                onClick={() => setSelectedItem('reportedReason')}>Reported Reasons</a>
+            </li>
           </ul>
         </div>
 
@@ -38,7 +43,10 @@ function AdminProfile() {
             <ModeratorList/>
           ) : selectedItem === 'dblist' ? (
            <DebaterList/>
-          ) : selectedItem === 'add' ? (
+          ) : selectedItem === 'reportedReason' ? (
+            <ReportedReason/>
+           )
+          : selectedItem === 'add' ? (
             <AddTopic/>
           ) :(
           <div className="flex flex-col items-center">

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import DebaterList from '../shared/debaterList';
 import AddTopic from '../shared/addTopic';
 import { Navbar } from '../../../shared/loginavbar';
+import ReportedReason from '../shared/reportedReason';
 function ModeratorProfile() {
 
   const [selectedItem, setSelectedItem] = useState('general');
@@ -25,6 +26,10 @@ function ModeratorProfile() {
               <a href="#" className="text-gray-800 font-bold hover:text-gray-700 block py-2 px-4 rounded-md"
                 onClick={() => setSelectedItem('add')}>Add Topic</a>
             </li>
+            <li className={`mb-4 ${selectedItem === 'reason' ? 'bg-gray-300' : ''}`}>
+              <a href="#" className="text-gray-800 font-bold hover:text-gray-700 block py-2 px-4 rounded-md"
+                onClick={() => setSelectedItem('reason')}>Reported Reasons</a>
+            </li>
           </ul>
         </div>
         <div className="flex-1 p-8 dark:bg-zinc-900">
@@ -32,6 +37,9 @@ function ModeratorProfile() {
             <DebaterList/>
           ) : selectedItem === 'add' ? (
            <AddTopic/>
+          ) : selectedItem === 'reason' ? (
+            <ReportedReason/>
+
           ) : (
           <div className="flex flex-col items-center">
             <form className="w-full max-w-sm">
