@@ -62,16 +62,6 @@ const deletePost = asyncHandler(async (req, res) => {
     throw new Error("Post not found");
   }
 
-  if (!req.user) {
-    res.status(401);
-    throw new Error("User not found");
-  }
-
-  if (post.user.toString() !== req.user.id) {
-    res.status(401);
-    throw new Error("User not authorized");
-  }
-
   await Post.findByIdAndDelete(id);
 
   res.status(200).json({ id: req.params.id, message: "Your post is deleted" });
