@@ -17,6 +17,7 @@ import { RegisterMod } from './pages/auth/Register-Mod';
 import MaterialLogin from "./pages/auth/MaterialLogin";
 import {DashboardVerified} from "./pages/dashboard/DashboardVerified";
 import {DashboardAlreadyVerified} from "./pages/dashboard/DashboardAlreadyVerified";
+import ChatApp, {MyChatComponent} from "./pages/dashboard/Chat";
 
 
 
@@ -27,7 +28,6 @@ function App() {
           <Routes>
               <Route element={<PrivateRoutes />}>
               <Route path="/dashboard2" element={<TempHome/>}></Route>
-              <Route path="/chat" element={<SendPost/>}></Route>
               <Route path="/admin-profile" element={<AdminProfile />}></Route>
               <Route path="/mod-profile" element={<ModeratorProfile />} />
               <Route path="/sign-up-mod" element={<RegisterMod/>}></Route>
@@ -36,7 +36,8 @@ function App() {
               </Route>
               <Route path="/dashboard" element={<Dashboard/>}>
               </Route>
-              <Route path="/dashboard/verified" element={<DashboardVerified/>}/>
+            <Route path="/talk" element={<MyChatComponent/>}/>
+            <Route path="/dashboard/verified" element={<DashboardVerified/>}/>
               <Route path="/dashboard/already-verified" element={<DashboardAlreadyVerified/>}/>
               <Route path="/" element={<Navigate to="/dashboard" />} />
               <Route path="/auth" element={<Auth />}></Route>
