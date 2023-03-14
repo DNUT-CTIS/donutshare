@@ -5,6 +5,7 @@ import ReportModal from "../../shared/ReportModal";
 import {toast} from "react-toastify";
 
 
+
 export function Rate(props) {
 
     const [likeCount, setLikeCount] = useState(props.upvoteCount);
@@ -34,7 +35,7 @@ export function Rate(props) {
         //setHasUpvoted(userHasUpvoted);
     }, [props.post]);
 
-    const handleDelete = async (event) => {
+   /* const handleDelete = async (event) => {
         event.preventDefault()
         console.log(event)
         try {
@@ -49,6 +50,11 @@ export function Rate(props) {
         } catch (err) {
             console.log(err);
         }
+    };*/
+    const handleDelete = () => {
+        // call the delete function passed as prop
+        console.log(props.id)
+        props.deleteFun(props.id);
     };
 
     const upvotePost = async (event) => {

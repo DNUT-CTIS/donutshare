@@ -22,7 +22,8 @@ const reportPost = (id, text) => {
 const DeletePost = (id) => {
     return axios
         .delete(API_URL + "/post/delete", {
-            data:{
+            config
+            ,data:{
             id:id
           }
         }).then(() => {
