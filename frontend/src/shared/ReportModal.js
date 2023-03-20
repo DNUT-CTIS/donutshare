@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import PostService from "../service/postService";
+import {motion} from "framer-motion";
 
 const ReportModal = (props) => {
     const [showModal, setShowModal] = useState(false);
@@ -26,16 +27,21 @@ const ReportModal = (props) => {
     };
     return (
         <>
-            <button onClick={() => setShowModal(true)}>
+            <motion.button
+              whileTap={{
+                  scale: 0.8,
+              }} onClick={() => setShowModal(true)}>
                 <div style={{ display: 'flex', alignItems: 'center', right:0 }}>
-                    <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3.747a.75.75 0 0 1 .75-.75h16.504a.75.75 0 0 1 .6 1.2L16.69 9.748l4.164 5.552a.75.75 0 0 1-.6 1.2H4.5v4.749a.75.75 0 0 1-.648.743L3.75 22a.75.75 0 0 1-.743-.648L3 21.249V3.747Z" fill="#ffffff" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 3v1.5M3 21v-6m0 0l2.77-.693a9 9 0 016.208.682l.108.054a9 9 0 006.086.71l3.114-.732a48.524 48.524 0 01-.005-10.499l-3.11.732a9 9 0 01-6.085-.711l-.108-.054a9 9 0 00-6.208-.682L3 4.5M3 15V4.5" />
+                    </svg>
 
 
                 </div>
 
 
 
-            </button>
+            </motion.button>
             {showModal ? (
                 <>
                     <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
