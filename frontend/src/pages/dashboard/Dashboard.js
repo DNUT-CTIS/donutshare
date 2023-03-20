@@ -29,6 +29,7 @@ export function Dashboard(props) {
             <Post></Post>
             <br></br>
         </div>
+        
       </section>
     </div>
 
