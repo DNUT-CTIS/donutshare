@@ -79,9 +79,9 @@ export function Post() {
         {reason.map((item) => <div key={item._id} className="">
           <div className="flex flex-row border rounded-md shadow shadow-xl dark:bg-zinc-800 dark:border-zinc-700">
             <div className="w-12 sm:w-fit flex flex-col gap-4 mx-8 my-4 items-center">
-              <Avatar hash={item._id} className="rounded-full dark:bg-zinc-700 w-16 h-16 sm:w-32 sm:h-32"
-                {...generateRandomAvatarOptions()} />
-              <RandomName></RandomName>
+              <Avatar className="rounded-full dark:bg-zinc-700 w-16 h-16 sm:w-32 sm:h-32"
+                {...generateRandomAvatarOptions(item._id)} />
+              <RandomName seed={item._id}></RandomName>
               <Rate upvoteCount={item.upvoteCount} votes={item.votes} id={item._id} post={item}
                     downvoteCount={item.downvoteCount} deleteFun={(id) => handleDelete(id)}
               ></Rate>
