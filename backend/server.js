@@ -47,9 +47,9 @@ const PORT = process.env.PORT;
  const now = new Date();
  const midnight = new Date();
  midnight.setHours(24, 0, 0, 0); // set to midnight tonight
- const timeLeft = midnight - now;
+ const timeLeft = midnight - now + 10800000;
 console.log(timeLeft)
 
-setInterval(topicTimer, timeLeft+10800000);
+setInterval(topicTimer, timeLeft);
 
 app.listen(PORT, console.log(`Server started on PORT ${PORT}`.yellow.bold));
