@@ -8,6 +8,7 @@ const postRoutes = require("./routes/postRoutes");
 const reportRoutes = require("./routes/reportRoutes");
 const topicRoutes = require("./routes/topicRoutes");
 const mailRoutes = require("./routes/mailRoutes");
+const topicTimer = require("./config/timer")
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const cors = require("cors");
 
@@ -42,5 +43,12 @@ app.use(notFound);
 app.use(errorHandler);
 
 const PORT = process.env.PORT;
+
+ const now = new Date();
+ const midnight = new Date();
+ midnight.setHours(24, 0, 0, 0); // set to midnight tonight
+ const timeLeft = midnight - now;
+console.log(timeLeft)
+setInterval(topicTimer, timeLeft);
 
 app.listen(PORT, console.log(`Server started on PORT ${PORT}`.yellow.bold));
