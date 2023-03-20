@@ -29,3 +29,7 @@ input[type="text"]:not(:placeholder-shown) ~ .input-text{
   transform: translateZ(50px);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
+
+.overscroll {
+ background-color: #18181b;
+}
