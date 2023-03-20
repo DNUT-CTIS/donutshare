@@ -1,7 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import DebaterService from '../../../service/debeterService';
-import Confirm from './confirm';
 import reasonService from '../../../service/reasonService';
 
 

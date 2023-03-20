@@ -10,14 +10,24 @@ import {Rate} from "./Rate.js";
 import axios from "axios";
 import postService from '../../service/postService';
 import {motion} from "framer-motion";
+import PostService from "../../service/postService";
+import Avatar from 'avataaars';
+import {generateRandomAvatarOptions} from './randomAvatar';
+import {uniqueNamesGenerator, Config, starWars} from 'unique-names-generator';
+import {RandomName} from "./RandomName";
+
 
 export function Post() {
 
   const [post, setPost] = useState([]);
+  const [agreePost, setAgreePost] = useState([]);
+  const [disagreePost, setDisagreePost] = useState([]);
   const [upvote, setUpvote] = useState([]);
   const [downvote, setDownvote] = useState([]);
   const [text, setText] = useState([]);
   const [reason, setReason] = useState([]);
+  const [isClicked, setIsClicked] = useState(false);
+
 
   useEffect(() => {
     axios.get('https://donutshare-api.onrender.com/api/post/').then((res) => {
@@ -34,8 +44,23 @@ export function Post() {
       console.error(error);
     });
 
-  }, [])
+  }, [isClicked])
 
+  const handleDelete = async (id) => {
+
+    try {
+      await PostService.DeletePost(id).then(
+        (response) => {
+          setIsClicked(!isClicked)
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -43,31 +68,36 @@ export function Post() {
 
 
   return (
-    <motion.div initial={{opacity: 0, scale: 0.5}}
-                animate={{opacity: 1, scale: 1}}
-                transition={{
-                  duration: 0.8,
-                  delay: 0.5,
-                  ease: [0, 0.71, 0.2, 1.01]
-                }} className="w-96 pb-8 ">
-      {reason.map((item) => <div key={item._id}
-                                 className="border border-gray-200 shadow hover:bg-gray-100 rounded-lg dark:bg-pink-800 dark:border-gray-700 dark:hover:bg-pink-700 mb-8">
-        <a href="#"
-           className="block max-w-sm p-6 b h-64">
-          <p className="font-bold text-gray-700 dark:text-white">{item.text} {item.upvoteCount}
-          </p>
-        </a>
-        <div className="inset-x-0 bottom-1">
-          <hr className="dark:border-gray-900 pt-2"></hr>
-          <Rate upvoteCount={item.upvoteCount} votes={item.votes} id={item._id} post={item}
-                downvoteCount={item.downvoteCount}></Rate>
-
-
-        </div>
-
-
-      </div>)}
-    </motion.div>
+    <div className="sm:w-2/5">
+      <motion.div initial={{opacity: 0, scale: 0.5}}
+                  animate={{opacity: 1, scale: 1}}
+                  transition={{
+                    duration: 0.8,
+                    delay: 0.5,
+                    ease: [0, 0.71, 0.2, 1.01]
+                  }} className="">
+        {reason.map((item) => <div key={item._id} className="">
+          <div className="flex flex-row border rounded-md shadow shadow-xl dark:bg-zinc-800 dark:border-zinc-700">
+            <div className="w-12 sm:w-fit flex flex-col gap-4 mx-8 my-4 items-center">
+              <Avatar hash={item._id} className="rounded-full dark:bg-zinc-700 w-16 h-16 sm:w-32 sm:h-32"
+                {...generateRandomAvatarOptions()} />
+              <RandomName></RandomName>
+              <Rate upvoteCount={item.upvoteCount} votes={item.votes} id={item._id} post={item}
+                    downvoteCount={item.downvoteCount} deleteFun={(id) => handleDelete(id)}
+              ></Rate>
+            </div>
+            <div className="gap-4 mx-4 my-5">
+              <span
+                className={`inline-block px-2 py-1 leading-none rounded-full font-semibold uppercase tracking-wide text-xs ${item.opinion === 'agree' ? 'bg-blue-500 ' : 'bg-pink-500 '}`}>
+                {item.opinion}
+              </span>
+              <p className="max-h-60 overflow-y-scroll my-2 dark:text-white">{item.text}</p>
+            </div>
+          </div>
+          <br/>
+        </div>)}
+      </motion.div>
+    </div>
 
   );
 }

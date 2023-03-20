@@ -109,7 +109,7 @@ export function Login() {
                        duration: 0.8,
                        delay: 0.5,
                        ease: [0, 0.71, 0.2, 1.01]
-                     }} className="bg-pink-200 text-black active:bg-blue-500
+                     }} className="bg-pink-600 text-white active:bg-pink-800
       font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
               type="button" onClick={() => {
         setShowModal(true);
