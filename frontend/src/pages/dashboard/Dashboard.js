@@ -25,10 +25,9 @@ export function Dashboard(props) {
           <a href="#" class="flex flex-col items-center justify-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 sticky top-0 md:h-fit">
             <Topic></Topic>
           </a>
-          <div>
+
             <Post></Post>
             <br></br>
-          </div>
         </div>
       </section>
     </div>
