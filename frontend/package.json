@@ -24,6 +24,7 @@
     "react-toastify": "^9.1.1",
     "react-upvote": "0.0.2",
     "seedrandom": "^3.0.5",
+    "socket.io-client": "^4.6.1",
     "talkjs": "^0.15.6",
     "unique-names-generator": "^4.7.1",
     "web-vitals": "^2.1.4"
