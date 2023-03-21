@@ -41,10 +41,13 @@ export function Topic() {
 
     const dateTimeAfterThreeDays = NOW_IN_MS + timeleft;
 
+    const token = localStorage.getItem("token");
+
     const socket = io("http://localhost:4000");
 
     function handleAgreeClick() {
       socket.emit("buttonClick", "agree");
+      
     }
 
     function handleDisagreeClick() {
@@ -67,13 +70,20 @@ export function Topic() {
         <h1 class="mb-3 text-3xl font-bold text-gray-900 dark:text-white pt-6">
           {topic}
         </h1>
-
-        <div class="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 p-8">
-          <div class="buttons">
-            <button onClick={handleAgreeClick}>Agree</button>
-            <button onClick={handleDisagreeClick}>Disagree</button>
-          </div>
+   
+          {token ? (
+            <div class="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 p-8">
+              <div class="buttons">
+                <button onClick={handleAgreeClick}>Agree</button>
+                <button onClick={handleDisagreeClick}>Disagree</button>
+              </div>
+            </div>
+          ) : (
+            <div style={{ display: "none" }}>
+              Hidden when token is not present
+            </div>
+          )}
         </div>
-      </div>
+
     );
 }

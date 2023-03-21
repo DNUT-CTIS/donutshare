@@ -16,8 +16,6 @@ const cors = require("cors");
 connectDB();
 const app = express();
 
-const server = require("http").createServer(app);
-const io = require("socket.io")(server);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -55,7 +53,17 @@ const timeRemaining = midnight - now - 10800000;
 setTimeout(topicTimer, timeRemaining);
 
 
-app.listen(PORT, console.log(`Server started on PORT ${PORT}`.yellow.bold));
+const server = app.listen(PORT, console.log(`Server started on PORT ${PORT}`.yellow.bold));
+
+const io = require('socket.io')(server, {
+  pingTimeout: 60000,
+  cors: {
+    origin: "*",
+  },
+});
+
+const agreeUsers = [];
+const disagreeUsers = [];
 
 io.on("connection", (socket) => {
   console.log("A user connected");
