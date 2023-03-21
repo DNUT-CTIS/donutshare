@@ -66,7 +66,7 @@ const agreeUsers = [];
 const disagreeUsers = [];
 
 io.on("connection", (socket) => {
-  console.log("A user connected");
+ // console.log("A user connected");
 
   socket.on("buttonClick", (button) => {
     if (button === "agree") {
