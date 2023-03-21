@@ -3,9 +3,12 @@ import CountdownTimer from './CountdownTimer';
 import { useEffect,useState } from 'react';
 import topicService from '../../service/topicService';
 import io from "socket.io-client";
+import {Link, useNavigate} from "react-router-dom";
 
 
 import './timer.css';
+import ModalContainer from "../../shared/ModalContainer";
+import {Load} from "./Load";
 
 export function Topic() {
 
@@ -17,6 +20,14 @@ export function Topic() {
     const [topic, setTopic] = useState('');
     const[timeleft,setTimeLeft] = useState(null);
     console.log(timeleft)
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const navigate = useNavigate();
+
+    const handleModalClose = () => {
+        setIsModalOpen(false);
+    };
  
     useEffect(() => {
         try {
@@ -46,15 +57,19 @@ export function Topic() {
     const socket = io("http://localhost:4000");
 
     function handleAgreeClick() {
+      setIsModalOpen(true);
       socket.emit("buttonClick", "agree");
+
       
     }
 
     function handleDisagreeClick() {
+        setIsModalOpen(true);
       socket.emit("buttonClick", "disagree");
     }
 
         socket.on('matched', (message) => {
+        navigate("/chat");
         alert(message);
         });
 
@@ -75,7 +90,11 @@ export function Topic() {
             <div class="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 p-8">
               <div class="buttons">
                 <button onClick={handleAgreeClick}>Agree</button>
-                <button onClick={handleDisagreeClick}>Disagree</button>
+                  <ModalContainer isOpen={isModalOpen} onClose={handleModalClose}>
+                      <Load></Load>
+                      <button onClick={handleModalClose}>Close Modal</button>
+                  </ModalContainer>
+                  <button onClick={handleDisagreeClick}>Disagree</button>
               </div>
             </div>
           ) : (
