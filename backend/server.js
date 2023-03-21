@@ -47,7 +47,7 @@ const PORT = process.env.PORT;
  const now = new Date();
  const midnight = new Date();
  midnight.setHours(24, 0, 0, 0); // set to midnight tonight
- const timeLeft = midnight - now + 10800000;
+ const timeLeft = midnight - now;
 console.log(timeLeft)
 
 setInterval(topicTimer, timeLeft);
