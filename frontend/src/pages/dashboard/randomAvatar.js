@@ -1,3 +1,5 @@
+import seedrandom from "seedrandom";
+
 const configs = {
   topType: [
     'NoHair',
@@ -179,12 +181,21 @@ const configs = {
 
 const configsKeys = Object.keys(configs);
 
-export function generateRandomAvatarOptions() {
+export function generateRandomAvatarOptions(seed) {
   const options = { }
   const keys = [...configsKeys]
+  var randomNumber = parseInt(seed, 16) / Math.pow(2, 256);
+  console.log(randomNumber)
+  let seedrandom = require('seedrandom');
+  let photo = seedrandom("641884b536366cce49378969");
+  let photo2 = seedrandom("641884e336366cce493789cc");
+  console.log("p(",photo())
+  console.log("p2",photo2())
   keys.forEach(key => {
+    let rng = seedrandom(seed);
     const configArray = configs[key];
-    options[key] = configArray[Math.floor(Math.random()*configArray.length)];
+    options[key] = configArray[Math.ceil(rng()*configArray.length)];
+
   })
 
   return options;
