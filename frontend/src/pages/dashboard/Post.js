@@ -15,6 +15,11 @@ import Avatar from 'avataaars';
 import {generateRandomAvatarOptions} from './randomAvatar';
 import {uniqueNamesGenerator, Config, starWars} from 'unique-names-generator';
 import {RandomName} from "./RandomName";
+import {PostSkeleton} from "./PostSkeleton";
+import Skeleton from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css'
+import donutImage from "./donut.png";
+
 
 
 export function Post() {
@@ -27,9 +32,13 @@ export function Post() {
   const [text, setText] = useState([]);
   const [reason, setReason] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
+  const [loading, setLoading] = useState(false);
+
 
 
   useEffect(() => {
+    setLoading(true);
+
     axios.get('https://donutshare-api.onrender.com/api/post/').then((res) => {
       res.data.posts.map((item) => {
         if (item) {
@@ -39,6 +48,7 @@ export function Post() {
       setPost(res.data.posts.map((post) => post.text));
       setReason(res.data.posts.map((post) => post));
 
+      setLoading(false);
 
     }).catch((error) => {
       console.error(error);
@@ -68,7 +78,10 @@ export function Post() {
 
 
   return (
-    <div className="sm:w-2/5">
+    <div>
+      {loading && <img className="py-16 mx-auto" src={donutImage}/>
+      }
+      <div className="mx-auto sm:w-2/5">
       <motion.div initial={{opacity: 0, scale: 0.5}}
                   animate={{opacity: 1, scale: 1}}
                   transition={{
@@ -91,13 +104,14 @@ export function Post() {
                 className={`inline-block px-2 py-1 leading-none rounded-full font-semibold uppercase tracking-wide text-xs ${item.opinion === 'agree' ? 'bg-blue-500 ' : 'bg-pink-500 '}`}>
                 {item.opinion}
               </span>
-              <p className="max-h-60 overflow-y-scroll my-2 dark:text-white">{item.text}</p>
+              <p className="max-h-60 overflow-y-scroll my-2 dark:text-white">{item.text ||                   <Skeleton height={60} />
+              }</p>
             </div>
           </div>
           <br/>
         </div>)}
       </motion.div>
     </div>
-
+    </div>
   );
 }
