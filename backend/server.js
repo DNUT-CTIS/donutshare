@@ -44,12 +44,22 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT;
 
- const now = new Date();
- const midnight = new Date();
- midnight.setHours(24, 0, 0, 0); // set to midnight tonight
- const timeLeft = midnight - now - 10800000;
-console.log(timeLeft)
+const now = new Date();
 
-setInterval(topicTimer, timeLeft);
+// Calculate the time remaining until midnight
+const timeUntilMidnight =
+  new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate() + 1, // add one day to get to tomorrow
+    0, // hours
+    0, // minutes
+    0 // seconds
+  ) -
+  now -
+  10800000;
+
+// Set the timeout to execute the function at midnight
+setTimeout(topicTimer, timeUntilMidnight);
 
 app.listen(PORT, console.log(`Server started on PORT ${PORT}`.yellow.bold));
