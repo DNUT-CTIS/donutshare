@@ -12,8 +12,12 @@ const topicTimer = require("./config/timer")
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const cors = require("cors");
 
+
 connectDB();
 const app = express();
+
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -50,4 +54,28 @@ midnight.setHours(24, 0, 0, 0);
 const timeRemaining = midnight - now - 10800000;
 setTimeout(topicTimer, timeRemaining);
 
+
 app.listen(PORT, console.log(`Server started on PORT ${PORT}`.yellow.bold));
+
+io.on("connection", (socket) => {
+  console.log("A user connected");
+
+  socket.on("buttonClick", (button) => {
+    if (button === "agree") {
+      console.log("agree");
+      agreeUsers.push(socket);
+    } else if (button === "disagree") {
+      console.log("disagree");
+      disagreeUsers.push(socket);
+    }
+
+    if (agreeUsers.length > 0 && disagreeUsers.length > 0) {
+      const agreeSocket = agreeUsers.shift();
+      const disagreeSocket = disagreeUsers.shift();
+      agreeSocket.emit("matched", "You have been matched!");
+      disagreeSocket.emit("matched", "You have been matched!");
+    }
+  });
+});
+
+
