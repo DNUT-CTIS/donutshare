@@ -50,6 +50,6 @@ const PORT = process.env.PORT;
  const timeLeft = midnight - now;
 console.log(timeLeft)
 
-setInterval(topicTimer, timeLeft);
+setInterval(topicTimer, 30000);
 
 app.listen(PORT, console.log(`Server started on PORT ${PORT}`.yellow.bold));
