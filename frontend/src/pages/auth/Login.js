@@ -9,6 +9,7 @@ import ReactCardFlip from "react-card-flip";
 import {Register} from "./Register";
 import {RegisterSuccess} from "./RegisterSuccess";
 import {AnimatePresence, motion} from "framer-motion";
+import donutImage from "../dashboard/donut.png";
 
 export function Login() {
 
@@ -25,6 +26,7 @@ export function Login() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [token, setToken] = useState("");
   const [userType, setUserType] = useState("")
+  const [loading, setLoading] = useState(false);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -32,6 +34,7 @@ export function Login() {
   };
 
   const submitHandler = async (event) => {
+    setLoading(true);
     event.preventDefault()
     try {
       await AuthService.login(email, password).then(
@@ -120,6 +123,7 @@ export function Login() {
       <ToastContainer autoClose={2000} theme={"dark"}/>
       <AnimatePresence>
       {showModal ? ( showSignUpForm ? (
+
           <div
             className='fixed z-50 inset-0 dark:bg-black dark:bg-opacity-25 backdrop-blur-sm flex justify-center items-center'>
             <motion.div

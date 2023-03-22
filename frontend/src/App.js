@@ -18,6 +18,7 @@ import MaterialLogin from "./pages/auth/MaterialLogin";
 import {DashboardVerified} from "./pages/dashboard/DashboardVerified";
 import {DashboardAlreadyVerified} from "./pages/dashboard/DashboardAlreadyVerified";
 import ChatApp, {MyChatComponent} from "./pages/dashboard/Chat";
+import {Chat} from "./pages/chat/Chat";
 
 
 
@@ -32,7 +33,7 @@ function App() {
               <Route path="/mod-profile" element={<ModeratorProfile />} />
               <Route path="/sign-up-mod" element={<RegisterMod/>}></Route>
               <Route path="/profile" element={<DebaterProfile />} />
-              <Route path="/chat" element={<SendPost/>}></Route>
+              <Route path="/chat" element={<Chat/>}></Route>
               </Route>
               <Route path="/dashboard" element={<Dashboard/>}>
               </Route>
