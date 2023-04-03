@@ -65,7 +65,7 @@ const deletePost = asyncHandler(async (req, res) => {
 
   await Post.findByIdAndDelete(id);
 
-  Report.deleteMany({postId:id});
+  await Report.deleteMany({postId:id});
 
   res.status(200).json({ id: req.params.id, message: "Your post is deleted" });
 });
