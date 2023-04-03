@@ -34,6 +34,8 @@ const reportPost = asyncHandler(async (req, res) => {
   }
 
   const report = await Report.create({
+    postId: post._id,
+    postContext: post.text,
     complainant: req.user.username,
     offender: offender.username,
     text: req.body.text,

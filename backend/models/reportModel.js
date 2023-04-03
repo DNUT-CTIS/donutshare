@@ -2,6 +2,8 @@ const mongoose = require('mongoose')
 
 const reportModel = mongoose.Schema(
   {
+    postId: { type: String, required: true },
+    postContext: { type: String, required: true },
     complainant: { type: String, required: true },
     offender: { type: String, required: true },
     text: {
