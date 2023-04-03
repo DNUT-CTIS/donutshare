@@ -62,28 +62,56 @@ const io = require('socket.io')(server, {
   },
 });
 
-const agreeUsers = [];
-const disagreeUsers = [];
+const waitingAgreeUsers = [];
+const waitingDisagreeUsers = [];
 
 io.on("connection", (socket) => {
- // console.log("A user connected");
+  console.log("A user connected");
 
   socket.on("buttonClick", (button) => {
     if (button === "agree") {
-      console.log("agree");
-      agreeUsers.push(socket);
+      waitingAgreeUsers.push(socket);
+      console.log(
+        `User ${socket.id} clicked the agree button and is waiting for a match.`
+      );
     } else if (button === "disagree") {
-      console.log("disagree");
-      disagreeUsers.push(socket);
+      waitingDisagreeUsers.push(socket);
+      console.log(
+        `User ${socket.id} clicked the disagree button and is waiting for a match.`
+      );
     }
 
-    if (agreeUsers.length > 0 && disagreeUsers.length > 0) {
-      const agreeSocket = agreeUsers.shift();
-      const disagreeSocket = disagreeUsers.shift();
-      agreeSocket.emit("matched", "You have been matched!");
-      disagreeSocket.emit("matched", "You have been matched!");
+    if (waitingAgreeUsers.length > 0 && waitingDisagreeUsers.length > 0) {
+      const agreeSocket = waitingAgreeUsers.shift();
+      const disagreeSocket = waitingDisagreeUsers.shift();
+      console.log(
+        `Users ${agreeSocket.id} and ${disagreeSocket.id} have been matched.`
+      );
+
+      // Create a room for the matched users
+      const room =
+        io.of("/matchmaking").adapter.rooms[
+          `${agreeSocket.id}-${disagreeSocket.id}`
+        ];
+      if (!room) {
+        agreeSocket.join(`${agreeSocket.id}-${disagreeSocket.id}`);
+        disagreeSocket.join(`${agreeSocket.id}-${disagreeSocket.id}`);
+      }
+
+      // Emit a "matched" event to the matched users
+      io.to(`${agreeSocket.id}-${disagreeSocket.id}`).emit(
+        "matched",
+        "You have been matched!"
+      );
     }
   });
+
+  socket.on("disconnect", () => {
+    console.log(`User ${socket.id} disconnected.`);
+    const index1 = waitingAgreeUsers.indexOf(socket);
+    if (index1 !== -1) waitingAgreeUsers.splice(index1, 1);
+
+    const index2 = waitingDisagreeUsers.indexOf(socket);
+    if (index2 !== -1) waitingDisagreeUsers.splice(index2, 1);
+  });
 });
-
-
