@@ -53,19 +53,23 @@ export function Topic() {
     const dateTimeAfterThreeDays = NOW_IN_MS + timeleft;
 
     const token = localStorage.getItem("token");
+    const username = localStorage.getItem("username");
 
     const socket = io("http://localhost:4000");
+    socket.emit("setUsername", username);
 
     function handleAgreeClick() {
       setIsModalOpen(true);
-      socket.emit("buttonClick", "agree");
+  
 
+      socket.emit("buttonClick", "agree", username);
+      
       
     }
 
     function handleDisagreeClick() {
         setIsModalOpen(true);
-      socket.emit("buttonClick", "disagree");
+      socket.emit("buttonClick", "disagree",username);
     }
 
         socket.on('matched', (message) => {
