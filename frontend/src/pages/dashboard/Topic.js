@@ -11,7 +11,6 @@ import { Load } from "./Load";
 export function Topic() {
     const [topic, setTopic] = useState('');
     const [hourLeft, setHourLeft] = useState(200);
-    const THREE_DAYS_IN_MS = 1 * 24 * 60 * 60 * 1000;
     const SEVEN_DAYS_IN_MS = 7 * 24 * 60 * 60 * 1000;
     const NOW_IN_MS = new Date().getTime();
 
@@ -25,11 +24,8 @@ export function Topic() {
 
     useEffect(() => {
         try {
-            topicService.getcCurrentTopic().then(
+            topicService.getCurrentTopic().then(
                 (response) => {
-                    // check for token and user already exists with 200
-                    //   console.log("Sign up successfully", response);
-                    //    console.log(response.userArr)
                     setTopic(response.topic)
                     setTimeLeft(response.timeleft)
                 },

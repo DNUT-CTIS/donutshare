@@ -11,7 +11,7 @@ const postTopic = (content) => {
             return response.data;
         });
 };
-const getcCurrentTopic = (content) => {
+const getCurrentTopic = (content) => {
     return axios
         .get(API_URL + "/topic/currentTopic", {
             content
@@ -67,7 +67,7 @@ const topicService = {
     login,
     logout,
     getCurrentUser,
-    getcCurrentTopic
+    getCurrentTopic
 };
 
 export default topicService;
