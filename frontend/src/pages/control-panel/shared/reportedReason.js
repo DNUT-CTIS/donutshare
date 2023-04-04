@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import DebaterService from '../../../service/debeterService';
 import reasonService from '../../../service/reasonService';
+import PostService from '../../../service/postService';
 
 
 
@@ -11,8 +12,8 @@ function ReportedReason(){
     const [user, setUser] = useState([]);
     const [isclicked,setisclicked] = useState(false)
     const [showModal,setShowModal] = useState(false)
-    const [deletedUser,setdeletedUser]=useState("")
-    const [revokedUser,setrevokedUser]=useState("")
+    const [deletedPost,setdeletedPost]=useState("")
+
     
     const filteredUsernames = user.filter((item) =>
       item.text.toLowerCase().includes(searchTerm.toLowerCase())
@@ -39,46 +40,24 @@ function ReportedReason(){
         console.log(err);
     }
 
-  }, [])
-  const handleUnban = (username) => {
-    DebaterService.UnBanDebater(username)
-    .then((data) => {
-      // Success message or perform any other action
-      console.log(user)
+  }, [isclicked])
+  
 
+  const handleDelete = async (id) => {
 
-
-      console.log(user)
-      setisclicked(!isclicked)
-      setrevokedUser("")
-
-    })
-    .catch((error) => {
-      // Error message or perform any other action
-    });
-
-  };
-
- 
-
-      const handleDelete = (username) => {
-        DebaterService.DeleteDebater(username)
-        .then((data) => {
-          // Success message or perform any other action
-          console.log(user)
-
-
-
-          console.log(user)
+    try {
+      await PostService.DeletePost(id).then(
+        (response) => {
           setisclicked(!isclicked)
-          setdeletedUser("")
-
-        })
-        .catch((error) => {
-          // Error message or perform any other action
-        });
-
-      };
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   
 
@@ -106,8 +85,10 @@ return(
             className="flex items-center justify-between px-4 py-2 bg-white border border-gray-300 rounded-md"
           >
             {console.log(reason.text)}
-            <p>{reason.text}</p>
-            
+            <p><b>Post context:</b> {reason.postContext}<br/>
+            <b>Complainant username:</b> {reason.complainant}<br/>
+            <b>Written reason:</b> {reason.text}</p>
+            <button onClick={() => {setdeletedPost(reason.postId); setShowModal(true)}} type="button" class="text-white bg-gradient-to-r from-pink-600 via-pink-600 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Delete Post</button>
           </div>
         ))}
       </div>
@@ -124,8 +105,7 @@ return(
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
                   <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                    {revokedUser === "" ?  "Are you sure you want to ban this debater ?": "Are you sure you want to revoke ban of this debater ?" }
-                  
+                    Are you sure you want to delete this post ?                  
                   </p>
                 </div>
                 {/*footer*/}
@@ -140,7 +120,7 @@ return(
                   <button
                     className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
-                    onClick={() => { if(revokedUser === ""){handleDelete(deletedUser);setShowModal(false);} else {handleUnban(revokedUser);setShowModal(false);} }}
+                    onClick={() => {handleDelete(deletedPost);setShowModal(false)}}
                   >
                     Yes
                   </button>

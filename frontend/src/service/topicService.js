@@ -11,6 +11,17 @@ const postTopic = (content) => {
             return response.data;
         });
 };
+const getCurrentTopic = (content) => {
+    return axios
+        .get(API_URL + "/topic/currentTopic", {
+            content
+        })
+        .then((response) => {
+            return response.data;
+        });
+};
+
+
 const getcCurrentTopic = (content) => {
     return axios
         .get(API_URL + "/topic/currentTopic", {
@@ -56,7 +67,7 @@ const topicService = {
     login,
     logout,
     getCurrentUser,
-    getcCurrentTopic
+    getCurrentTopic
 };
 
 export default topicService;
