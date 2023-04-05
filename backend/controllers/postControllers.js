@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const Post = require("../models/postModel");
 const Report = require("../models/reportModel");
-const User = require("../models/userModel");
+const Topic = require("../models/topicModel");
 
 const sendPost = asyncHandler(async (req, res) => {
   if (!req.body.text) {
@@ -9,9 +9,12 @@ const sendPost = asyncHandler(async (req, res) => {
     throw new Error("Please add a text field");
   }
 
+  const topic = await Topic.findOne({ isCurrent: true });
+
   const post = await Post.create({
     user: req.user.id,
     username: req.user.username,
+    topicId: topic.id,
     text: req.body.text,
     opinion: req.body.opinion,
   });
@@ -20,8 +23,8 @@ const sendPost = asyncHandler(async (req, res) => {
 });
 
 const getPosts = asyncHandler(async (req, res) => {
-  const posts = await Post.find();
-
+  const topic = await Topic.findOne({ isCurrent: true });
+  const posts = await Post.find({topicId: topic.id});
   res.status(200).json({ posts });
 });
 

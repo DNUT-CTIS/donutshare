@@ -5,6 +5,7 @@ const postModel = mongoose.Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" },
     username: { type: String, trim: true, required: true },
+    topicId: { type: String, trim: true, required: true },
     text: {
       type: String,
       trim: true,
@@ -17,9 +18,7 @@ const postModel = mongoose.Schema(
     },
     upvoteCount: { type: mongoose.Schema.Types.Number, default: 0 },
     downvoteCount: { type: mongoose.Schema.Types.Number, default: 0 },
-    votes: [
-      { username: String, rate: String},
-    ],
+    votes: [{ username: String, rate: String }],
   },
 
   {

@@ -8,8 +8,18 @@ const addTopic = asyncHandler(async (req, res) => {
     throw new Error("Please add a text field");
   }
 
+const count = await Topic.countDocuments({});
+var isCurrent = false;
+if (count === 0) {
+  console.log("Topic collection is empty");
+  isCurrent = true;
+} else {
+  console.log(`Topic collection has ${count} documents`);
+}
+
   const topic = await Topic.create({
-    content: req.body.content
+    content: req.body.content,
+    isCurrent: isCurrent
   });
 
   res.status(200).json(topic);
