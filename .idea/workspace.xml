@@ -2,52 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da5314df-7f70-4900-b5c2-0593070a3e26" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/service/adminService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/.firebase/hosting.YnVpbGQ.cache" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.firebase/hosting.YnVpbGQ.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/build/asset-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/build/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/Dashboard.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/Navbar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/loader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/build/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/auth/Auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/auth/Auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/auth/Login.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/auth/MaterialLogin.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/auth/Register-Mod.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/auth/SignupMod.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/auth/Register.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/auth/RegisterSuccess.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/chat/Chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/chat/Chat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/control-panel/admin-panel/adminProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/control-panel/admin-panel/adminProfile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/control-panel/admin-panel/moderatorList.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/control-panel/admin-panel/moderatorList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/control-panel/debater-panel/debaterProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/control-panel/debater-panel/debaterProfile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/control-panel/moderator-panel/moderatorProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/control-panel/moderator-panel/moderatorProfile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/control-panel/shared/debaterList.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/control-panel/shared/debaterList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/control-panel/shared/reportedReason.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/control-panel/shared/ReportedPosts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/dashboard/Chat.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/control-panel/shared/ReportedPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/control-panel/shared/ReportedPosts.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/dashboard/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/dashboard/DashboardAlreadyVerified.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/dashboard/DashboardAlreadyVerified.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/dashboard/DashboardVerified.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/dashboard/DashboardVerified.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/dashboard/Found.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/dashboard/FoundMatch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/dashboard/Home.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/dashboard/Load.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/dashboard/SearchModal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/dashboard/Post.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/dashboard/Post.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/dashboard/PostSkeleton.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/dashboard/Rate.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/dashboard/Rate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/dashboard/Reason.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/dashboard/TempHome.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/dashboard/Topic.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/dashboard/Topic.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/service/authHeader.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/service/authMod.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/service/authService.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/service/authService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/service/debeterService.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/service/moderatorService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/service/modService.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/service/modService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/service/postService.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/service/postService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/service/reasonService.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/service/topicService.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/service/topicService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/shared/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/shared/Navbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/shared/PrivateRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/shared/PrivateRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/shared/loginavbar.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

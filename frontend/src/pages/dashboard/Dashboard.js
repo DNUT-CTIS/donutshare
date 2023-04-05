@@ -2,8 +2,6 @@ import React, {useState} from 'react';
 import {Navbar} from "../../shared/Navbar";
 import {Post} from "./Post";
 import {Topic} from "./Topic";
-import 'react-loading-skeleton/dist/skeleton.css'
-
 
 export function Dashboard(props) {
   const [loading, setLoading] = useState(false);
@@ -27,7 +25,7 @@ export function Dashboard(props) {
             <Post></Post>
             <br></br>
         </div>
-        
+
       </section>
     </div>
 
