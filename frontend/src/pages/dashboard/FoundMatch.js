@@ -2,7 +2,7 @@ import React, {useRef} from 'react';
 import {motion} from "framer-motion";
 import donutStatic from './donut.jpg';
 
-export function Found() {
+export function FoundMatch() {
 
   const constraintsRef = useRef(null)
 

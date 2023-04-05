@@ -1,6 +1,6 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import '../../button.css';
-import {Dashboard} from "../../Dashboard";
+import {Dashboard} from "./Dashboard";
 
 
 export function DashboardAlreadyVerified(props) {

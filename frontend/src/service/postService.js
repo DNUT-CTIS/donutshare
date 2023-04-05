@@ -1,5 +1,4 @@
 import axios from "axios";
-import authHeader from "./authHeader";
 import { toast } from 'react-toastify';
 
 const API_URL = "https://donutshare-api.onrender.com/api";
@@ -19,7 +18,17 @@ const reportPost = (id, text) => {
     }, config).then(console.log(text));
 };
 
-const DeletePost = (id) => {
+const getAllReportedPosts = () => {
+    return axios
+      .get(API_URL + "/report/allReports", {
+
+      })
+      .then((response) => {
+          return response.data;
+      });
+};
+
+const deletePost = (id) => {
     return axios
         .delete(API_URL + "/post/delete", {
             config
@@ -46,8 +55,9 @@ const postService = {
     sendPost,
     upvotePost,
     downvotePost,
-    DeletePost,
+    deletePost,
     reportPost,
+    getAllReportedPosts,
 };
 
 export default postService;
