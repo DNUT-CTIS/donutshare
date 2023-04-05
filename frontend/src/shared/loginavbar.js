@@ -31,8 +31,6 @@ export function Navbar() {
 
     navigate("/dashboard");
     window.location.reload(false);
-
-
   };
 
   const handleProfile = async (event) => {
@@ -93,11 +91,7 @@ export function Navbar() {
                 </button>
               </div>) : null}
               <SendModal/>
-              <button onClick={() => setIsModalOpen(true)}>Open Modal</button>
-              <ModalContainer isOpen={isModalOpen} onClose={handleModalClose}>
-                <Load></Load>
-                <button onClick={handleModalClose}>Close Modal</button>
-              </ModalContainer>              {!username ? (<Login></Login>) : <motion.button initial={{opacity: 0, scale: 0.5}}
+            {!username ? (<Login></Login>) : <motion.button initial={{opacity: 0, scale: 0.5}}
                                                               animate={{opacity: 1, scale: 1}}
                                                               transition={{
                                                                 duration: 0.8,

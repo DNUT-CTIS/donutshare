@@ -33,7 +33,7 @@ export function Post() {
   const [reason, setReason] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const [showRate, setShowRate] = useState(true);
 
 
   useEffect(() => {
@@ -55,6 +55,8 @@ export function Post() {
     });
 
   }, [isClicked])
+
+  const token = localStorage.getItem("token");
 
   const handleDelete = async (id) => {
 
@@ -94,10 +96,10 @@ export function Post() {
             <div className="w-12 sm:w-fit flex flex-col gap-4 mx-8 my-4 items-center">
               <Avatar className="rounded-full dark:bg-zinc-700 w-16 h-16 sm:w-32 sm:h-32"
                 {...generateRandomAvatarOptions(item._id)} />
-              <RandomName seed={item._id}></RandomName>
-              <Rate upvoteCount={item.upvoteCount} votes={item.votes} id={item._id} post={item}
-                    downvoteCount={item.downvoteCount} deleteFun={(id) => handleDelete(id)}
-              ></Rate>
+              <RandomName seed={item._id} user={item.user} username={item.username}></RandomName>
+              {token && <Rate upvoteCount={item.upvoteCount} votes={item.votes} id={item._id} post={item}
+                     downvoteCount={item.downvoteCount} deleteFun={(id) => handleDelete(id)}
+              ></Rate>}
             </div>
             <div className="gap-4 mx-4 my-5">
               <span
