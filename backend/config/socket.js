@@ -73,5 +73,17 @@ io.on("connection", (socket) => {
     socket.username = username;
     console.log(`User ${socket.id} has set their username to ${username}.`);
   });
+
+  socket.on("leaveQueue", () => {
+    const index1 = waitingAgreeUsers.indexOf(socket);
+    if (index1 !== -1) waitingAgreeUsers.splice(index1, 1);
+
+    const index2 = waitingDisagreeUsers.indexOf(socket);
+    if (index2 !== -1) waitingDisagreeUsers.splice(index2, 1);
+
+    console.log(
+      `User ${socket.id} with username ${socket.username} has left the queue.`
+    );
+  });
 });
 }
