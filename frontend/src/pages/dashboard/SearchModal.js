@@ -2,7 +2,7 @@ import React, {useRef} from 'react';
 import {motion} from "framer-motion";
 import donutImage from './donut.png';
 
-export function Load() {
+export function SearchModal() {
 
   const constraintsRef = useRef(null)
 

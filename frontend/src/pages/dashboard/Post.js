@@ -1,25 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {Link, useNavigate} from "react-router-dom";
-import logo from "../../shared/logo.png"
-import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ReactCardFlip from 'react-card-flip';
-
-import Upvote from "react-upvote/lib/ReactUpvote";
 import {Rate} from "./Rate.js";
 import axios from "axios";
-import postService from '../../service/postService';
+import PostService from '../../service/postService';
 import {motion} from "framer-motion";
-import PostService from "../../service/postService";
 import Avatar from 'avataaars';
 import {generateRandomAvatarOptions} from './randomAvatar';
-import {uniqueNamesGenerator, Config, starWars} from 'unique-names-generator';
 import {RandomName} from "./RandomName";
-import {PostSkeleton} from "./PostSkeleton";
 import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css'
 import donutImage from "./donut.png";
-
 
 
 export function Post() {
@@ -61,7 +51,7 @@ export function Post() {
   const handleDelete = async (id) => {
 
     try {
-      await PostService.DeletePost(id).then(
+      await PostService.deletePost(id).then(
         (response) => {
           setIsClicked(!isClicked)
         },

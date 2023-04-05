@@ -39,7 +39,7 @@ export function Rate(props) {
        event.preventDefault()
        console.log(event)
        try {
-          await PostService.DeletePost(id).then(
+          await PostService.deletePost(id).then(
                (response) => {
 
                },

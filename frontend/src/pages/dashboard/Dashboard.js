@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Navbar } from "../../shared/loginavbar";
-import { Post } from "./Post";
-import { Topic } from "./Topic";
-import Skeleton from 'react-loading-skeleton'
+import React, {useState} from 'react';
+import {Navbar} from "../../shared/Navbar";
+import {Post} from "./Post";
+import {Topic} from "./Topic";
 import 'react-loading-skeleton/dist/skeleton.css'
-
-
 
 
 export function Dashboard(props) {

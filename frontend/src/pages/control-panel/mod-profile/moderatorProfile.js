@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import DebaterList from '../shared/debaterList';
 import AddTopic from '../shared/addTopic';
-import { Navbar } from '../../../shared/loginavbar';
-import ReportedReason from '../shared/reportedReason';
+import { Navbar } from '../../../shared/Navbar';
+import ReportedPosts from '../shared/ReportedPosts';
 function ModeratorProfile() {
 
   const [selectedItem, setSelectedItem] = useState('general');
@@ -38,7 +38,7 @@ function ModeratorProfile() {
           ) : selectedItem === 'add' ? (
            <AddTopic/>
           ) : selectedItem === 'reason' ? (
-            <ReportedReason/>
+            <ReportedPosts/>
 
           ) : (
           <div className="flex flex-col items-center">
