@@ -4,7 +4,7 @@ const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
 const User = require("../models/userModel");
 const Token = require("../models/tokenModel");
-const generateToken = require("../config/generateToken");
+const {generateToken, generateRefreshToken} = require("../config/generateToken");
 
 dotenv.config();
 
@@ -114,11 +114,19 @@ const authUser = asyncHandler(async (req, res) => {
       throw new Error("You are Banned from Donut Share");
     }
 
+     const refreshToken = generateRefreshToken(user._id);
+
+     res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000), // 10 days
+    });
+
     res.status(200).json({
       _id: user._id,
       username: user.username,
       userType: user.userType,
       token: generateToken(user._id),
+      refreshToken:refreshToken,
     });
   } else {
     res.status(401);
