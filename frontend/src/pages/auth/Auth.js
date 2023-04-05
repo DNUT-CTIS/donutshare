@@ -40,7 +40,7 @@ export function Auth() {
           const data = JSON.parse(localStorage.getItem("userType"))
 
           if (data === "debater") {
-            window.location.reload(false);
+            //window.location.reload(false);
           } else if (data === "moderator") {
             navigate("/mod-profile");
           }

@@ -29,6 +29,7 @@ export function Topic() {
   const navigate = useNavigate();
 
   const handleModalClose = () => {
+    socket.emit('leaveQueue');
     setIsModalOpen(false);
   };
 

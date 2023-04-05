@@ -7,8 +7,6 @@ import {motion} from "framer-motion";
 import Avatar from 'avataaars';
 import {generateRandomAvatarOptions} from './randomAvatar';
 import {RandomName} from "./RandomName";
-import Skeleton from "react-loading-skeleton";
-import 'react-loading-skeleton/dist/skeleton.css'
 import donutImage from "./donut.png";
 
 
@@ -73,7 +71,7 @@ export function Post() {
     <div>
       {loading && <img className="py-16 mx-auto" src={donutImage}/>
       }
-      <div className="mx-auto sm:w-2/5">
+      <div className="mx-auto sm:w-[700px] w-[350px]">
       <motion.div initial={{opacity: 0, scale: 0.5}}
                   animate={{opacity: 1, scale: 1}}
                   transition={{
@@ -96,8 +94,7 @@ export function Post() {
                 className={`inline-block px-2 py-1 leading-none rounded-full font-semibold uppercase tracking-wide text-xs ${item.opinion === 'agree' ? 'bg-blue-500 ' : 'bg-pink-500 '}`}>
                 {item.opinion}
               </span>
-              <p className="max-h-60 overflow-y-scroll my-2 dark:text-white">{item.text ||                   <Skeleton height={60} />
-              }</p>
+              <p className="max-h-60 overflow-y-scroll my-2 dark:text-white">{item.text}</p>
             </div>
           </div>
           <br/>
