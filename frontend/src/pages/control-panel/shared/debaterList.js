@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
-import DebaterService from '../../../service/debeterService';
+import DebaterService from '../../../service/moderatorService';
 
 
 
@@ -60,7 +60,7 @@ function DebaterList(){
  
    
       const handleDelete = (username) => {
-        DebaterService.DeleteDebater(username)
+        DebaterService.banDebater(username)
         .then((data) => {
           // Success message or perform any other action
           console.log(user)

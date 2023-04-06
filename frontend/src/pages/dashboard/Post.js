@@ -1,20 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {Link, useNavigate} from "react-router-dom";
-import logo from "../../shared/logo.png"
-import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ReactCardFlip from 'react-card-flip';
-
-import Upvote from "react-upvote/lib/ReactUpvote";
 import {Rate} from "./Rate.js";
 import axios from "axios";
-import postService from '../../service/postService';
+import PostService from '../../service/postService';
 import {motion} from "framer-motion";
-import PostService from "../../service/postService";
 import Avatar from 'avataaars';
 import {generateRandomAvatarOptions} from './randomAvatar';
-import {uniqueNamesGenerator, Config, starWars} from 'unique-names-generator';
 import {RandomName} from "./RandomName";
+import donutImage from "./donut.png";
 
 
 export function Post() {
@@ -27,9 +20,13 @@ export function Post() {
   const [text, setText] = useState([]);
   const [reason, setReason] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [showRate, setShowRate] = useState(true);
 
 
   useEffect(() => {
+    setLoading(true);
+
     axios.get('https://donutshare-api.onrender.com/api/post/').then((res) => {
       res.data.posts.map((item) => {
         if (item) {
@@ -39,6 +36,7 @@ export function Post() {
       setPost(res.data.posts.map((post) => post.text));
       setReason(res.data.posts.map((post) => post));
 
+      setLoading(false);
 
     }).catch((error) => {
       console.error(error);
@@ -46,10 +44,12 @@ export function Post() {
 
   }, [isClicked])
 
+  const token = localStorage.getItem("token");
+
   const handleDelete = async (id) => {
 
     try {
-      await PostService.DeletePost(id).then(
+      await PostService.deletePost(id).then(
         (response) => {
           setIsClicked(!isClicked)
         },
@@ -68,7 +68,10 @@ export function Post() {
 
 
   return (
-    <div className="sm:w-2/5">
+    <div>
+      {loading && <img className="py-16 mx-auto" src={donutImage}/>
+      }
+      <div className="mx-auto sm:w-[700px] w-[350px]">
       <motion.div initial={{opacity: 0, scale: 0.5}}
                   animate={{opacity: 1, scale: 1}}
                   transition={{
@@ -79,12 +82,12 @@ export function Post() {
         {reason.map((item) => <div key={item._id} className="">
           <div className="flex flex-row border rounded-md shadow shadow-xl dark:bg-zinc-800 dark:border-zinc-700">
             <div className="w-12 sm:w-fit flex flex-col gap-4 mx-8 my-4 items-center">
-              <Avatar hash={item._id} className="rounded-full dark:bg-zinc-700 w-16 h-16 sm:w-32 sm:h-32"
-                {...generateRandomAvatarOptions()} />
-              <RandomName></RandomName>
-              <Rate upvoteCount={item.upvoteCount} votes={item.votes} id={item._id} post={item}
-                    downvoteCount={item.downvoteCount} deleteFun={(id) => handleDelete(id)}
-              ></Rate>
+              <Avatar className="rounded-full dark:bg-zinc-700 w-16 h-16 sm:w-32 sm:h-32"
+                {...generateRandomAvatarOptions(item._id)} />
+              <RandomName seed={item._id} user={item.user} username={item.username}></RandomName>
+              {token && <Rate upvoteCount={item.upvoteCount} votes={item.votes} id={item._id} post={item}
+                     downvoteCount={item.downvoteCount} deleteFun={(id) => handleDelete(id)}
+              ></Rate>}
             </div>
             <div className="gap-4 mx-4 my-5">
               <span
@@ -98,6 +101,6 @@ export function Post() {
         </div>)}
       </motion.div>
     </div>
-
+    </div>
   );
 }

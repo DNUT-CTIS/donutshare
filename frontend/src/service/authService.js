@@ -5,8 +5,6 @@ import { toast } from 'react-toastify';
 const API_URL = "https://donutshare-api.onrender.com/api";
 
 
-
-
 const signup = (username, email, password) => {
     return axios
         .post(API_URL + "/user", {
