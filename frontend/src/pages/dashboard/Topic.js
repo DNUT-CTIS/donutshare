@@ -74,14 +74,14 @@ export function Topic() {
     socket.emit("buttonClick", "disagree");
   }
 
-  socket.on('matched', (message) => {
-    setFound(true)
-    setTimeout(() => {
-      navigate("/chat");
-    }, 5000);
+ socket.on("matched", (roomName) => {
+   setFound(true);
 
+   setTimeout(() => {
+     navigate(`/chat/${roomName}`);
+   }, 5000);
+ });
 
-  });
 
   return (
     <div class="flex flex-col text-center p-4 leading-normal">

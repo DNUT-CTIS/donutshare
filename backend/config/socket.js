@@ -41,19 +41,30 @@ io.on("connection", (socket) => {
           } have been matched.`
         );
 
-        const room =
-          io.of("/matchmaking").adapter.rooms[
-            `${agreeSocket.id}-${disagreeSocket.id}`
-          ];
+        const roomName = `${agreeSocket.id}-${disagreeSocket.id}`;
+        const room = io.of("/matchmaking").adapter.rooms[roomName];
+
         if (!room) {
-          agreeSocket.join(`${agreeSocket.id}-${disagreeSocket.id}`);
-          disagreeSocket.join(`${agreeSocket.id}-${disagreeSocket.id}`);
+          agreeSocket.join(roomName);
+          disagreeSocket.join(roomName);
         }
 
-        io.to(`${agreeSocket.id}-${disagreeSocket.id}`).emit(
-          "matched",
-          "You have been matched!"
-        );
+        io.to(roomName).emit("matched", roomName);
+
+        io.to(roomName).on("chatMessage", (message) => {
+          io.to(roomName).emit("chatMessage", {
+            username: socket.username,
+            message: message,
+          });
+        });
+
+        io.to(roomName).on("disconnect", () => {
+          console.log(`User ${socket.id} has disconnected from the chat.`);
+          io.to(roomName).emit("chatMessage", {
+            username: "System",
+            message: `${socket.username} has left the chat.`,
+          });
+        });
       }
     }
   });
