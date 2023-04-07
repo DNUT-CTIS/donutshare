@@ -14,7 +14,6 @@ const Chat = ({ match }) => {
     });
 
     socket.on("chatMessage", (message) => {
-      console.log("hey")
       setMessages((messages) => [...messages, message]);
     });
 

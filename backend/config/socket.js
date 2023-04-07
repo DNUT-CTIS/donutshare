@@ -53,6 +53,9 @@ io.on("connection", (socket) => {
         }
 
         io.to(roomName).emit("matched", roomName);
+        
+        agreeSocket.removeAllListeners("chatMessage");
+        disagreeSocket.removeAllListeners("chatMessage");
 
         agreeSocket.on("chatMessage", (message) => {
           io.to(roomName).emit("chatMessage", {
