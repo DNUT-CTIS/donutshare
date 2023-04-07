@@ -12,7 +12,7 @@ const waitingAgreeUsers = [];
 const waitingDisagreeUsers = [];
 
 io.on("connection", (socket) => {
-  console.log(`User ${socket.id} connected`);
+ // console.log(`User ${socket.id} connected`);
 
   socket.on("buttonClick", (button) => {
     if (button === "agree") {
@@ -43,30 +43,52 @@ io.on("connection", (socket) => {
 
         const roomName = `${agreeSocket.id}-${disagreeSocket.id}`;
         const room = io.of("/matchmaking").adapter.rooms[roomName];
-
+       
         if (!room) {
           agreeSocket.join(roomName);
           disagreeSocket.join(roomName);
         }
+        else{
+          console.log(room)
+        }
 
         io.to(roomName).emit("matched", roomName);
 
-        io.to(roomName).on("chatMessage", (message) => {
+        agreeSocket.on("chatMessage", (message) => {
           io.to(roomName).emit("chatMessage", {
-            username: socket.username,
+            username: agreeSocket.username,
             message: message,
           });
         });
 
-        io.to(roomName).on("disconnect", () => {
-          console.log(`User ${socket.id} has disconnected from the chat.`);
+        disagreeSocket.on("chatMessage", (message) => {
+          console.log("AAAAAAAAAA");
+          io.to(roomName).emit("chatMessage", {
+            username: disagreeSocket.username,
+            message: message,
+          });
+        });
+
+        agreeSocket.on("disconnect", () => {
+          console.log(`User ${agreeSocket.id} has disconnected from the chat.`);
           io.to(roomName).emit("chatMessage", {
             username: "System",
-            message: `${socket.username} has left the chat.`,
+            message: `${agreeSocket.username} has left the chat.`,
+          });
+        });
+
+        disagreeSocket.on("disconnect", () => {
+          console.log(
+            `User ${disagreeSocket.id} has disconnected from the chat.`
+          );
+          io.to(roomName).emit("chatMessage", {
+            username: "System",
+            message: `${disagreeSocket.username} has left the chat.`,
           });
         });
       }
     }
+
   });
 
   socket.on("disconnect", () => {

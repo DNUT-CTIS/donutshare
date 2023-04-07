@@ -2,7 +2,7 @@ import React from 'react';
 import CountdownTimer from './CountdownTimer';
 import {useEffect, useState} from 'react';
 import topicService from '../../service/topicService';
-import io from "socket.io-client";
+import socket from "../../socket/socket"
 import {Link, useNavigate} from "react-router-dom";
 
 
@@ -58,15 +58,13 @@ export function Topic() {
 
   const token = localStorage.getItem("token");
 
-  const socket = io("https://donutshare-api.onrender.com");
+
 
   socket.emit("setUsername", username);
 
   function handleAgreeClick() {
     setIsModalOpen(true);
     socket.emit("buttonClick", "agree");
-
-
   }
 
   function handleDisagreeClick() {

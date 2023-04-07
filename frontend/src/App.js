@@ -21,7 +21,7 @@ function App() {
             <Route path="/control-panel/mod-profile" element={<ModeratorProfile/>}/>
             <Route path="/control-panel/signup-mod" element={<SignupMod/>}></Route>
             <Route path="/control-panel/profile" element={<DebaterProfile/>}/>
-              <Route path="/chat/:roomName" component={Chat} />
+              <Route path="/chat/:roomName" element={<Chat/>} />
           </Route>
           <Route path="/dashboard" element={<Dashboard/>}/>
           <Route path="/dashboard/verified" element={<DashboardVerified/>}/>
