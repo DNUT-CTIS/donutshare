@@ -48,7 +48,7 @@ const now = new Date();
 const midnight = new Date();
 midnight.setHours(24, 0, 0, 0);
 const timeRemaining = midnight - now - 10800000;
-setTimeout(topicTimer, timeRemaining);
+//setTimeout(topicTimer, timeRemaining);
 
 
 const server = app.listen(PORT, console.log(`Server started on PORT ${PORT}`.yellow.bold));
