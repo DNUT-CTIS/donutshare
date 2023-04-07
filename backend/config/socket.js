@@ -53,10 +53,8 @@ io.on("connection", (socket) => {
         }
 
         io.to(roomName).emit("matched", roomName);
-        
-        agreeSocket.removeAllListeners("chatMessage");
-        disagreeSocket.removeAllListeners("chatMessage");
 
+        agreeSocket.removeAllListeners("chatMessage");
         agreeSocket.on("chatMessage", (message) => {
           io.to(roomName).emit("chatMessage", {
             username: agreeSocket.username,
@@ -64,15 +62,16 @@ io.on("connection", (socket) => {
           });
         });
 
+        disagreeSocket.removeAllListeners("chatMessage");
         disagreeSocket.on("chatMessage", (message) => {
-          console.log("AAAAAAAAAA");
           io.to(roomName).emit("chatMessage", {
             username: disagreeSocket.username,
             message: message,
           });
         });
 
-        agreeSocket.on("disconnect", () => {
+
+        agreeSocket.on("leaveChat", () => {
           console.log(`User ${agreeSocket.id} has disconnected from the chat.`);
           io.to(roomName).emit("chatMessage", {
             username: "System",
@@ -80,7 +79,7 @@ io.on("connection", (socket) => {
           });
         });
 
-        disagreeSocket.on("disconnect", () => {
+        disagreeSocket.on("leaveChat", () => {
           console.log(
             `User ${disagreeSocket.id} has disconnected from the chat.`
           );
