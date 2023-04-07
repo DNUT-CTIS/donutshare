@@ -54,21 +54,20 @@ io.on("connection", (socket) => {
 
         io.to(roomName).emit("matched", roomName);
 
-        agreeSocket.removeAllListeners("chatMessage");
-        agreeSocket.on("chatMessage", (message) => {
-          io.to(roomName).emit("chatMessage", {
-            username: agreeSocket.username,
-            message: message,
-          });
-        });
+       // register listener for chat messages
+  socket.on("chatMessage", (message) => {
+    io.to(roomName).emit("chatMessage", {
+      username: socket.username,
+      message: message,
+    });
+  });
 
-        disagreeSocket.removeAllListeners("chatMessage");
-        disagreeSocket.on("chatMessage", (message) => {
-          io.to(roomName).emit("chatMessage", {
-            username: disagreeSocket.username,
-            message: message,
-          });
-        });
+  // register listener for matching
+  socket.on("matched", (roomName) => {
+    socket.join(roomName);
+    io.to(roomName).emit("matched", roomName);
+    });
+        
 
 
         agreeSocket.on("leaveChat", () => {
