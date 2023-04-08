@@ -57,7 +57,7 @@ io.on("connection", (socket) => {
         agreeSocket.removeAllListeners("chatMessage");
         agreeSocket.on("chatMessage", (message) => {
           io.to(roomName).emit("chatMessage", {
-            username: agreeSocket.username,
+            username: JSON.parse(agreeSocket.username),
             message: message,
           });
         });
@@ -65,7 +65,7 @@ io.on("connection", (socket) => {
         disagreeSocket.removeAllListeners("chatMessage");
         disagreeSocket.on("chatMessage", (message) => {
           io.to(roomName).emit("chatMessage", {
-            username: disagreeSocket.username,
+            username: JSON.parse(disagreeSocket.username),
             message: message,
           });
         });

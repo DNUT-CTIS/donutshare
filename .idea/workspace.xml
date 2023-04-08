@@ -2,9 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da5314df-7f70-4900-b5c2-0593070a3e26" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/config/socket.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/config/socket.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/build/asset-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/build/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.710226b2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.710226b2.js.LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/main.710226b2.js.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/chat/Chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/chat/Chat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/dashboard/Topic.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/dashboard/Topic.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/socket/socket.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/socket/socket.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +37,10 @@
             <RecentBranchesForRepo>
               <option name="branches">
                 <list>
+                  <RecentBranch>
+                    <option name="branchName" value="yusuf-v2-chat" />
+                    <option name="lastUsedInstant" value="1680873334" />
+                  </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="aleren-socket-v2" />
                     <option name="lastUsedInstant" value="1679405002" />
