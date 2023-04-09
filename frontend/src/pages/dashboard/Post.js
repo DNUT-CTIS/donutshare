@@ -91,7 +91,7 @@ export function Post() {
             </div>
             <div className="gap-4 mx-4 my-5">
               <span
-                className={`inline-block px-2 py-1 leading-none rounded-full font-semibold uppercase tracking-wide text-xs ${item.opinion === 'agree' ? 'bg-blue-500 ' : 'bg-pink-500 '}`}>
+                className={`inline-block px-2 py-1 leading-none rounded-full font-semibold uppercase tracking-wide text-xs ${item.opinion === 'Agree' ? 'bg-blue-500 ' : 'bg-pink-500 '}`}>
                 {item.opinion}
               </span>
               <p className="max-h-60 overflow-y-scroll my-2 dark:text-white">{item.text}</p>

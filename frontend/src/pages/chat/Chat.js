@@ -15,7 +15,7 @@ const Chat = ({ match }) => {
   const [inputValue, setInputValue] = useState("");
   const [user, setUser] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [opinion, setOpinion] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -53,6 +53,7 @@ const Chat = ({ match }) => {
   };
 
   const handleWithdrawClick = () => {
+    socket.emit("withdrawChat");
     setIsModalOpen(true);
   };
 
@@ -64,13 +65,18 @@ const Chat = ({ match }) => {
       socket.emit("chatMessage", message);
     }
   };
+  socket.on("withdrawChat", (side)=>{
+    setOpinion(side);
+    setIsModalOpen(true);
+  });
 
 
   return (
     <div>
       <Navbar></Navbar>
       <ModalContainer isOpen={isModalOpen}>
-        <PostModal></PostModal>
+        {console.log(opinion)}
+        <PostModal side={opinion}></PostModal>
         <button>SUBmit</button>
       </ModalContainer>
 

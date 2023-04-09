@@ -4,7 +4,7 @@ import PostService from "../../service/postService";
 import {useNavigate} from "react-router-dom";
 import socket from "../../socket/socket";
 
-export function PostModal() {
+export function PostModal({side}) {
 
   const [txt, setTxt] = useState("");
 
@@ -12,16 +12,27 @@ export function PostModal() {
 
   const navigate = useNavigate();
 
+  const [opinion,setOpinion] = useState("");
+
+
   useEffect(() => {
     const data = localStorage.getItem('username');
+    console.log("pp",side.side)
+
     if (data) {
       setUsername(JSON.parse(data));
     }
   }, []);
   const submitPost = async (event) => {
     event.preventDefault()
+    if (side.side === "Agree")
+    {
+      setOpinion("agree")
+    } else {
+      setOpinion("disagree")
+    }
     try {
-      await PostService.sendPost(username , txt, "agree").then(
+      await PostService.sendPost(username , txt, side.side).then(
         (response) => {
           // check for token and user already exists with 200
           //   console.log("Sign up successfully", response);
