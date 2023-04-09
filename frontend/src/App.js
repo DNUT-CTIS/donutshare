@@ -8,7 +8,7 @@ import PrivateRoutes from "./shared/PrivateRoutes";
 import {SignupMod} from './pages/auth/SignupMod';
 import {DashboardVerified} from "./pages/dashboard/DashboardVerified";
 import {DashboardAlreadyVerified} from "./pages/dashboard/DashboardAlreadyVerified";
-import {Chat} from "./pages/chat/Chat";
+import Chat from "./pages/chat/Chat";
 
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
             <Route path="/control-panel/mod-profile" element={<ModeratorProfile/>}/>
             <Route path="/control-panel/signup-mod" element={<SignupMod/>}></Route>
             <Route path="/control-panel/profile" element={<DebaterProfile/>}/>
-            <Route path="/chat" element={<Chat/>}></Route>
+            <Route path="/chat/:roomName" element={<Chat/>} />
           </Route>
           <Route path="/dashboard" element={<Dashboard/>}/>
           <Route path="/dashboard/verified" element={<DashboardVerified/>}/>
