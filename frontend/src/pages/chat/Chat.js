@@ -17,6 +17,7 @@ const Chat = ({ match }) => {
       setMessages((messages) => [...messages, message]);
     });
 
+   
     socket.on("leaveChat", () => {
       console.log("Disconnected from server");
     });

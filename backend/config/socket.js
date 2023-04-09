@@ -1,3 +1,4 @@
+const { Aggregate } = require('mongoose');
 const io = require('socket.io');
 
 module.exports = function(server) {
@@ -53,6 +54,24 @@ io.on("connection", (socket) => {
         }
 
         io.to(roomName).emit("matched", roomName);
+
+        agreeSocket.on("withdrawChat", ()=>{
+            agreeSocket.emit("withdrawChat",{
+              side: "Agree"
+            })
+            disagreeSocket.emit("withdrawChat",{
+              side: "Disagree"
+            })
+        })
+
+           disagreeSocket.on("withdrawChat", () => {
+             agreeSocket.emit("withdrawChat", {
+               side: "Agree",
+             });
+             disagreeSocket.emit("withdrawChat", {
+               side: "Disagree",
+             });
+           });
 
         agreeSocket.removeAllListeners("chatMessage");
         agreeSocket.on("chatMessage", (message) => {
