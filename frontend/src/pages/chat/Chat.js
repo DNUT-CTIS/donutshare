@@ -6,11 +6,17 @@ import Avatar from "avataaars";
 import donutStatic from '../dashboard/donut.jpg';
 import {RandomName} from "../dashboard/RandomName";
 import donutBackground from "./donut_patern.png";
+import ModalContainer from "../../shared/ModalContainer";
+import {PostModal} from "./PostModal";
+import {useNavigate} from "react-router-dom";
 
 const Chat = ({ match }) => {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [user, setUser] = useState();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -37,6 +43,19 @@ const Chat = ({ match }) => {
     setInputValue(event.target.value);
   };
 
+  const handleModalClose = () => {
+
+    socket.on("leaveChat", () => {
+      console.log("Disconnected from server");
+    });
+    setIsModalOpen(false);
+    navigate("/dashboard");
+  };
+
+  const handleWithdrawClick = () => {
+    setIsModalOpen(true);
+  };
+
   const handleSendMessage = (event) => {
     event.preventDefault();
     const message = inputValue.trim();
@@ -50,6 +69,10 @@ const Chat = ({ match }) => {
   return (
     <div>
       <Navbar></Navbar>
+      <ModalContainer isOpen={isModalOpen}>
+        <PostModal></PostModal>
+        <button>SUBmit</button>
+      </ModalContainer>
 
       <div className="flex flex-row dark:bg-zinc-700">
         <div className="dark:bg-zinc-800 h-screen flex flex-col w-2/4 dark:text-white">
@@ -58,7 +81,7 @@ const Chat = ({ match }) => {
             <Avatar className="rounded-full dark:bg-zinc-700 my-6 ml-10"></Avatar>
             <RandomName></RandomName>
             <button className="bg-pink-600 text-black active:bg-pink-800
-        font-bold my-6 px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-32 mb-1">Withdraw</button>
+        font-bold my-6 px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-32 mb-1" onClick={handleWithdrawClick}>Withdraw</button>
             <button className="bg-pink-600 text-black active:bg-pink-800
         font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mb-1">Report</button>
           </div>
