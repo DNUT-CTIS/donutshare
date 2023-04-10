@@ -90,7 +90,6 @@ export function Navbar() {
                   </div>
                 </button>
               </div>) : null}
-              <SendModal/>
             {!username ? (<Auth></Auth>) : <motion.button initial={{opacity: 0, scale: 0.5}}
                                                           animate={{opacity: 1, scale: 1}}
                                                           transition={{
