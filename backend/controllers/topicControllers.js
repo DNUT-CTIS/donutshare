@@ -8,18 +8,8 @@ const addTopic = asyncHandler(async (req, res) => {
     throw new Error("Please add a text field");
   }
 
-const count = await Topic.countDocuments({});
-var isCurrent = false;
-if (count === 0) {
-  console.log("Topic collection is empty");
-  isCurrent = true;
-} else {
-  console.log(`Topic collection has ${count} documents`);
-}
-
   const topic = await Topic.create({
-    content: req.body.content,
-    isCurrent: isCurrent
+    content: req.body.content
   });
 
   res.status(200).json(topic);
@@ -29,11 +19,9 @@ const currentTopic = asyncHandler(async (req, res) => {
 
 const topic = await Topic.findOne({isCurrent: true})
  const now = new Date();
-
  const midnight = new Date();
  midnight.setHours(24, 0, 0, 0); // set to midnight tonight
- const timeLeft = midnight - now + 75600000;
-  console.log(timeLeft);
+ const timeLeft = midnight - now - 10800000;
  const secondsLeft = Math.floor((timeLeft / 1000) % 60);
  const minutesLeft = Math.floor((timeLeft / 1000 / 60) % 60);
  const hoursLeft = Math.floor((timeLeft / 1000 / 60 / 60) % 24);

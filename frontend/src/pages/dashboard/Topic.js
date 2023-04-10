@@ -2,7 +2,7 @@ import React from 'react';
 import CountdownTimer from './CountdownTimer';
 import {useEffect, useState} from 'react';
 import topicService from '../../service/topicService';
-import socket from "../../socket/socket"
+import io from "socket.io-client";
 import {Link, useNavigate} from "react-router-dom";
 
 
@@ -58,23 +58,15 @@ export function Topic() {
 
   const token = localStorage.getItem("token");
 
-<<<<<<< HEAD
   const socket = io("https://donutshare-api.onrender.com");
 
-=======
-
-
->>>>>>> aleren-v2
   socket.emit("setUsername", username);
 
   function handleAgreeClick() {
     setIsModalOpen(true);
     socket.emit("buttonClick", "agree");
-<<<<<<< HEAD
 
 
-=======
->>>>>>> aleren-v2
   }
 
   function handleDisagreeClick() {
@@ -82,7 +74,6 @@ export function Topic() {
     socket.emit("buttonClick", "disagree");
   }
 
-<<<<<<< HEAD
   socket.on('matched', (message) => {
     setFound(true)
     setTimeout(() => {
@@ -91,16 +82,6 @@ export function Topic() {
 
 
   });
-=======
- socket.on("matched", (roomName) => {
-   setFound(true);
-
-   setTimeout(() => {
-     navigate(`/chat/${roomName}`);
-   }, 5000);
- });
-
->>>>>>> aleren-v2
 
   return (
     <div class="flex flex-col text-center p-4 leading-normal">
