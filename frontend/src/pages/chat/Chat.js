@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useEffect, useRef, useState} from "react";
 import socket from "../../socket/socket";
 import classNames from "classnames";
 import {Navbar} from "../../shared/Navbar"
@@ -18,7 +18,13 @@ const Chat = ({ match }) => {
   const [opinion, setOpinion] = useState("");
   const navigate = useNavigate();
 
+  const messagesEndRef = useRef(null)
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "start"});
+  }
   useEffect(() => {
+
     socket.on("connect", () => {
       console.log("this is chat");
       console.log(`Connected to server with ID ${socket.id}`);
@@ -26,21 +32,26 @@ const Chat = ({ match }) => {
 
     socket.on("chatMessage", (message) => {
       setMessages((messages) => [...messages, message]);
+
     });
 
     socket.on("leaveChat", () => {
       console.log("Disconnected from server");
     });
+    scrollToBottom()
 
     return () => {
       socket.off("connect");
       socket.off("chatMessage");
       socket.off("leaveChat");
     };
-  }, []);
+
+
+  }, [messages]);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
+
   };
 
   const handleModalClose = () => {
@@ -73,7 +84,6 @@ const Chat = ({ match }) => {
 
   return (
     <div>
-      <Navbar></Navbar>
       <ModalContainer isOpen={isModalOpen}>
         {console.log(opinion)}
         <PostModal side={opinion}></PostModal>
@@ -104,7 +114,8 @@ const Chat = ({ match }) => {
         <div className="bg-white dark:bg-zinc-900 w-screen h-screen flex flex-col"
              style={{ backgroundImage: `url(${donutBackground})` }}
         >
-          <div className="flex-1 overflow-y-scroll p-4">
+          <div className="flex-1 overflow-y-scroll p-4"
+          >
             {messages.map((message, index) => {
               const username = JSON.parse(localStorage.getItem("username"))
 
@@ -120,9 +131,9 @@ const Chat = ({ match }) => {
               });
 
               return (
-                <div key={index} className="flex">
-                  <div className={messageClass}>
-                    <p className="text-sm font-medium">{message.username}</p>
+                <div key={index} className="flex"
+                >
+                  <div className={messageClass}    ref={messagesEndRef}>
                     <p>{message.message}</p>
                   </div>
                 </div>
