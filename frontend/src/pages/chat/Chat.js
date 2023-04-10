@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from "react";
+import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import socket from "../../socket/socket";
 import classNames from "classnames";
 import {Navbar} from "../../shared/Navbar"
@@ -7,6 +7,7 @@ import donutStatic from '../dashboard/donut.jpg';
 import {RandomName} from "../dashboard/RandomName";
 import donutBackground from "./donut_patern.png";
 import ModalContainer from "../../shared/ModalContainer";
+import {generateRandomAvatarOptions} from '../dashboard/randomAvatar';
 import {PostModal} from "./PostModal";
 import {useNavigate} from "react-router-dom";
 
@@ -49,10 +50,9 @@ const Chat = ({ match }) => {
 
   }, [messages]);
 
-  const handleInputChange = (event) => {
+  const handleInputChange = useCallback((event) => {
     setInputValue(event.target.value);
-
-  };
+  }, []);
 
   const handleModalClose = () => {
 
@@ -81,6 +81,9 @@ const Chat = ({ match }) => {
     setIsModalOpen(true);
   });
 
+  const avatarOptions = useMemo(() => generateRandomAvatarOptions(), []);
+
+  const randomName = useMemo(() => <RandomName />, []);
 
   return (
     <div>
@@ -94,8 +97,9 @@ const Chat = ({ match }) => {
         <div className="dark:bg-zinc-800 h-screen flex flex-col w-2/4 dark:text-white">
           <div className="text-center text-xl font-extrabold my-6">Your Match</div>
           <div className="mx-auto text-center">
-            <Avatar className="rounded-full dark:bg-zinc-700 my-6 ml-10"></Avatar>
-            <RandomName></RandomName>
+            <Avatar className="rounded-full dark:bg-zinc-700 my-6 ml-10"
+                    {...avatarOptions}></Avatar>
+            {randomName}
             <button className="bg-pink-600 text-black active:bg-pink-800
         font-bold my-6 px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-32 mb-1" onClick={handleWithdrawClick}>Withdraw</button>
             <button className="bg-pink-600 text-black active:bg-pink-800
