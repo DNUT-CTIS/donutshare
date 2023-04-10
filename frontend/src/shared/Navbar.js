@@ -43,6 +43,10 @@ export function Navbar() {
       navigate("/control-panel/mod-profile");
     }
 
+    if (userData === 'admin') {
+      navigate("/control-panel/admin-profile");
+    }
+
   };
 
   return (
