@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da5314df-7f70-4900-b5c2-0593070a3e26" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/auth/Auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/auth/Auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +17,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="yusuf-v2-chat" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitToolBoxStore">
@@ -29,12 +34,16 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="aleren-socket-v2" />
-                    <option name="lastUsedInstant" value="1679405002" />
+                    <option name="branchName" value="yusuf-v2" />
+                    <option name="lastUsedInstant" value="1681075237" />
                   </RecentBranch>
                   <RecentBranch>
-                    <option name="branchName" value="yusuf-v2" />
-                    <option name="lastUsedInstant" value="1679344594" />
+                    <option name="branchName" value="yusuf-v2-chat" />
+                    <option name="lastUsedInstant" value="1680873334" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="aleren-socket-v2" />
+                    <option name="lastUsedInstant" value="1679405002" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="aleren-v2-yusuf" />
@@ -66,6 +75,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/yusufciftci/Documents/GitHub/donutshare/frontend/src/pages/chat&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.import&quot;,
     &quot;typescript.add.unambiguous.imports.on.the.fly&quot;: &quot;true&quot;,
@@ -73,6 +83,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/src/pages/chat" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/frontend/src/pages/dashboard" />
     </key>
