@@ -10,12 +10,14 @@ import ModalContainer from "../../shared/ModalContainer";
 import {generateRandomAvatarOptions} from '../dashboard/randomAvatar';
 import {PostModal} from "./PostModal";
 import {useNavigate} from "react-router-dom";
+import {WarningModal} from "../../shared/WarningModal";
 
 const Chat = ({ match }) => {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [user, setUser] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isWarningOpen, setIsWarningOpen] = useState(false);
   const [opinion, setOpinion] = useState("");
   const navigate = useNavigate();
 
@@ -63,9 +65,17 @@ const Chat = ({ match }) => {
     navigate("/dashboard");
   };
 
-  const handleWithdrawClick = () => {
+  const handleWarningClick = () => {
     socket.emit("withdrawChat");
     setIsModalOpen(true);
+  }
+
+  const handleCancelClick = () => {
+    setIsWarningOpen(false);
+  }
+
+  const handleWithdrawClick = () => {
+    setIsWarningOpen(true);
   };
 
   const handleSendMessage = (event) => {
@@ -87,6 +97,17 @@ const Chat = ({ match }) => {
 
   return (
     <div>
+      <ModalContainer isOpen={isWarningOpen}>
+        <WarningModal></WarningModal>
+        <button onClick={handleWarningClick} data-modal-hide="popup-modal" type="button"
+                className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+          Yes, I'm sure
+        </button>
+        <button onClick={handleCancelClick} data-modal-hide="popup-modal" type="button"
+                className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No,
+          cancel
+        </button>
+      </ModalContainer>
       <ModalContainer isOpen={isModalOpen}>
         {console.log(opinion)}
         <PostModal side={opinion}></PostModal>
