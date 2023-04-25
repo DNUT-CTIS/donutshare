@@ -14,6 +14,19 @@ const connectDB = async() => {
         });
 
         console.log(`MongoDB Connected: ${conn.connection.host}`.blue.bold);
+
+        const numCollections = await mongoose.connection.db
+          .listCollections()
+          .toArray();
+        console.log(`Total number of collections: ${numCollections.length}`);
+
+        if(numCollections.length == 0)
+        {
+        throw new Error("Database is empty!");
+        }
+
+        
+
     } catch(error) {
         console.log(`Error: ${error.message}`);
         process.exit();
