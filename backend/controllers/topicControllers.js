@@ -5,7 +5,12 @@ const Topic = require("../models/topicModel");
 const addTopic = asyncHandler(async (req, res) => {
   if (!req.body.content) {
     res.status(400);
-    throw new Error("Please add a text field");
+    throw new Error("Please add a text field for your topic");
+  }
+  if(Object.keys(req.body.content).length > 250)
+  {
+       res.status(400);
+       throw new Error("Topic cannot be more than 250 characters");
   }
 
 const count = await Topic.countDocuments({});
