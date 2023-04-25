@@ -1,0 +1,241 @@
+* {
+    
+    --donut: #f5a560;
+    --donutshadow: #efd27f;
+    --donutsize: 60px;
+    --icingcolor: deeppink;
+    
+  }
+  .errorPage {
+    height: 100vh;
+    background: black;
+    background-image: linear-gradient(#000000, #ffffff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 3rem 0;
+    position: relative;
+  }
+  
+  .donut:before {
+    content: "";
+    position: absolute;
+    top: -52px;
+    left: -53px;
+    display: block;
+    border-radius: 50%;
+    width: 130px;
+    height: 130px;
+    border: 23px solid rgba(255, 255, 255, 0.2);
+    border-right: transparent;
+    border-bottom: transparent;
+    border-right: transparent;
+    z-index: 1;
+    border-bottom: 0;
+    border-right: 0;
+  }
+  .donut {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    width: var(--donutsize);
+    height: var(--donutsize);
+    border: 75px solid #f5a560;
+    border: 75px solid var(--donut);
+    border-radius: 50%;
+    box-sizing: content-box;
+    flex-shrink: 0;
+    margin: 3em;
+    box-shadow: 6px 5px 0px 2px #d87d3c;
+    box-shadow: 6px 5px 0px 2px var(--donutshadow),
+      inset 6px 5px 0px 0px var(--donutshadow);
+  }
+  .donut .icing,
+  .donut .icing:before,
+  .donut .icing:after {
+    content: "";
+    display: block;
+    position: absolute;
+    border: 38px solid deeppink;
+    border: 38px solid var(--icingcolor);
+    border-radius: 10%;
+  }
+  .donut .icing {
+    top: -45px;
+    bottom: -45px;
+    right: -45px;
+    left: -45px;
+  }
+  .donut .icing:before {
+    transform: rotate(63deg);
+    top: -40px;
+    bottom: -40px;
+    right: -40px;
+    left: -40px;
+  }
+  .donut .icing:after {
+    transform: rotate(-59deg);
+    top: -40px;
+    bottom: -40px;
+    right: -40px;
+    left: -40px;
+  }
+  
+  .donut:after {
+    content: "";
+    position: absolute;
+    top: -40px;
+    bottom: -40px;
+    right: -40px;
+    left: -40px;
+    background: radial-gradient(
+        circle at 75% 7%,
+        hotpink 0,
+        hotpink 3px,
+        transparent 4px
+      ),
+      radial-gradient(circle at 12% 89%, gold 0, gold 3px, transparent 4px),
+      radial-gradient(
+        circle at 3% 68%,
+        midnightblue 0,
+        midnightblue 3px,
+        transparent 4px
+      ),
+      radial-gradient(
+        circle at 44% 3%,
+        blueviolet 0,
+        blueviolet 3px,
+        transparent 4px
+      ),
+      radial-gradient(
+        circle at 8% 60%,
+        aquamarine 0,
+        aquamarine 3px,
+        transparent 4px
+      ),
+      radial-gradient(circle at 41% 97%, gold 0, gold 3px, transparent 4px),
+      radial-gradient(circle at 79% 67%, coral 0, coral 3px, transparent 4px),
+      radial-gradient(circle at 24% 24%, hotpink 0, hotpink 3px, transparent 4px),
+      radial-gradient(
+        circle at 3% 38%,
+        blueviolet 0,
+        blueviolet 3px,
+        transparent 4px
+      ),
+      radial-gradient(circle at 6% 87%, deeppink 0, deeppink 3px, transparent 4px),
+      radial-gradient(circle at 91% 94%, beige 0, beige 3px, transparent 4px),
+      radial-gradient(
+        circle at 91% 34%,
+        darkorange 0,
+        darkorange 3px,
+        transparent 4px
+      ),
+      radial-gradient(circle at 85% 14%, green 0, green 3px, transparent 4px),
+      radial-gradient(
+        circle at 73% 96%,
+        darksalmon 0,
+        darksalmon 3px,
+        transparent 4px
+      ),
+      radial-gradient(circle at 35% 6%, hotpink 0, hotpink 3px, transparent 4px),
+      radial-gradient(
+        circle at 41% 16%,
+        floralwhite 0,
+        floralwhite 3px,
+        transparent 4px
+      ),
+      radial-gradient(circle at 89% 74%, blue 0, blue 3px, transparent 4px),
+      radial-gradient(circle at 59% 17%, hotpink 0, hotpink 3px, transparent 4px),
+      radial-gradient(circle at 54% 2%, gold 0, gold 3px, transparent 4px),
+      radial-gradient(
+        circle at 96% 45%,
+        midnightblue 0,
+        midnightblue 3px,
+        transparent 4px
+      ),
+      radial-gradient(
+        circle at 22% 68%,
+        blueviolet 0,
+        blueviolet 3px,
+        transparent 4px
+      ),
+      radial-gradient(
+        circle at 54% 93%,
+        aquamarine 0,
+        aquamarine 3px,
+        transparent 4px
+      ),
+      radial-gradient(circle at 96% 4%, gold 0, gold 3px, transparent 4px),
+      radial-gradient(circle at 96% 54%, coral 0, coral 3px, transparent 4px),
+      radial-gradient(circle at 3% 9%, hotpink 0, hotpink 3px, transparent 4px),
+      radial-gradient(
+        circle at 25% 90%,
+        blueviolet 0,
+        blueviolet 3px,
+        transparent 4px
+      ),
+      radial-gradient(
+        circle at 82% 46%,
+        deeppink 0,
+        deeppink 3px,
+        transparent 4px
+      ),
+      radial-gradient(circle at 98% 63%, beige 0, beige 3px, transparent 4px),
+      radial-gradient(
+        circle at 11% 77%,
+        darkorange 0,
+        darkorange 3px,
+        transparent 4px
+      ),
+      radial-gradient(circle at 80% 29%, green 0, green 3px, transparent 4px),
+      radial-gradient(
+        circle at 10% 23%,
+        darksalmon 0,
+        darksalmon 3px,
+        transparent 4px
+      ),
+      radial-gradient(circle at 38% 87%, hotpink 0, hotpink 3px, transparent 4px),
+      radial-gradient(
+        circle at 13% 44%,
+        floralwhite 0,
+        floralwhite 3px,
+        transparent 4px
+      ),
+      radial-gradient(circle at 67% 87%, blue 0, blue 3px, transparent 4px);
+  }
+  
+  
+  
+  .errorFirst {
+    text-align: center;
+    font-size: 3rem;
+    margin: 0;
+    color: white;
+  }
+  .errorSecond {
+    text-align: center;
+    font-size: 3rem;
+    margin: 0;
+    color: black;
+  }
+  
+  .errorThird {
+    font-size: 20em;
+    margin: 0;
+    z-index: 0;
+    margin-left: -165px;
+    margin-top: -90px;
+    padding: 10px 50px;
+    margin-right: -145px;
+    color: white;
+    
+  }
+  
+  .errorContainer {
+    display: flex;
+    flex-flow: row-reverse wrap;
+    justify-content: center;
+  }
+  
