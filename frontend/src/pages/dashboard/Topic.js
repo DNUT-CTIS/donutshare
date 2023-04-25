@@ -72,13 +72,13 @@ export function Topic() {
     socket.emit("buttonClick", "disagree");
   }
 
- socket.on("matched", (roomName) => {
-   setFound(true);
+  socket.on("matched", (roomName) => {
+    setFound(true);
 
-   setTimeout(() => {
-     navigate(`/chat/${roomName}`);
-   }, 5000);
- });
+    setTimeout(() => {
+      navigate(`/chat/${roomName}`);
+    }, 5000);
+  });
 
 
   return (

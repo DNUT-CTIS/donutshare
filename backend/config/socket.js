@@ -7,6 +7,7 @@ const io = require("socket.io")(server, {
   cors: {
     origin: "*",
   },
+  credentials: true,
 });
 
 const waitingAgreeUsers = [];

@@ -43,6 +43,8 @@ export function Auth() {
             window.location.reload(false);
           } else if (data === "moderator") {
             navigate("/control-panel/mod-profile");
+          } else if (data === "admin") {
+            navigate("/control-panel/admin-profile");
           }
         },
         (error) => {
