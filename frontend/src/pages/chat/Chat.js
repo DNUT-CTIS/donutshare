@@ -57,7 +57,7 @@ peer.on("connection", (conn) => {
     pushToTalkButton.addEventListener("mousedown", async () => {
    socket.emit("peer-connection", peer.id)
       socket.on("peer-bond", (destPeerId) => {
-
+        console.log("opponents peer id : " + destPeerId)
         destPeer = destPeerId
       
       })
