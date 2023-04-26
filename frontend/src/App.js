@@ -10,11 +10,7 @@ import PrivateRoutes from "./shared/PrivateRoutes";
 import {SignupMod} from './pages/auth/SignupMod';
 import {DashboardVerified} from "./pages/dashboard/DashboardVerified";
 import {DashboardAlreadyVerified} from "./pages/dashboard/DashboardAlreadyVerified";
-<<<<<<< HEAD
-import {Chat} from "./pages/chat/Chat";
-=======
 import Chat from "./pages/chat/Chat";
->>>>>>> 014a619cf2d6eb698c2e5a9fa7be261e7a8b4fa2
 
 
 function App() {
@@ -27,15 +23,7 @@ function App() {
             <Route path="/control-panel/mod-profile" element={<ModeratorProfile/>}/>
             <Route path="/control-panel/signup-mod" element={<SignupMod/>}></Route>
             <Route path="/control-panel/profile" element={<DebaterProfile/>}/>
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <Route path="/chat" element={<Chat/>}></Route>
-=======
             <Route path="/chat/:roomName" element={<Chat/>} />
->>>>>>> aleren-v2
-=======
-            <Route path="/chat/:roomName" element={<Chat/>} />
->>>>>>> 014a619cf2d6eb698c2e5a9fa7be261e7a8b4fa2
           </Route>
           <Route path="/dashboard" element={<Dashboard/>}/>
           <Route path="/dashboard-test" element={<DashboardTest/>}/>
