@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import modService from '../../../service/modService';
 import { Link, useNavigate } from "react-router-dom";
+import adminService from '../../../service/adminService';
 
 
   
@@ -19,9 +20,12 @@ function ModeratorList(){
     );
     console.log(user)
     console.log(filteredUsernames)
+
+
+    
     useEffect(() => {
       try {
-        modService.getallusers("moderator").then(
+        modService.getAllUsers("moderator").then(
             (response) => {
                 // check for token and user already exists with 200
                 //   console.log("Sign up successfully", response);
@@ -39,7 +43,7 @@ function ModeratorList(){
 
   }, [])
   const handleDelete = (username) => {
-    modService.DeleteMod(username)
+    adminService.deleteMod(username)
       .then((data) => {
         // Success message or perform any other action
         console.log(user)
