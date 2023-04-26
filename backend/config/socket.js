@@ -60,7 +60,7 @@ io.on("connection", (socket) => {
               console.log("received peer id of agree " + peerId);
             });
 
-            disagreeSocket.on("peer-connection", (peer) => {
+            disagreeSocket.on("peer-connection", (peerId) => {
               console.log("received peer id of disagree " + peerId);
             });
 
