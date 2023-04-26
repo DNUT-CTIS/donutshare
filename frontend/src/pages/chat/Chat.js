@@ -56,10 +56,14 @@ peer.on("connection", (conn) => {
 
     pushToTalkButton.addEventListener("mousedown", async () => {
    socket.emit("peer-connection", peer.id)
-   
+      socket.on("peer-bond", (destPeerId) => {
+        var conn = peer.connect(destPeerId);
+      })
     });
     
-
+peer.on('connection', function(conn) { 
+  console.log("received!")
+});
     pushToTalkButton.addEventListener("mouseup", () => {
   
     });

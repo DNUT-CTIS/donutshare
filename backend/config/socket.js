@@ -58,10 +58,12 @@ io.on("connection", (socket) => {
 
             agreeSocket.on("peer-connection", (peerId) => {
               console.log("received peer id of agree " + peerId);
+              disagreeSocket.emit("peer-bond", peerId)
             });
 
             disagreeSocket.on("peer-connection", (peerId) => {
               console.log("received peer id of disagree " + peerId);
+              agreeSocket.emit("peer-bond", peerId);
             });
 
 
