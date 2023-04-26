@@ -4,6 +4,7 @@ import {useEffect, useState} from 'react';
 import topicService from '../../service/topicService';
 import io from "socket.io-client";
 import {Link, useNavigate} from "react-router-dom";
+import donutImage from "./donut.png";
 
 
 import './timer.css';
@@ -25,6 +26,7 @@ export function Topic() {
   const username = localStorage.getItem("username");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [found, setFound] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -34,6 +36,7 @@ export function Topic() {
   };
 
   useEffect(() => {
+    setLoading(true);
     try {
       topicService.getCurrentTopic().then(
         (response) => {
@@ -42,6 +45,7 @@ export function Topic() {
           //    console.log(response.userArr)
           setTopic(response.topic)
           setTimeLeft(response.timeleft)
+          setLoading(false);
         },
         (error) => {
           console.log(error);
@@ -58,15 +62,22 @@ export function Topic() {
 
   const token = localStorage.getItem("token");
 
+<<<<<<< HEAD
   const socket = io("https://donutshare-api.onrender.com");
+=======
+
+>>>>>>> 014a619cf2d6eb698c2e5a9fa7be261e7a8b4fa2
 
   socket.emit("setUsername", username);
 
   function handleAgreeClick() {
     setIsModalOpen(true);
     socket.emit("buttonClick", "agree");
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 014a619cf2d6eb698c2e5a9fa7be261e7a8b4fa2
   }
 
   function handleDisagreeClick() {
@@ -74,31 +85,47 @@ export function Topic() {
     socket.emit("buttonClick", "disagree");
   }
 
-  socket.on('matched', (message) => {
-    setFound(true)
-    setTimeout(() => {
-      navigate("/chat");
-    }, 5000);
+  socket.on("matched", (roomName) => {
+    setFound(true);
 
+    setTimeout(() => {
+      navigate(`/chat/${roomName}`);
+    }, 5000);
+<<<<<<< HEAD
+
+=======
+  socket.on("matched", (roomName) => {
+    setFound(true);
+
+    setTimeout(() => {
+      navigate(`/chat/${roomName}`);
+    }, 5000);
+  });
+>>>>>>> aleren-v2
 
   });
+=======
+  });
+
+>>>>>>> 014a619cf2d6eb698c2e5a9fa7be261e7a8b4fa2
 
   return (
     <div class="flex flex-col text-center p-4 leading-normal">
+  {loading ? (
+    <img className="py-16 mx-auto" src={donutImage}/>
+  ) : (
+    <>
       <div class="mx-3 dark:text-white">
         <h1>Today's Topic</h1>
-
-        <h2>Topic expires after 1 days!!!</h2>
+        <h2>Topic expires after 1 day!!!</h2>
         <CountdownTimer targetDate={dateTimeAfterThreeDays}/>
       </div>
-
       <h1 class="mb-3 text-3xl font-bold text-gray-900 dark:text-white pt-6">
         {topic}
       </h1>
       <ModalContainer isOpen={found}>
         <FoundMatch></FoundMatch>
       </ModalContainer>
-
       {token ? (
         <div class="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 p-8">
           <div class="buttons">
@@ -106,10 +133,7 @@ export function Topic() {
             <ModalContainer isOpen={isModalOpen} onClose={handleModalClose}>
               <SearchModal></SearchModal>
               <div className="flex justify-center">
-                <button className=" bg-pink-600 text-black active:bg-pink-800
-        font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
-                        onClick={handleModalClose}>Cancel
-                </button>
+                <button className=" bg-pink-600 text-black active:bg-pink-800 font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" onClick={handleModalClose}>Cancel</button>
               </div>
             </ModalContainer>
             <button onClick={handleDisagreeClick}>Disagree</button>
@@ -120,7 +144,9 @@ export function Topic() {
           Hidden when token is not present
         </div>
       )}
-    </div>
+    </>
+  )}
+</div>
 
   );
 }

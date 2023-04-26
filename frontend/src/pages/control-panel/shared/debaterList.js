@@ -20,7 +20,7 @@ function DebaterList(){
    
     useEffect(() => {
       try {
-        DebaterService.getallusers("debater").then(
+        DebaterService.getAllUsers("debater").then(
             (response) => {
                 // check for token and user already exists with 200
                 //   console.log("Sign up successfully", response);
