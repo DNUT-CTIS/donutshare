@@ -167,6 +167,7 @@ const Chat = ({ match }) => {
           </div>
           <form onSubmit={handleSendMessage} className="flex dark:bg-zinc-800 items-center p-4">
             <input
+              maxLength={150}
               type="text"
               value={inputValue}
               onChange={handleInputChange}
