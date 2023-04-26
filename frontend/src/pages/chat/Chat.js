@@ -35,58 +35,59 @@ const Chat = ({ match }) => {
       console.log(`Connected to server with ID ${socket.id}`);
     });
 
- let audioConnection = null;
- let audioStream = null;
+let audioConnection = null;
+let audioStream = null;
+let destPeer = null;
+let call = null;
 
- peer.on("open", (peerId) => {
-   console.log(`Connected to peer server with ID ${peerId}`);
-   socket.emit("peer-connection", peer.id);
- });
+peer.on("open", (peerId) => {
+  console.log(`Connected to peer server with ID ${peerId}`);
+  socket.emit("peer-connection", peer.id);
+});
 
- socket.on("peer-bond", async (destPeerId) => {
-   console.log("opponents peer id: " + destPeerId);
+socket.on("peer-bond", async (destPeerId) => {
+  console.log("opponents peer id: " + destPeerId);
 
-   audioConnection = peer.connect(destPeerId);
-   audioConnection.on("open", async () => {
-     console.log("Connected to remote-peer-id!");
+  audioConnection = peer.connect(destPeerId);
+  audioConnection.on("open", async () => {
+    console.log("Connected to remote-peer-id!");
 
-     // Get the user's audio stream
-     audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    // Save the destination peer ID
+    destPeer = destPeerId;
+  });
+});
 
-     // Create a new PeerJS MediaConnection for the audio stream
-     const mediaConnection = peer.call(destPeerId, audioStream);
+const pushToTalkButton = document.getElementById("push-to-talk");
 
-     // Play the audio stream from the other peer when it's received
-     mediaConnection.on("stream", (stream) => {
-       const audioElement = document.createElement("audio");
-       audioElement.srcObject = stream;
-       audioElement.play();
-     });
-   });
- });
+pushToTalkButton.addEventListener("click", async () => {
+  // Get the user's audio stream
+  audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
 
- const pushToTalkButton = document.getElementById("push-to-talk");
+  // Create a new PeerJS MediaConnection for the audio stream
+  call = peer.call(destPeer, audioStream);
 
- var call = null;
+  // Play the audio stream from the other peer when it's received
+  call.on("stream", (stream) => {
+    const audioElement = document.createElement("audio");
+    audioElement.srcObject = stream;
+    audioElement.play();
+  });
+});
 
- pushToTalkButton.addEventListener("mousedown", () => {
-   audioStream =  navigator.mediaDevices.getUserMedia({ audio: true });
-   call = peer.call("dest-peer-id", audioStream);
- });
+peer.on("call", function (incomingCall) {
+  // Answer the call, providing our mediaStream
+  incomingCall.answer(audioStream);
 
- peer.on("call", function (call) {
-   // Answer the call, providing our mediaStream
-   call.answer(audioStream);
- });
+  // Enable audio track
+  audioStream.getAudioTracks()[0].enabled = true;
 
-
-
-
- pushToTalkButton.addEventListener("mouseup", () => {
-    console.log("streaming is stopped");
-   // Unmute the user's audio stream
-   audioStream.getAudioTracks()[0].enabled = true;
- });
+  // Play the audio stream from the other peer when it's received
+  incomingCall.on("stream", (stream) => {
+    const audioElement = document.createElement("audio");
+    audioElement.srcObject = stream;
+    audioElement.play();
+  });
+});
 
     socket.on("chatMessage", (message) => {
       setMessages((messages) => [...messages, message]);

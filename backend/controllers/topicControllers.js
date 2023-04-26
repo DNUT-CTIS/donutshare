@@ -49,6 +49,4 @@ console.log(
 });
 
 
-
-
 module.exports = {addTopic, currentTopic}
