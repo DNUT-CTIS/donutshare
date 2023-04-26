@@ -53,21 +53,19 @@ peer.on("connection", (conn) => {
   
 
     const pushToTalkButton = document.getElementById("push-to-talk");
-    var destPeer
+var destPeer
     pushToTalkButton.addEventListener("mousedown", async () => {
    socket.emit("peer-connection", peer.id)
       socket.on("peer-bond", (destPeerId) => {
-        console.log("opponents peer id : " + destPeerId)
-        destPeer = destPeerId
-      
+        
+        console.log("opponents peer id: " + destPeerId)
+        var conn = peer.connect(destPeerId);
+
+        conn.on("open", function () {
+          console.log("Connected to remote-peer-id!");
+        });
       })
     });
-
-      var conn = peer.connect(destPeer);
-
-      conn.on("open", function () {
-        console.log("Connected to remote-peer-id!");
-      });
     
 peer.on('connection', function(conn) { 
   console.log("received!")
