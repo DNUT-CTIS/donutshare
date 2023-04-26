@@ -10,7 +10,10 @@ import ModalContainer from "../../shared/ModalContainer";
 import {generateRandomAvatarOptions} from '../dashboard/randomAvatar';
 import {PostModal} from "./PostModal";
 import {useNavigate} from "react-router-dom";
-import SimpleWebRTC from "simplewebrtc";
+import Peer from "peerjs";
+
+
+
 
 const Chat = ({ match }) => {
   const [messages, setMessages] = useState([]);
@@ -19,9 +22,8 @@ const Chat = ({ match }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [opinion, setOpinion] = useState("");
   const navigate = useNavigate();
-
   const messagesEndRef = useRef(null)
-  const [webrtc, setWebrtc] = useState(null);
+  const peer = new Peer()
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "start"});
@@ -36,13 +38,31 @@ const Chat = ({ match }) => {
     const currentPath = window.location.href;
     const lastPart = currentPath.substring(currentPath.lastIndexOf("/") + 1);
     console.log(lastPart);
-    
-    const webrtc = new SimpleWebRTC({
-      url: currentPath,
-      enableDataChannels: true,
+    console.log(socket.id)
+
+
+    peer.on("open", (peerId) => {
+      console.log(`Connected to peer server with ID ${peerId}`);
+    });
+
+    var conn = peer.connect("dest-peer-id");
+
+peer.on("connection", (conn) => {
+  console.log("New connection:", conn);
+});
+  
+
+    const pushToTalkButton = document.getElementById("push-to-talk");
+
+    pushToTalkButton.addEventListener("mousedown", async () => {
+   socket.emit("peer-connection", peer.id)
+   
     });
     
+
+    pushToTalkButton.addEventListener("mouseup", () => {
   
+    });
 
     socket.on("chatMessage", (message) => {
       setMessages((messages) => [...messages, message]);

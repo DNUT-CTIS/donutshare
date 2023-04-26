@@ -56,6 +56,15 @@ io.on("connection", (socket) => {
 
         io.to(roomName).emit("matched", roomName);
 
+            agreeSocket.on("peer-connection", (peerId) => {
+              console.log("received peer id of agree " + peerId);
+            });
+
+            disagreeSocket.on("peer-connection", (peer) => {
+              console.log("received peer id of disagree " + peerId);
+            });
+
+
         agreeSocket.on("withdrawChat", ()=>{
             agreeSocket.emit("withdrawChat",{
               side: "Agree"
