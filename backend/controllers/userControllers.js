@@ -134,6 +134,24 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
+const changePassword = asyncHandler(async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+  const userId = req.user._id;
+
+  const user = await User.findById(userId);
+
+  if (user && (await user.matchPassword(currentPassword))) {
+    user.password = newPassword;
+    await user.save();
+
+    res.status(200).json({ message: "Password changed successfully" });
+  } else {
+    res.status(401);
+    throw new Error("Invalid Password");
+  }
+});
+
+
 const banUser = asyncHandler(async (req, res) => {
   const { username } = req.body;
   console.log(username);
@@ -244,6 +262,7 @@ const deleteModerator = asyncHandler(async (req, res) => {
 module.exports = {
   registerUser,
   authUser,
+  changePassword,
   banUser,
   allUsers,
   deleteModerator,
