@@ -48,5 +48,11 @@ console.log(
   res.status(200).send({ topic: topic.content, timeleft:timeLeft});
 });
 
+const allTopics = asyncHandler(async (req, res) => {
+  const topics = await Topic.find({});
+  res.status(200).json(topics);
+});
 
-module.exports = {addTopic, currentTopic}
+
+
+module.exports = {addTopic, currentTopic, allTopics}
