@@ -3,6 +3,10 @@ import { Link, useNavigate} from "react-router-dom";
 import { toast } from 'react-toastify';
 
 const API_URL = "https://donutshare-api.onrender.com/api";
+const user = JSON.parse(localStorage.getItem("token"));
+const config = {
+  headers: { Authorization: `Bearer ${user}` }
+};
 
 
 const signup = (username, email, password) => {
@@ -40,10 +44,26 @@ const login = (email, password) => {
 
             return response.data;
         }).catch(error => {
-            toast.error(error.response.data.message)
             return error
         });
 };
+
+const changePassword = (currentPassword, newPassword) => {
+    return axios.put(API_URL + "/user/changePassword", {
+    currentPassword,
+    newPassword,
+    }, config)
+    .then(response => {
+      console.log(response);
+      toast.success(response.data.message)
+      return response;
+    })
+    .catch(error => {
+      console.log(error);
+      toast.error(error.response.data.message)
+      return error;
+    });
+  }
 
 const resend = (email) => {
   return axios
@@ -81,6 +101,7 @@ const authService = {
     logout,
     resend,
     getCurrentUser,
+    changePassword
   
     
 };

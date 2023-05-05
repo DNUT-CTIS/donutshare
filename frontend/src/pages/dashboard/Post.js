@@ -29,10 +29,6 @@ export function Post() {
     console.log(res.data.posts)
       
     setResponse(res.data.posts)
-
-
-      
-      
       res.data.posts.map((item) => {
       });
       setPost(res.data.posts.map((post) => post.text));
