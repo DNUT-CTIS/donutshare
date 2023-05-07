@@ -12,6 +12,7 @@
     "flowbite": "^1.6.3",
     "flowbite-react": "^0.3.8",
     "framer-motion": "^10.1.0",
+    "peerjs": "^1.4.7",
     "random-avatar-generator": "^2.0.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.2",
