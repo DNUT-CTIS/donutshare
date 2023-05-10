@@ -35,7 +35,7 @@ function DebaterProfile() {
     <ul>
       <li className={`mb-4 ${selectedItem === 'general' ? 'bg-gray-300' : ''}`}>
         <a href="#" className="text-gray-800 font-bold hover:text-gray-700 block py-2 px-4 rounded-md"
-          onClick={() => setSelectedItem('general')}>Account Settings</a>
+          onClick={() => setSelectedItem('general')}>Change Password</a>
       </li>
     </ul>
   </div>
