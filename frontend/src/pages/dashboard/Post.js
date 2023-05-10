@@ -70,51 +70,46 @@ export function Post() {
   {loading && <img className="py-16 mx-auto" src={donutImage}/>}
   
   <div className="mx-auto sm:w-[700px] w-[350px]">
-    <motion.div initial={{opacity: 0, scale: 0.5}}
-                animate={{opacity: 1, scale: 1}}
-                transition={{
-                  duration: 0.8,
-                  delay: 0.5,
-                  ease: [0, 0.71, 0.2, 1.01]
-                }} className="">
-      {response.length === 0 ? (
- 
- <h1 class="text-center text-3xl font-extrabold text-white py-8">No debate for this proposition yet choose a side and be ready for first debate!</h1>
-    
-      ) : (
-        reason.map((item) => (
-          <div key={item._id} className="">
-            <div className="flex flex-row border rounded-md shadow shadow-xl dark:bg-zinc-800 dark:border-zinc-700">
-              <div className="w-12 sm:w-fit flex flex-col gap-4 mx-8 my-4 items-center">
-                <Avatar className="rounded-full dark:bg-zinc-700 w-16 h-16 sm:w-32 sm:h-32"
-                  {...generateRandomAvatarOptions(item._id)} />
-                <RandomName seed={item._id} user={item.user} username={item.username}></RandomName>
-                {token && <Rate upvoteCount={item.upvoteCount} votes={item.votes} id={item._id} post={item}
-                      downvoteCount={item.downvoteCount} deleteFun={(id) => {setdeletedPost(id); setShowModal(true)}}
-                ></Rate>}
-              </div>
-              <div className="gap-4 mx-4 my-5">
-                <span
-                  className={`inline-block px-2 py-1 leading-none rounded-full font-semibold uppercase tracking-wide text-xs ${item.opinion === 'Agree' ? 'bg-blue-500 ' : 'bg-pink-500 '}`}>
-                  {item.opinion}
-                </span>
-                <p className="max-h-60 overflow-y-scroll my-2 dark:text-white">{item.text}</p>
-              </div>
-            </div>
-<<<<<<< HEAD
-            <div className="gap-4 mx-4 my-5">
-              <span
-                className={`inline-block px-2 py-1 leading-none rounded-full font-semibold uppercase tracking-wide text-xs ${item.opinion === 'Agree' ? 'bg-blue-500 ' : 'bg-pink-500 '}`}>
-                {item.opinion}
-              </span>
-              <p className="max-h-60 overflow-y-scroll my-2 dark:text-white">{item.text}</p>
-=======
-            <br/>
+  <motion.div 
+    initial={{opacity: 0, scale: 0.5}}
+    animate={{opacity: 1, scale: 1}}
+    transition={{
+      duration: 0.8,
+      delay: 0.5,
+      ease: [0, 0.71, 0.2, 1.01]
+    }} 
+    className="">
+    {!loading && response.length === 0 ? (
+      <h1 className="text-center text-3xl font-extrabold text-white py-8">No debate for this proposition yet. Choose a side and be ready for the first debate!</h1>
+    ) : (
+      reason.map((item) => (
+        <div key={item._id} className="border rounded-md shadow shadow-xl dark:bg-zinc-800 dark:border-zinc-700 flex flex-row">
+          <div className="mx-8 my-4 items-center flex flex-col gap-4 w-12 sm:w-fit">
+            <Avatar 
+              className="rounded-full dark:bg-zinc-700 w-16 h-16 sm:w-32 sm:h-32"
+              {...generateRandomAvatarOptions(item._id)}
+            />
+            <RandomName seed={item._id} user={item.user} username={item.username} />
+            {token && <Rate 
+              upvoteCount={item.upvoteCount} 
+              votes={item.votes} 
+              id={item._id} 
+              post={item}
+              downvoteCount={item.downvoteCount} 
+              deleteFun={(id) => {setdeletedPost(id); setShowModal(true)}}
+            />}
           </div>
-        ))
-      )}
-    </motion.div>
-  </div>
+          <div className="mx-4 my-5 gap-4">
+            <span className={`inline-block px-2 py-1 leading-none rounded-full font-semibold uppercase tracking-wide text-xs ${item.opinion === 'Agree' ? 'bg-blue-500' : 'bg-pink-500'}`}>
+              {item.opinion}
+            </span>
+            <p className="max-h-60 overflow-y-scroll my-2 dark:text-white">{item.text}</p>
+          </div>
+        </div>
+      ))
+    )}
+  </motion.div>
+</div>
   {showModal ? (
         <>
           <div
@@ -148,7 +143,6 @@ export function Post() {
                   </button>
                 </div>
               </div>
->>>>>>> 014a619cf2d6eb698c2e5a9fa7be261e7a8b4fa2
             </div>
           </div>
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>

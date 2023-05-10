@@ -9,15 +9,6 @@ import ChangePassword from '../shared/changePassword';
 function ModeratorProfile() {
 
   const [selectedItem, setSelectedItem] = useState('general');
-  const [password, setPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-
-
-  const handlePasswordChange = (event) => {
-    event.preventDefault();
-    authService.changePassword(password, newPassword);
-  };
- 
   return (
     <div className="flex flex-col h-screen dark:bg-zinc-900">
       <Navbar/>
@@ -27,7 +18,7 @@ function ModeratorProfile() {
           <ul>
             <li className={`mb-4 ${selectedItem === 'general' ? 'bg-gray-300' : ''}`}>
               <a href="#" className="text-gray-800 font-bold hover:text-gray-700 block py-2 px-4 rounded-md"
-                onClick={() => setSelectedItem('general')}>Account Settings</a>
+                onClick={() => setSelectedItem('general')}>Change Password</a>
             </li>
             <li className={`mb-4 ${selectedItem === 'dblist' ? 'bg-gray-300' : ''}`}>
               <a href="#" className="text-gray-800 font-bold hover:text-gray-700 block py-2 px-4 rounded-md"
