@@ -7,6 +7,7 @@ const io = require("socket.io")(server, {
   cors: {
     origin: "*",
   },
+  credentials: true,
 });
 
 const waitingAgreeUsers = [];
@@ -54,6 +55,17 @@ io.on("connection", (socket) => {
         }
 
         io.to(roomName).emit("matched", roomName);
+
+            agreeSocket.on("peer-connection", (peerId) => {
+              console.log("received peer id of agree " + peerId);
+              disagreeSocket.emit("peer-bond", peerId)
+            });
+
+            disagreeSocket.on("peer-connection", (peerId) => {
+              console.log("received peer id of disagree " + peerId);
+              agreeSocket.emit("peer-bond", peerId);
+            });
+
 
         agreeSocket.on("withdrawChat", ()=>{
             agreeSocket.emit("withdrawChat",{

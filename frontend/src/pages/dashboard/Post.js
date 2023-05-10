@@ -29,10 +29,6 @@ export function Post() {
     console.log(res.data.posts)
       
     setResponse(res.data.posts)
-
-
-      
-      
       res.data.posts.map((item) => {
       });
       setPost(res.data.posts.map((post) => post.text));
@@ -105,6 +101,14 @@ export function Post() {
                 <p className="max-h-60 overflow-y-scroll my-2 dark:text-white">{item.text}</p>
               </div>
             </div>
+<<<<<<< HEAD
+            <div className="gap-4 mx-4 my-5">
+              <span
+                className={`inline-block px-2 py-1 leading-none rounded-full font-semibold uppercase tracking-wide text-xs ${item.opinion === 'Agree' ? 'bg-blue-500 ' : 'bg-pink-500 '}`}>
+                {item.opinion}
+              </span>
+              <p className="max-h-60 overflow-y-scroll my-2 dark:text-white">{item.text}</p>
+=======
             <br/>
           </div>
         ))
@@ -144,6 +148,7 @@ export function Post() {
                   </button>
                 </div>
               </div>
+>>>>>>> 014a619cf2d6eb698c2e5a9fa7be261e7a8b4fa2
             </div>
           </div>
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>

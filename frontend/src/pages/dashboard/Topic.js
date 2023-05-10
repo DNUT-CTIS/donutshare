@@ -2,7 +2,7 @@ import React from 'react';
 import CountdownTimer from './CountdownTimer';
 import {useEffect, useState} from 'react';
 import topicService from '../../service/topicService';
-import socket from "../../socket/socket"
+import io from "socket.io-client";
 import {Link, useNavigate} from "react-router-dom";
 import donutImage from "./donut.png";
 
@@ -62,13 +62,22 @@ export function Topic() {
 
   const token = localStorage.getItem("token");
 
+<<<<<<< HEAD
+  const socket = io("https://donutshare-api.onrender.com");
+=======
 
+>>>>>>> 014a619cf2d6eb698c2e5a9fa7be261e7a8b4fa2
 
   socket.emit("setUsername", username);
 
   function handleAgreeClick() {
     setIsModalOpen(true);
     socket.emit("buttonClick", "agree");
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 014a619cf2d6eb698c2e5a9fa7be261e7a8b4fa2
   }
 
   function handleDisagreeClick() {
@@ -82,8 +91,23 @@ export function Topic() {
     setTimeout(() => {
       navigate(`/chat/${roomName}`);
     }, 5000);
+<<<<<<< HEAD
+
+=======
+  socket.on("matched", (roomName) => {
+    setFound(true);
+
+    setTimeout(() => {
+      navigate(`/chat/${roomName}`);
+    }, 5000);
+  });
+>>>>>>> aleren-v2
+
+  });
+=======
   });
 
+>>>>>>> 014a619cf2d6eb698c2e5a9fa7be261e7a8b4fa2
 
   return (
     <div class="flex flex-col text-center p-4 leading-normal">
