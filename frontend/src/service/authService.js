@@ -44,6 +44,7 @@ const login = (email, password) => {
 
             return response.data;
         }).catch(error => {
+            toast.error(error.response.data.message)
             return error
         });
 };
