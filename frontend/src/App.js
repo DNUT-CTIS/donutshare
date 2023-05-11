@@ -27,10 +27,10 @@ function App() {
           </Route>
           <Route path="/dashboard" element={<Dashboard/>}/>
           <Route path="/dashboard-test" element={<DashboardTest/>}/>
-          <Route path="/error-page" element={<ErrorPage/>}/>
           <Route path="/dashboard/verified" element={<DashboardVerified/>}/>
           <Route path="/dashboard/already-verified" element={<DashboardAlreadyVerified/>}/>
           <Route path="/" element={<Navigate to="/dashboard"/>}/>
+          <Route path='*' element={<ErrorPage/>}/>
         </Routes>
 
 
