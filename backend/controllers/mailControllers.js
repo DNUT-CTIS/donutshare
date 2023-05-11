@@ -33,7 +33,6 @@ const confirmationPost = asyncHandler(async (req, res) => {
   user.save();
   res
     .status(200)
-    .send("The account has been verified. Please log in.")
     .redirect("https://donut-5dff6.web.app/dashboard/verified");
 });
 
