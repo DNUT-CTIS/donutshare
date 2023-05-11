@@ -52,6 +52,7 @@
     box-shadow: 6px 5px 0px 2px var(--donutshadow),
       inset 6px 5px 0px 0px var(--donutshadow);
   }
+  
   .donut .icing,
   .donut .icing:before,
   .donut .icing:after {
@@ -205,8 +206,6 @@
       ),
       radial-gradient(circle at 67% 87%, blue 0, blue 3px, transparent 4px);
   }
-  
-  
   
   .errorFirst {
     text-align: center;

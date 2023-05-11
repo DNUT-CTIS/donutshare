@@ -5,6 +5,7 @@ import topicService from '../../service/topicService';
 import io from "socket.io-client";
 import {Link, useNavigate} from "react-router-dom";
 import donutImage from "./donut.png";
+import './error.css'
 
 
 import './timer.css';
@@ -92,9 +93,21 @@ export function Topic() {
   });
   return (
     <div class="flex flex-col text-center p-4 leading-normal">
-  {loading ? (
-    <img className="py-16 mx-auto" src={donutImage}/>
-  ) : (
+      {loading ? (
+       
+           <div class="errorContainer">
+           <div class="donut classic"><span class="icing"></span></div>
+
+          
+           
+
+        <h1 className="text-center text-3xl font-extrabold text-pink-500 py-2">No Topic avaliable !</h1>
+        <h1 className="text-center text-2xl font-extrabold text-orange-300 py-2">Donut worry, we'll return you to the sweet stuff soon!</h1>
+
+      
+    </div>
+
+      ) : (
     <>
       <div class="mx-3 dark:text-white">
         <h1>Today's Topic</h1>
