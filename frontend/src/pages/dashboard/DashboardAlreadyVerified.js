@@ -1,6 +1,7 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import '../../button.css';
 import {Dashboard} from "./Dashboard";
+import {useNavigate} from "react-router-dom";
 
 
 export function DashboardAlreadyVerified(props) {
@@ -10,6 +11,12 @@ export function DashboardAlreadyVerified(props) {
   const [counter, setCounter] = useState(25);
   const [users, setUsers] = useState([])
 
+  const navigate = useNavigate();
+
+
+  const handleModalClick = () => {
+    navigate("/dashboard");
+  }
 
 
   return (
@@ -23,7 +30,7 @@ export function DashboardAlreadyVerified(props) {
           <div className="dark:bg-zinc-800 p-2  rounded-lg dark:border dark:border-zinc-700 flex flex-col">
             <button type="button"
                     className="place-self-end top-3 right-2.5 place-self-end text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto dark:hover:bg-zinc-700 dark:hover:text-white"
-                    onClick={() => setShowModal(false)}
+                    onClick={handleModalClick}
             >
               <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                    xmlns="http://www.w3.org/2000/svg">
