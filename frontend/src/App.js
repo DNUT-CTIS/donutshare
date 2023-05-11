@@ -11,11 +11,15 @@ import {SignupMod} from './pages/auth/SignupMod';
 import {DashboardVerified} from "./pages/dashboard/DashboardVerified";
 import {DashboardAlreadyVerified} from "./pages/dashboard/DashboardAlreadyVerified";
 import Chat from "./pages/chat/Chat";
-
+import {ToastContainer} from "react-toastify";
+import React from "react";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
+
     <div>
+      <ToastContainer autoClose={2000} theme={"dark"}/>
       <BrowserRouter>
         <Routes>
           <Route element={<PrivateRoutes/>}>
@@ -36,6 +40,7 @@ function App() {
 
       </BrowserRouter>
     </div>
+
   );
 }
 
