@@ -13,6 +13,7 @@ const reportUser = asyncHandler(async (req, res) => {
     complainant: req.user.username,
     offender: req.body.offender,
     text: req.body.text,
+    reportType: req.body.reportType,
   });
 
   res.status(200).json(report);
@@ -43,6 +44,7 @@ const reportPost = asyncHandler(async (req, res) => {
 
   res.status(200).json(report);
 });
+
 
 const allReports = asyncHandler(async (req, res) => {
   const reportArr = await Report.find({});

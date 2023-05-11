@@ -1,5 +1,4 @@
 const asyncHandler = require("express-async-handler");
-
 const Topic = require("../models/topicModel");
 
 const addTopic = asyncHandler(async (req, res) => {
@@ -52,7 +51,6 @@ const allTopics = asyncHandler(async (req, res) => {
   const topics = await Topic.find({});
   res.status(200).json(topics);
 });
-
 
 
 module.exports = {addTopic, currentTopic, allTopics}
