@@ -32,8 +32,12 @@ export function SignupMod(props) {
           console.log(response.status);
           if (response.status === 200 ) {
             setSignupSuccess(true);
-            navigate("/control-panel/admin-profile");
-            alert("SignUp email has been sent to given e-mail")
+            toast.success("SignUp email has been sent to given e-mail");
+
+              navigate("/control-panel/admin-profile");
+
+
+            //alert("SignUp email has been sent to given e-mail")
            
             
           }
