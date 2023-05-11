@@ -67,7 +67,8 @@ export function Post() {
 
   return (
     <div>
-  {loading && <img className="py-16 mx-auto" src={donutImage}/>}
+      {loading && <><h1 className="text-center text-3xl font-extrabold text-pink-600 py-4">No post avaliable !</h1><p className="text-center text-2xl font-extrabold text-white py-2"> This page is eating a Donut ! It will be fixed soon. Please try it again later ! </p></>
+      }
   
   <div className="mx-auto sm:w-[700px] w-[350px]">
   <motion.div 
