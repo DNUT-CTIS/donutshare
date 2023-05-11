@@ -151,6 +151,58 @@ const changePassword = asyncHandler(async (req, res) => {
   }
 });
 
+const forgotPassword = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  // Create a password reset token for this user
+  const resetToken = new Token({
+    _userId: user._id,
+    token: crypto.randomBytes(16).toString("hex"),
+  });
+
+  // Save the password reset token
+  await resetToken.save();
+
+  // Send the email
+  const transporter = nodemailer.createTransport({
+    service: "Sendgrid",
+    auth: { user: "apikey", pass: process.env.SENDGRID_APIKEY },
+  });
+
+  const mailOptions = {
+    from: "Donut Share " + process.env.SYSTEM_MAIL,
+    to: user.email,
+    subject: "Password Reset",
+    text:
+      "Hello,\n\n" +
+      "You have requested to reset your password. Please click the link below to proceed:\n\n" +
+      "http://" +
+      req.headers.host +
+      "/api/mail/reset-password/" +
+      resetToken.token +
+      "\n\n" +
+      "If you did not request this, please ignore this email and your password will remain unchanged.\n",
+  };
+
+  transporter.sendMail(mailOptions, function (err) {
+    if (err) {
+      return res.status(500).send({ msg: err.message });
+    }
+
+    res.status(200).json({
+      message: "Password reset email has been sent to " + user.email + ".",
+    });
+  });
+});
+
+
 
 const banUser = asyncHandler(async (req, res) => {
   const { username } = req.body;
@@ -263,6 +315,7 @@ module.exports = {
   registerUser,
   authUser,
   changePassword,
+  forgotPassword,
   banUser,
   allUsers,
   deleteModerator,

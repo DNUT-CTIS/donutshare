@@ -90,4 +90,26 @@ const resendConfimation = asyncHandler(async (req, res) => {
   });
 });
 
-module.exports = { confirmationPost, resendConfimation };
+const forgotPassword = asyncHandler(async (req, res) => {
+
+  const token = await Token.findOne({ token: req.params.token });
+
+  if (!token) {
+    res.status(400);
+    throw new Error("Your token may have expired");
+  }
+  var user = await User.findOne(token._userId);
+
+  if (!user) {
+    res.status(400);
+    throw new Error("We were unable to find a user for this token.");
+  }
+
+
+  user.isVerified = true;
+  user.save();
+  res.status(200).redirect("https://donut-5dff6.web.app/dashboard/forgotPassword");
+});
+
+
+module.exports = { confirmationPost, resendConfimation, forgotPassword };
