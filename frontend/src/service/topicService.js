@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { toast } from 'react-toastify';
 const API_URL = "https://donutshare-api.onrender.com/api";
 
 const postTopic = (content) => {
@@ -8,8 +8,13 @@ const postTopic = (content) => {
             content
         })
         .then((response) => {
+            toast.success("The new topic added successfully")
             return response.data;
-        });
+        }).catch(error => {
+            console.log(error.response)
+            toast.error(error.response.data.message)
+            return error
+          });
 };
 
 const getCurrentTopic = (content) => {

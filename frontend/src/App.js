@@ -1,5 +1,7 @@
 import './App.css';
 import {Dashboard} from "./pages/dashboard/Dashboard";
+import {DashboardTest} from "./pages/dashboard/DashboardTest";
+import {ErrorPage} from "./pages/dashboard/ErrorPage";
 import DebaterProfile from './pages/control-panel/debater-profile/debaterProfile';
 import AdminProfile from './pages/control-panel/admin-profile/adminProfile';
 import ModeratorProfile from './pages/control-panel/mod-profile/moderatorProfile';
@@ -24,6 +26,8 @@ function App() {
             <Route path="/chat/:roomName" element={<Chat/>} />
           </Route>
           <Route path="/dashboard" element={<Dashboard/>}/>
+          <Route path="/dashboard-test" element={<DashboardTest/>}/>
+          <Route path="/error-page" element={<ErrorPage/>}/>
           <Route path="/dashboard/verified" element={<DashboardVerified/>}/>
           <Route path="/dashboard/already-verified" element={<DashboardAlreadyVerified/>}/>
           <Route path="/" element={<Navigate to="/dashboard"/>}/>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 const API_URL = "https://donutshare-api.onrender.com/api";
 
@@ -13,8 +14,11 @@ const signupMod = (username, email, password) => {
         .then((response) => {
                 console.log(response.data)
 
-            return response.data;
-        });
+            return response;
+        }).catch(error => {
+          toast.error(error.response.data.message)
+          return error
+      });
 };
 
 const deleteMod = (username) => {

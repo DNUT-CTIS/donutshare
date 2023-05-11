@@ -28,6 +28,13 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.9.2",
     "nodemailer": "^6.9.1",
+<<<<<<< HEAD
     "react-avataaars": "^0.2.3"
+=======
+    "nodemon": "^2.0.20",
+    "peer": "^1.0.0",
+    "peerjs": "^1.4.7",
+    "socket.io": "^4.6.1"
+>>>>>>> aleren-v2
   }
 }
