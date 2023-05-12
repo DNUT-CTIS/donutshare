@@ -39,7 +39,7 @@ function DebaterList(){
   }, [isclicked])
 
   const handleUnban = (username) => {
-    DebaterService.unbanDebater(username)
+    DebaterService.UnBanDebater(username)
     .then((data) => {
       // Success message or perform any other action
       console.log(user)
@@ -60,7 +60,7 @@ function DebaterList(){
  
    
       const handleDelete = (username) => {
-        DebaterService.DeleteDebater(username)
+        DebaterService.banDebater(username)
         .then((data) => {
           // Success message or perform any other action
           console.log(user)

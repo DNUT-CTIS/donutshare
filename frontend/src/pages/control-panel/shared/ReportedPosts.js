@@ -84,8 +84,9 @@ return(
             key={reason}
             className="flex items-center justify-between px-4 py-2 bg-white border border-gray-300 rounded-md"
           >
-            {console.log(reason.text)}
-            <p><b>Post context:</b> {reason.postContext}<br/>
+            {console.log(reason)}
+            <p><b>Post Topic:</b> {reason.topicContent}<br/>
+            <b>Post context:</b> {reason.postContext}<br/>
             <b>Complainant username:</b> {reason.complainant}<br/>
             <b>Written reason:</b> {reason.text}</p>
             <button onClick={() => {setdeletedPost(reason.postId); setShowModal(true)}} type="button" class="text-white bg-gradient-to-r from-pink-600 via-pink-600 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Delete Post</button>
