@@ -15,6 +15,7 @@ const sendPost = asyncHandler(async (req, res) => {
     user: req.user.id,
     username: req.user.username,
     topicId: topic.id,
+    topicContent: topic.content,
     text: req.body.text,
     opinion: req.body.opinion,
   });

@@ -6,6 +6,7 @@ const postModel = mongoose.Schema(
     user: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" },
     username: { type: String, trim: true, required: true },
     topicId: { type: String, trim: true, required: true },
+    topicContent: { type: String, trim: true, required: true },
     text: {
       type: String,
       trim: true,
