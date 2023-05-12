@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import topicService from '../../../service/topicService';
 import { ToastContainer } from 'react-toastify';
+import Avatar from "avataaars";
+import {generateRandomAvatarOptions} from "../../dashboard/randomAvatar";
+import {RandomName} from "../../dashboard/RandomName";
+import {Rate} from "../../dashboard/Rate";
 
 function AddTopic(){
     const [topic, setTopic] = useState('');
+    const [allTopics, setAllTopics] = useState([]);
     const [showModal,setShowModal] = useState(false)
   
     const handleSubmit = (event) => {
@@ -18,6 +23,29 @@ function AddTopic(){
       console.log('Submitted topic:', topic);
       // Add your logic to handle the submission here
     };
+
+  useEffect(() => {
+    try {
+      topicService.getAllTopics().then(
+        (response) => {
+          // check for token and user already exists with 200
+          //   console.log("Sign up successfully", response);
+          //    console.log(response.userArr)
+          //console.log(response.map)
+          setAllTopics(response.map((topic) => topic.content));
+
+
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } catch (err) {
+
+      console.log(err);
+    }
+
+  }, [])
 
     
 //handleSubmit(topic)
@@ -39,6 +67,16 @@ function AddTopic(){
             Submit
           </button>
         </form>
+          {
+            allTopics.map((item) =>(
+              <div className="border rounded-md shadow shadow-xl dark:bg-zinc-800 dark:border-zinc-700 w-48 flex flex-row my-4">
+                <div className="mx-8 my-4 items-center flex flex-col gap-4 w-12 sm:w-fit">
+                  <p className="max-h-60 overflow-y-scroll my-2 center dark:text-white">{item}</p>
+                </div>
+              </div>
+              )
+            )
+          }
         <ToastContainer />
         {showModal ? (
         <>
