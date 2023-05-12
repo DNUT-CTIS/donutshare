@@ -7,6 +7,7 @@ const reportModel = mongoose.Schema(
     complainant: { type: String, required: true },
     offender: { type: String, required: true },
     reportType: { type: String, required: true },
+    isVisible: { type: String, required: true },
     text: {
       type: String,
       trim: true,

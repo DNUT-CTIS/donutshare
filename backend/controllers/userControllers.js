@@ -11,6 +11,12 @@ dotenv.config();
 const registerUser = asyncHandler(async (req, res) => {
   const { username, email, password, userType } = req.body;
 
+  // Check if email contains invalid characters
+  if (!/^[^*#]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    res.status(400);
+    throw new Error("Invalid email address format");
+  }
+
   if (!username || !email || !password) {
     res.status(400);
     throw new Error("Please Enter all the fields!");
@@ -97,6 +103,7 @@ const registerUser = asyncHandler(async (req, res) => {
     });
   });
 });
+
 
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;

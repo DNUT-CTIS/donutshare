@@ -13,6 +13,7 @@ const reportUser = asyncHandler(async (req, res) => {
     complainant: req.user.username,
     offender: req.body.offender,
     text: req.body.text,
+    isVisible: "yes",
     reportType: req.body.reportType,
   });
 
@@ -39,11 +40,36 @@ const reportPost = asyncHandler(async (req, res) => {
     postContext: post.text,
     complainant: req.user.username,
     offender: offender.username,
+    isVisible: "yes",
     text: req.body.text,
+    reportType: req.body.reportType,
   });
 
   res.status(200).json(report);
 });
+
+const updateReportVisibility = asyncHandler(async (req, res) => {
+  const reportId = req.body.id;
+
+  if (!reportId) {
+    res.status(400);
+    throw new Error("Report ID not provided");
+  }
+
+  const report = await Report.findById(reportId);
+
+  if (!report) {
+    res.status(400);
+    throw new Error("Report not found");
+  }
+
+  report.isVisible = "no";
+
+  await report.save();
+
+  res.status(200).json(report);
+});
+
 
 
 const allReports = asyncHandler(async (req, res) => {
@@ -52,4 +78,4 @@ const allReports = asyncHandler(async (req, res) => {
   res.status(200).json({ reportArr });
 });
 
-module.exports = { reportUser, reportPost, allReports };
+module.exports = { reportUser, reportPost, updateReportVisibility, allReports };
