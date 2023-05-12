@@ -27,9 +27,20 @@ const getCurrentTopic = (content) => {
         });
 };
 
+const getAllTopics = (content) => {
+    return axios
+      .get(API_URL + "/topic/allTopics", {
+          content
+      })
+      .then((response) => {
+          return response.data;
+      });
+};
+
 const topicService = {
     postTopic,
-    getCurrentTopic
+    getCurrentTopic,
+    getAllTopics
 };
 
 export default topicService;
