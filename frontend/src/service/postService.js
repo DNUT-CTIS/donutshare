@@ -12,9 +12,9 @@ const sendPost = (username, text, opinion) => {
     }, config).then(console.log(text));
 };
 
-const reportPost = (id, text) => {
+const reportPost = (id, text, reportType) => {
     return axios.post(API_URL + "/report/post", {
-        id, text
+        id, text, reportType
     }, config).then(console.log(text));
 };
 

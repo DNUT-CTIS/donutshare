@@ -6,26 +6,9 @@ import ChangePassword from '../shared/changePassword';
 function DebaterProfile() {
 
   const [selectedItem, setSelectedItem] = useState('general');
-  const [password, setPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [showModal,setShowModal] = useState(false)
+ 
 
-  const handlePasswordChange = (e) => {
-    e.preventDefault();
-    console.log(password)
-    console.log(newPassword)
-    authService.changePassword(password, newPassword)
-      .then((response) => {
-        console.log(response.data);
-        setShowModal(false)
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    setPassword('');
-    setNewPassword('');
-  };
+  
 
   return (
     <div className="flex flex-col h-screen dark:bg-zinc-900">
@@ -39,15 +22,10 @@ function DebaterProfile() {
       </li>
     </ul>
   </div>
+  <div className="flex-1 p-8 dark:bg-zinc-900">
   <ChangePassword/>
+  </div>
 </div>
-
-
-
-
-
-
-
     </div>
 
 
