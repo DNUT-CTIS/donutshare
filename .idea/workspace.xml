@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da5314df-7f70-4900-b5c2-0593070a3e26" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/chat/Chat.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/.firebase/hosting.YnVpbGQ.cache" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.firebase/hosting.YnVpbGQ.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/asset-manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/787.cda612ba.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/js/787.cda612ba.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/build/static/media/logo.87d8ec7dd9b4daf173de.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/auth/SignupMod.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/auth/SignupMod.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +36,10 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1683879955" />
+                  </RecentBranch>
+                  <RecentBranch>
                     <option name="branchName" value="yusuf-v2" />
                     <option name="lastUsedInstant" value="1681075237" />
                   </RecentBranch>
@@ -57,10 +54,6 @@
                   <RecentBranch>
                     <option name="branchName" value="aleren-v2-yusuf" />
                     <option name="lastUsedInstant" value="1679318080" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="aleren-v2-backup" />
-                    <option name="lastUsedInstant" value="1679318079" />
                   </RecentBranch>
                 </list>
               </option>
