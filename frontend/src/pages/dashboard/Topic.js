@@ -2,9 +2,9 @@ import React from 'react';
 import CountdownTimer from './CountdownTimer';
 import {useEffect, useState} from 'react';
 import topicService from '../../service/topicService';
-import io from "socket.io-client";
 import {Link, useNavigate} from "react-router-dom";
 import donutImage from "./donut.png";
+import socket from "../../socket/socket"
 import './error.css'
 
 
@@ -62,7 +62,6 @@ export function Topic() {
   const dateTimeAfterThreeDays = NOW_IN_MS + timeleft;
 
   const token = localStorage.getItem("token");
-  const socket = io("https://donutshare-api.onrender.com");
   socket.emit("setUsername", username);
 
   function handleAgreeClick() {
