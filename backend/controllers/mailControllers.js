@@ -108,7 +108,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
 
   user.isVerified = true;
   user.save();
-  res.status(200).redirect("https://donut-5dff6.web.app/dashboard/forgotPassword");
+  res.status(200).redirect("https://donut-5dff6.web.app/dashboard/forgotPassword").json({username: user.username});
 });
 
 
