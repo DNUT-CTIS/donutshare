@@ -4,6 +4,7 @@ const io = require('socket.io');
 module.exports = function(server) {
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
+  connectTimeout: 5000,
   cors: {
     origin: "*",
   },
