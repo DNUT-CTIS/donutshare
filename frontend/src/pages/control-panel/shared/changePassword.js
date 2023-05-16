@@ -8,8 +8,19 @@ function ChangePassword() {
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [showModal,setShowModal] = useState(false)
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handlePasswordChange = (e) => {
+
+    if (password.length < 6) {
+      toast.error("Password should be at least 6 characters long");
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      toast.error("Passwords do not match!");
+      return;
+    }
     e.preventDefault();
     console.log(password)
     console.log(newPassword)
@@ -52,6 +63,18 @@ function ChangePassword() {
           className="form-input w-full"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
+        />
+      </div>
+      <div className="mb-4">
+        <label htmlFor="confirmPassword" className="block text-gray-700 font-bold mb-2 dark:text-white">
+          Confirm Password
+        </label>
+        <input
+          type="password"
+          id="confirmPassword"
+          className="form-input w-full"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
         />
       </div>
 
