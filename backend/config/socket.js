@@ -125,18 +125,48 @@ io.on("connection", (socket) => {
 
   });
 
-  socket.on("disconnect", () => {
-    console.log(
-      `User ${socket.id} with username ${socket.username} disconnected.`
+socket.on("disconnect", () => {
+  console.log(
+    `User ${socket.id} with username ${socket.username} disconnected.`
+  );
+
+  // Find and remove the user from the waitingAgreeUsers array
+  const index1 = waitingAgreeUsers.findIndex((user) => user.id === socket.id);
+  if (index1 !== -1) {
+    waitingAgreeUsers.splice(index1, 1);
+
+    // Also remove the opponent from the waitingDisagreeUsers array
+    const opponent = waitingDisagreeUsers.find(
+      (user) => user.id !== socket.id && user.username !== socket.username
     );
-  
+    const index2 = waitingDisagreeUsers.findIndex(
+      (user) => user.id === opponent.id
+    );
+    if (index2 !== -1) {
+      waitingDisagreeUsers.splice(index2, 1);
+    }
+  }
 
-    const index1 = waitingAgreeUsers.indexOf(socket);
-    if (index1 !== -1) waitingAgreeUsers.splice(index1, 1);
+  // Find and remove the user from the waitingDisagreeUsers array
+  const index3 = waitingDisagreeUsers.findIndex(
+    (user) => user.id === socket.id
+  );
+  if (index3 !== -1) {
+    waitingDisagreeUsers.splice(index3, 1);
 
-    const index2 = waitingDisagreeUsers.indexOf(socket);
-    if (index2 !== -1) waitingDisagreeUsers.splice(index2, 1);
-  });
+    // Also remove the opponent from the waitingAgreeUsers array
+    const opponent = waitingAgreeUsers.find(
+      (user) => user.id !== socket.id && user.username !== socket.username
+    );
+    const index4 = waitingAgreeUsers.findIndex(
+      (user) => user.id === opponent.id
+    );
+    if (index4 !== -1) {
+      waitingAgreeUsers.splice(index4, 1);
+    }
+  }
+});
+
 
   socket.on("setUsername", (username) => {
     socket.username = username;
