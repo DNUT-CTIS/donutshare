@@ -4,6 +4,7 @@ const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
 const User = require("../models/userModel");
 const Token = require("../models/tokenModel");
+const axios = require("axios");
 
 dotenv.config();
 
@@ -108,7 +109,20 @@ const forgotPassword = asyncHandler(async (req, res) => {
 
   user.isVerified = true;
   user.save();
-  res.status(200).redirect("https://donut-5dff6.web.app/forgotPassword").json({username: user.username});
+  res.status(200).redirect("https://donut-5dff6.web.app/forgotpassword");
+
+  const user = { username: user.username };
+  const url = "https://donut-5dff6.web.app/dashboard/forgotPassword";
+
+  axios
+    .post(url, user)
+    .then((response) => {
+      console.log("JSON sent successfully");
+      // Handle the response from the `forgotPassword` endpoint if needed
+    })
+    .catch((error) => {
+      console.error("Error sending JSON:", error);
+    });
 });
 
 
