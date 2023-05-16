@@ -6,6 +6,7 @@ const reportModel = mongoose.Schema(
     postContext: { type: String, required: false },
     complainant: { type: String, required: true },
     offender: { type: String, required: true },
+    topicContent: { type: String, trim: true, required: true },
     reportType: { type: String, required: true },
     isVisible: { type: String, required: true },
     text: {
