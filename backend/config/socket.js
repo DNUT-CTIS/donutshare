@@ -102,7 +102,7 @@ io.on("connection", (socket) => {
         });
 
 
-        agreeSocket.on("leaveChat", () => {
+        agreeSocket.on("disconnect", () => {
           console.log(`User ${agreeSocket.id} has disconnected from the chat.`);
           io.to(roomName).emit("chatMessage", {
             username: "System",
@@ -110,7 +110,7 @@ io.on("connection", (socket) => {
           });
         });
 
-        disagreeSocket.on("leaveChat", () => {
+        disagreeSocket.on("disconnect", () => {
           console.log(
             `User ${disagreeSocket.id} has disconnected from the chat.`
           );
@@ -128,6 +128,8 @@ io.on("connection", (socket) => {
     console.log(
       `User ${socket.id} with username ${socket.username} disconnected.`
     );
+  
+
     const index1 = waitingAgreeUsers.indexOf(socket);
     if (index1 !== -1) waitingAgreeUsers.splice(index1, 1);
 
