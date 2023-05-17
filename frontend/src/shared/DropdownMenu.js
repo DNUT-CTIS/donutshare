@@ -61,10 +61,11 @@ const DropdownMenu = ({ options }) => {
     <div className="relative inline-block" ref={dropdownRef}>
       {username ? (<div className="">
 
-        <div
-          className="mx-auto w-12 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600"
+        <button
+          id="dropdownAvatarNameButton"
+          class="flex items-center text-sm font-medium text-gray-900 rounded-full hover:text-pink-600 dark:hover:text-pink-500 md:mr-0 focus:ring-4 focus:ring-gray-100 dark:focus:ring-pink-400 dark:text-white"
           data-dropdown-toggle="userDropdown"
-          data-dropdown-placement="bottom-start"
+          data-placement= "bottom"
           alt="User dropdown"
           onClick={toggleDropdown}>
           {userData === "moderator" ? (<img
@@ -75,14 +76,30 @@ const DropdownMenu = ({ options }) => {
                 src="https://icons.iconarchive.com/icons/pictogrammers/material-alphabet/128/alpha-d-circle-icon.png" />
               )
           }
-        </div>
+          <span class="sr-only">Open user menu</span>
+
+          <div class="p-1 font-medium dark:text-white">
+            <div>{username}</div>
+
+          </div>
+
+
+
+          <svg class="w-4 h-4 mx-1.5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
 
       </div>) : null}
       {isOpen && (
         <div
           id="userDropdown"
-          className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 absolute"
+          className="mt-4 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 absolute"
         >
+          <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+            <div class="font-medium capitalize">{userData}</div>
+            <div class="truncate">name@flowbite.com</div>
+          </div>
+
+
 
           <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
             {options.map((option) => (
@@ -96,7 +113,7 @@ const DropdownMenu = ({ options }) => {
                 </a>
               </li>
             ))}
-             <li>
+            <li>
               <button
                 className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 onClick={handleProfile}
