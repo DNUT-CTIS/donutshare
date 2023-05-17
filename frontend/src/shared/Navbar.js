@@ -24,11 +24,14 @@ export function Navbar() {
   const navigate = useNavigate();
   const username = JSON.parse(localStorage.getItem("username"))
   const userData = JSON.parse(localStorage.getItem("userType"))
+  
+ 
  
   
 
   console.log(userData)
   console.log(username)
+  
   
 
 
@@ -98,11 +101,7 @@ export function Navbar() {
 
               </div>
               
-              <div class="font-medium dark:text-white">
-                <div>{username}</div>
-                <div class="font-medium truncate">name@flowbite.com</div>
-                <div class="text-sm text-gray-500 dark:text-gray-400">{userData}</div>
-              </div>
+              
 
               
 

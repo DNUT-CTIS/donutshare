@@ -40,8 +40,7 @@ const login = (email, password) => {
                 localStorage.setItem("id", JSON.stringify(response.data._id))
                 localStorage.setItem("username", JSON.stringify(response.data.username))
                 localStorage.setItem("token", JSON.stringify(response.data.token));
-                localStorage.setItem("email", JSON.stringify(response.data.email));
-
+                
 
 
             return response.data;
