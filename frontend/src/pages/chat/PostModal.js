@@ -17,6 +17,7 @@ export function PostModal({side}) {
 
   useEffect(() => {
     const data = localStorage.getItem('username');
+    console.log("pp",side)
     console.log("pp",side.side)
 
     if (data) {
@@ -27,7 +28,7 @@ export function PostModal({side}) {
     event.preventDefault()
     if (side.side === "Agree")
     {
-      setOpinion("agree")
+      setOpinion("agreee")
     } else {
       setOpinion("disagree")
     }
