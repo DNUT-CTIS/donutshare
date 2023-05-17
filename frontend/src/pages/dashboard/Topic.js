@@ -95,16 +95,17 @@ export function Topic() {
       {loading ? (
 
         <div class="errorContainer place-content-center ">
-          <div class="donut classic "><span class="icing"></span></div>
+          
           <h1 className="text-center text-3xl font-extrabold text-pink-500 py-2">No Topic avaliable !</h1>
           <h1 className="text-center text-2xl font-extrabold text-orange-300 py-2">Donut worry, we'll return you to the sweet stuff soon!</h1>
-
+          <div class="donut classic "><span class="icing"></span></div>
 
         </div>
 
       ) : (
         <>
           <div class="mx-3 dark:text-white">
+
 
           
 
@@ -114,6 +115,7 @@ export function Topic() {
 
             <CountdownTimer targetDate={dateTimeAfterThreeDays} />
           </div>
+          
           <h1 class="mb-3 text-3xl font-bold text-gray-900 dark:text-white pt-6">
             {topic}
           </h1>
