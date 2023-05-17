@@ -20,6 +20,7 @@ export function Post() {
   const [deletedPost,setdeletedPost]=useState("")
   const [loading, setLoading] = useState(false);
   const [response,setResponse]=useState([])
+  const [notopic, setNoTopic] = useState(false);
 
 
   useEffect(() => {
@@ -35,9 +36,12 @@ export function Post() {
       setReason(res.data.posts.map((post) => post));
 
       setLoading(false);
+      setNoTopic(false)
 
     }).catch((error) => {
+      setLoading(false);
       console.error(error);
+      setNoTopic(true)
     });
 
   }, [isClicked])
@@ -68,65 +72,66 @@ export function Post() {
   return (
     <div>
   {loading ? (
+     <img src={donutImage} alt="" />
+  ) : notopic? (
     <>
       <h1 className="text-center text-3xl font-extrabold text-pink-600 py-4">No posts available!</h1>
       <p className="text-center text-2xl font-extrabold text-white py-2">
         This page is eating a donut! It will be fixed soon. Please try again later!
       </p>
     </>
-  ) : (
-    <div className="mx-auto sm:w-[700px] w-[350px]">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, delay: 0.5, ease: [0, 0.71, 0.2, 1.01] }}
-        className=""
-      >
-        {response.length === 0 ? (
-          <h1 className="text-center text-3xl font-extrabold text-white py-8">
-            No debates for this proposition yet. Choose a side and be ready for the first debate!
-          </h1>
-        ) : (
-          reason.map((item) => (
-            <div key={item._id} className="my-5">
-              <div className="flex flex-row border rounded-md shadow shadow-xl dark:bg-zinc-800 dark:border-zinc-700">
-                <div className="w-12 sm:w-fit flex flex-col gap-4 mx-8 my-4 items-center">
-                  <Avatar
-                    className="rounded-full dark:bg-zinc-700 w-16 h-16 sm:w-32 sm:h-32"
-                    {...generateRandomAvatarOptions(item._id)}
-                  />
-                  <RandomName seed={item._id} user={item.user} username={item.username} />
-                  {token && (
-                    <Rate
-                      upvoteCount={item.upvoteCount}
-                      votes={item.votes}
-                      id={item._id}
-                      post={item}
-                      downvoteCount={item.downvoteCount}
-                      deleteFun={(id) => {
-                        setdeletedPost(id);
-                        setShowModal(true);
-                      }}
-                    />
-                  )}
-                </div>
-                <div className="gap-4 mx-4 my-5">
-                  <span
-                    className={`inline-block px-2 py-1 leading-none rounded-full font-semibold uppercase tracking-wide text-xs ${
-                      item.opinion === 'Agree' ? 'bg-blue-500' : 'bg-pink-500'
-                    }`}
-                  >
-                    {item.opinion}
-                  </span>
-                  <p className="max-h-60 overflow-y-scroll my-2 dark:text-white">{item.text}</p>
-                </div>
-              </div>
+  
+  ):(  <div className="mx-auto sm:w-[700px] w-[350px]">
+  <motion.div
+    initial={{ opacity: 0, scale: 0.5 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.8, delay: 0.5, ease: [0, 0.71, 0.2, 1.01] }}
+    className=""
+  >
+    {response.length === 0 ? (
+      <h1 className="text-center text-3xl font-extrabold text-white py-8">
+        No debates for this proposition yet. Choose a side and be ready for the first debate!
+      </h1>
+    ) : (
+      reason.map((item) => (
+        <div key={item._id} className="my-5">
+          <div className="flex flex-row border rounded-md shadow shadow-xl dark:bg-zinc-800 dark:border-zinc-700">
+            <div className="w-12 sm:w-fit flex flex-col gap-4 mx-8 my-4 items-center">
+              <Avatar
+                className="rounded-full dark:bg-zinc-700 w-16 h-16 sm:w-32 sm:h-32"
+                {...generateRandomAvatarOptions(item._id)}
+              />
+              <RandomName seed={item._id} user={item.user} username={item.username} />
+              {token && (
+                <Rate
+                  upvoteCount={item.upvoteCount}
+                  votes={item.votes}
+                  id={item._id}
+                  post={item}
+                  downvoteCount={item.downvoteCount}
+                  deleteFun={(id) => {
+                    setdeletedPost(id);
+                    setShowModal(true);
+                  }}
+                />
+              )}
             </div>
-          ))
-        )}
-      </motion.div>
-    </div>
-  )}
+            <div className="gap-4 mx-4 my-5">
+              <span
+                className={`inline-block px-2 py-1 leading-none rounded-full font-semibold uppercase tracking-wide text-xs ${
+                  item.opinion === 'Agree' ? 'bg-blue-500' : 'bg-pink-500'
+                }`}
+              >
+                {item.opinion}
+              </span>
+              <p className="max-h-60 overflow-y-scroll my-2 dark:text-white">{item.text}</p>
+            </div>
+          </div>
+        </div>
+      ))
+    )}
+  </motion.div>
+</div>)}
 
   {showModal ? (
         <>

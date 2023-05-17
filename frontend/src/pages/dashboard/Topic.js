@@ -28,6 +28,7 @@ export function Topic() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [found, setFound] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [notopic, setNoTopic] = useState(false);
 
   const navigate = useNavigate();
 
@@ -47,9 +48,12 @@ export function Topic() {
           setTopic(response.topic)
           setTimeLeft(response.timeleft)
           setLoading(false);
+          setNoTopic(false)
         },
         (error) => {
+          setLoading(false);
           console.log(error);
+          setNoTopic(true)
         }
       );
     } catch (err) {
@@ -95,50 +99,50 @@ export function Topic() {
       {loading ? (
        
            <div class="errorContainer">
-           <div class="donut classic"><span class="icing"></span></div>
-
           
-           
-
-        <h1 className="text-center text-3xl font-extrabold text-pink-500 py-2">No Topic avaliable !</h1>
-        <h1 className="text-center text-2xl font-extrabold text-orange-300 py-2">Donut worry, we'll return you to the sweet stuff soon!</h1>
-
+          <img src={donutImage} alt="" />
       
     </div>
 
-      ) : (
-    <>
-      <div class="mx-3 dark:text-white">
-        <h1>Today's Topic</h1>
-        <h2>Topic expires after 1 day!!!</h2>
-        <CountdownTimer targetDate={dateTimeAfterThreeDays}/>
+      )  : notopic ? (
+        <div class="errorContainer">
+        <div class="donut classic"><span class="icing"></span></div>
+        <h1 className="text-center text-3xl font-extrabold text-pink-500 py-2">No Topic avaliable !</h1>
+        <h1 className="text-center text-2xl font-extrabold text-orange-300 py-2">Donut worry, we'll return you to the sweet stuff soon!</h1>
+
+   
+ </div>
+  ) : (<>
+    <div class="mx-3 dark:text-white">
+      <h1>Today's Topic</h1>
+      <h2>Topic expires after 1 day!!!</h2>
+      <CountdownTimer targetDate={dateTimeAfterThreeDays}/>
+    </div>
+    <h1 class="mb-3 text-3xl font-bold text-gray-900 dark:text-white pt-6">
+      {topic}
+    </h1>
+    <ModalContainer isOpen={found}>
+      <FoundMatch></FoundMatch>
+    </ModalContainer>
+    {token ? (
+      <div class="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 p-8">
+        <div class="buttons">
+          <button onClick={handleAgreeClick}>Agree</button>
+          <ModalContainer isOpen={isModalOpen} onClose={handleModalClose}>
+            <SearchModal></SearchModal>
+            <div className="flex justify-center">
+              <button className=" bg-pink-600 text-black active:bg-pink-800 font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" onClick={handleModalClose}>Cancel</button>
+            </div>
+          </ModalContainer>
+          <button onClick={handleDisagreeClick}>Disagree</button>
+        </div>
       </div>
-      <h1 class="mb-3 text-3xl font-bold text-gray-900 dark:text-white pt-6">
-        {topic}
-      </h1>
-      <ModalContainer isOpen={found}>
-        <FoundMatch></FoundMatch>
-      </ModalContainer>
-      {token ? (
-        <div class="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 p-8">
-          <div class="buttons">
-            <button onClick={handleAgreeClick}>Agree</button>
-            <ModalContainer isOpen={isModalOpen} onClose={handleModalClose}>
-              <SearchModal></SearchModal>
-              <div className="flex justify-center">
-                <button className=" bg-pink-600 text-black active:bg-pink-800 font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" onClick={handleModalClose}>Cancel</button>
-              </div>
-            </ModalContainer>
-            <button onClick={handleDisagreeClick}>Disagree</button>
-          </div>
-        </div>
-      ) : (
-        <div style={{display: "none"}}>
-          Hidden when token is not present
-        </div>
-      )}
-    </>
-  )}
+    ) : (
+      <div style={{display: "none"}}>
+        Hidden when token is not present
+      </div>
+    )}
+  </> )}
 </div>
 
   );
