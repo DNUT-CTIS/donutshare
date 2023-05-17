@@ -91,15 +91,11 @@ export function Topic() {
     });
   });
   return (
-    <div class="flex flex-col text-center p-4 leading-normal">
+    <div class="flex flex-col text-center p-4 leading-normal ">
       {loading ? (
 
-        <div class="errorContainer">
-          <div class="donut classic"><span class="icing"></span></div>
-
-
-
-
+        <div class="errorContainer place-content-center ">
+          <div class="donut classic "><span class="icing"></span></div>
           <h1 className="text-center text-3xl font-extrabold text-pink-500 py-2">No Topic avaliable !</h1>
           <h1 className="text-center text-2xl font-extrabold text-orange-300 py-2">Donut worry, we'll return you to the sweet stuff soon!</h1>
 

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 const DropdownMenu = ({ options }) => {
   const username = JSON.parse(localStorage.getItem("username"))
   const userData = JSON.parse(localStorage.getItem("userType"))
+  const mail = JSON.parse(localStorage.getItem("mail"))
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const dropdownRef = useRef(null);
@@ -96,7 +97,7 @@ const DropdownMenu = ({ options }) => {
         >
           <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
             <div class="font-medium capitalize">{userData}</div>
-            <div class="truncate">name@flowbite.com</div>
+            <div class="truncate">{mail}</div>
           </div>
 
 
