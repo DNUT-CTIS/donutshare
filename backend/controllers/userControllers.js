@@ -159,6 +159,23 @@ const changePassword = asyncHandler(async (req, res) => {
   }
 });
 
+const changePasswordWithoutToken = asyncHandler(async (req, res) => {
+  const { userId, newPassword } = req.body;
+
+  const user = await User.findById(userId);
+
+  if (user) {
+    user.password = newPassword;
+    await user.save();
+
+    res.status(200).json({ message: "Password changed successfully" });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
+
+
 const forgotPassword = asyncHandler(async (req, res) => {
   const { email } = req.body;
 
@@ -191,10 +208,8 @@ const forgotPassword = asyncHandler(async (req, res) => {
     text:
       "Hello,\n\n" +
       "You have requested to reset your password. Please click the link below to proceed:\n\n" +
-      "http://" +
-      req.headers.host +
-      "/api/mail/reset-password/" +
-      resetToken.token +
+      "https://donut-5dff6.web.app/forgotpassword/" +
+      user._id +
       "\n\n" +
       "If you did not request this, please ignore this email and your password will remain unchanged.\n",
   };
@@ -323,6 +338,7 @@ module.exports = {
   registerUser,
   authUser,
   changePassword,
+  changePasswordWithoutToken,
   forgotPassword,
   banUser,
   allUsers,
