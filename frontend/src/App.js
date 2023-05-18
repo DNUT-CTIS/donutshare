@@ -14,6 +14,7 @@ import Chat from "./pages/chat/Chat";
 import {ToastContainer} from "react-toastify";
 import React from "react";
 import 'react-toastify/dist/ReactToastify.css';
+import {Profile} from "./pages/dashboard/Profile"
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           </Route>
           <Route path="/dashboard" element={<Dashboard/>}/>
           <Route path="/dashboard-test" element={<DashboardTest/>}/>
+          <Route path="/profile" element={<Profile/>}/>
           <Route path="/dashboard/verified" element={<DashboardVerified/>}/>
           <Route path="/dashboard/already-verified" element={<DashboardAlreadyVerified/>}/>
           <Route path="/" element={<Navigate to="/dashboard"/>}/>
