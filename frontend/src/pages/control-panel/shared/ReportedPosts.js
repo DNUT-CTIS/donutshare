@@ -16,15 +16,19 @@ function ReportedPosts(){
 
     const [filteredResponses, setFilteredResponses] = useState([]);
 
-    const filterByDateRange = (startDate, endDate) => {
-      const filtered = user.filter((item) => {
-        const itemDate = new Date(item.createdAt);
-        return itemDate >= startDate && itemDate <= endDate;
-      });
-      setFilteredResponses(filtered);
-    };
+  const filterByDateRange = (startDate, endDate) => {
+    const filtered = user.filter((item) => {
+      const itemDate = new Date(item.createdAt);
+      const itemDateOnly = new Date(itemDate.getFullYear(), itemDate.getMonth(), itemDate.getDate());
+      const startDateOnly = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+      const endDateOnly = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
+      return itemDateOnly >= startDateOnly && itemDateOnly <= endDateOnly;
+    });
+    setFilteredResponses(filtered);
+  };
 
-    const handleYesterdayFilter = () => {
+
+  const handleYesterdayFilter = () => {
       const today = new Date();
       const yesterday = new Date(today);
       yesterday.setDate(today.getDate() - 1);
@@ -33,9 +37,8 @@ function ReportedPosts(){
 
   const handleTodayFilter = () => {
     const today = new Date();
-    const yesterday = new Date(today);
-    yesterday.setDate(today.getDate() - 0);
-    filterByDateRange(yesterday, today);
+    console.log(today)
+    filterByDateRange(today, today);
   };
 
     const handle7DaysAgoFilter = () => {
