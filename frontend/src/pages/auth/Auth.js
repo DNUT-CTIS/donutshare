@@ -11,6 +11,7 @@ export function Auth() {
   const [showModal, setShowModal] = useState(false);
   const [showSignUpForm, setShowSignUpForm] = useState(true);
   const [signupSuccess, setSignupSuccess] = useState(false);
+  const [isForgetModalOpen,setForgotModalOpen] = useState(false);
 
 
   const navigate = useNavigate();
@@ -171,8 +172,10 @@ export function Auth() {
                             className="w-full text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Login
                     </button>
                     <div>
-                      <h1 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Not a donuter? <a
-                        onClick={() => setShowSignUpForm(false)} className="dark:text-pink-400">Sign up</a></h1>
+                    <h1 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> <a
+                    onClick={() => navigate("/forgotpasswordemail")} className="dark:text-pink-400">I forgot my password</a></h1>
+                    <h1 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Not a donuter? <a
+                    onClick={() => setShowSignUpForm(false)} className="dark:text-pink-400">Sign up</a></h1>
                     </div>
                   </form>
                 </div>
@@ -203,7 +206,7 @@ export function Auth() {
               <p className="dark:text-white place-self-center">If there isn't any email click to <a onClick={resendHandler} className="text-pink-700" >resend</a> another one</p>
             </div>
           </div>
-        </div>) : <div>
+        </div>) :  <div>
           <div
             className='fixed z-50 inset-0 dark:bg-black dark:bg-opacity-25 backdrop-blur-sm flex justify-center items-center'>
             <motion.div initial={{ scale: 0 }}

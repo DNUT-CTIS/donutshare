@@ -29,6 +29,23 @@ const signup = (username, email, password) => {
       });
 };
 
+
+const forgotpassword = (email) => {
+  return axios
+      .put(API_URL + "/user/forgotPassword", {
+          email
+      })
+      .then((response) => {
+              console.log(response.data)
+              toast.success(response.data)
+          return response;
+      }).catch(error => {
+      console.log(error.response)
+      toast.error(error.response.data.message)
+      return error
+    });
+};
+
 const login = (email, password) => {
     return axios
         .post(API_URL + "/user/login", {
@@ -40,12 +57,14 @@ const login = (email, password) => {
                 localStorage.setItem("id", JSON.stringify(response.data._id))
                 localStorage.setItem("username", JSON.stringify(response.data.username))
                 localStorage.setItem("token", JSON.stringify(response.data.token));
+                localStorage.setItem("mail", JSON.stringify(response.data.mail));
+                
 
 
             return response.data;
         }).catch(error => {
-            toast.error(error.response.data.message)
-            return error
+          toast.error(error.response.data.message)
+          return error
         });
 };
 
@@ -102,9 +121,8 @@ const authService = {
     logout,
     resend,
     getCurrentUser,
-    changePassword
-  
-    
+    changePassword,
+    forgotpassword
 };
 
 export default authService;

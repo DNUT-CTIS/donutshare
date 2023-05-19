@@ -5,6 +5,7 @@ import { Navbar } from '../../../shared/Navbar';
 import ReportedPosts from '../shared/ReportedPosts';
 import authService from '../../../service/authService';
 import ChangePassword from '../shared/changePassword';
+import ReportedUsers from '../shared/reportedUsers';
 
 function ModeratorProfile() {
 
@@ -32,6 +33,10 @@ function ModeratorProfile() {
               <a href="#" className="text-gray-800 font-bold hover:text-gray-700 block py-2 px-4 rounded-md"
                 onClick={() => setSelectedItem('reason')}>Reported Reasons</a>
             </li>
+            <li className={`mb-4 ${selectedItem === 'reportedUser' ? 'bg-gray-300' : ''}`}>
+              <a href="#" className="text-gray-800 font-bold hover:text-gray-700 block py-2 px-4 rounded-md"
+                onClick={() => setSelectedItem('reportedUser')}>Reported Users</a>
+            </li>
           </ul>
         </div>
         <div className="flex-1 p-8 dark:bg-zinc-900">
@@ -42,6 +47,8 @@ function ModeratorProfile() {
           ) : selectedItem === 'reason' ? (
             <ReportedPosts/>
 
+          ): selectedItem === 'reportedUser' ? (
+            <ReportedUsers/>
           ) : (
           <ChangePassword/>
           )}

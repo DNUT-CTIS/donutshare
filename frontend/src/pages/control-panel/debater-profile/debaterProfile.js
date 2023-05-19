@@ -6,9 +6,7 @@ import ChangePassword from '../shared/changePassword';
 function DebaterProfile() {
 
   const [selectedItem, setSelectedItem] = useState('general');
-  const [password, setPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [showModal,setShowModal] = useState(false)
+ 
 
   
 

@@ -4,13 +4,12 @@ import {motion} from "framer-motion";
 
 const ReportModal = (props) => {
     const [showModal, setShowModal] = useState(false);
-
     const [txt, setTxt] = useState("");
 
     const reportPost = async (event) => {
         event.preventDefault()
         try {
-            await PostService.reportPost(props.id , txt).then(
+            await PostService.reportPost(props.id , txt, "post" ).then(
                 (response) => {
                     // check for token and user already exists with 200
                     //   console.log("Sign up successfully", response);

@@ -11,7 +11,7 @@ import {generateRandomAvatarOptions} from '../dashboard/randomAvatar';
 import {PostModal} from "./PostModal";
 import {useNavigate} from "react-router-dom";
 import Peer from "peerjs";
-import {LeftModal} from "./LeftModal";
+import postService from "../../service/postService";
 
 
 
@@ -21,12 +21,10 @@ const Chat = ({ match }) => {
   const [inputValue, setInputValue] = useState("");
   const [user, setUser] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLeftModalOpen, setIsLeftModalOpen] = useState(false);
   const [opinion, setOpinion] = useState("");
   const navigate = useNavigate();
   const messagesEndRef = useRef(null)
   const peer = new Peer()
-
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "start"});
@@ -65,7 +63,6 @@ const Chat = ({ match }) => {
       // Get the user's audio stream
       audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
 
-
       // Create a new PeerJS MediaConnection for the audio stream
       call = peer.call(destPeer, audioStream);
 
@@ -93,17 +90,12 @@ const Chat = ({ match }) => {
     });
 
     socket.on("chatMessage", (message) => {
-
       setMessages((messages) => [...messages, message]);
-      if (message.username === "System") {
-        setIsLeftModalOpen(true);
-      }
     });
 
     socket.on("leaveChat", () => {
       console.log("Disconnected from server");
     });
-
     scrollToBottom();
 
     return () => {
@@ -156,16 +148,11 @@ const Chat = ({ match }) => {
         <button>SUBmit</button>
       </ModalContainer>
 
-      <ModalContainer isOpen={isLeftModalOpen}>
-        <LeftModal></LeftModal>
-      </ModalContainer>
-
       <div className="flex flex-row dark:bg-zinc-700">
         <div className="dark:bg-zinc-800 h-screen flex flex-col w-2/4 dark:text-white">
           <div className="text-center text-xl font-extrabold my-6">
             Your Match
           </div>
-          <p className="text-center">(Anon)</p>
           <div className="mx-auto text-center">
             <Avatar
               className="rounded-full dark:bg-zinc-700 my-6 ml-10"
@@ -203,7 +190,6 @@ const Chat = ({ match }) => {
               const username = JSON.parse(localStorage.getItem("username"));
 
               const isSentByCurrentUser = username === message.username;
-
               console.log(isSentByCurrentUser);
               console.log(message.username);
               const messageClass = classNames({
