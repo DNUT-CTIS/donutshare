@@ -30,7 +30,6 @@ function App() {
             <Route path="/chat/:roomName" element={<Chat/>} />
           </Route>
           <Route path="/dashboard" element={<Dashboard/>}/>
-          <Route path="/dashboard-test" element={<DashboardTest/>}/>
           <Route path="/dashboard/verified" element={<DashboardVerified/>}/>
           <Route path="/dashboard/already-verified" element={<DashboardAlreadyVerified/>}/>
           <Route path="/" element={<Navigate to="/dashboard"/>}/>

@@ -165,6 +165,7 @@ const Chat = ({ match }) => {
           <div className="text-center text-xl font-extrabold my-6">
             Your Match
           </div>
+          <p className="text-center">(Anon)</p>
           <div className="mx-auto text-center">
             <Avatar
               className="rounded-full dark:bg-zinc-700 my-6 ml-10"
