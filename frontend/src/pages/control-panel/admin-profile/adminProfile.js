@@ -6,9 +6,10 @@ import { Navbar } from '../../../shared/Navbar';
 import ReportedPosts from '../shared/ReportedPosts';
 import ChangePassword from '../shared/changePassword';
 import ReportedUsers from '../shared/reportedUsers';
+import { Profile } from '../../dashboard/Profile';
 function AdminProfile() {
   
-  const [selectedItem, setSelectedItem] = useState('general');
+  const [selectedItem, setSelectedItem] = useState('profile');
 
   return (
     <div className="flex flex-col h-screen dark:bg-zinc-900">
@@ -16,6 +17,10 @@ function AdminProfile() {
       <div className="flex flex-row flex-1">
         <div className="w-1/6 bg-gray-200 h-full p-4">
         <ul>
+            <li className={`mb-4 ${selectedItem === 'profile' ? 'bg-gray-300' : ''}`}>
+              <a href="#" className="text-gray-800 font-bold hover:text-gray-700 block py-2 px-4 rounded-md"
+                onClick={() => setSelectedItem('profile')}>Profile</a>
+            </li>
             <li className={`mb-4 ${selectedItem === 'general' ? 'bg-gray-300' : ''}`}>
               <a href="#" className="text-gray-800 font-bold hover:text-gray-700 block py-2 px-4 rounded-md"
                 onClick={() => setSelectedItem('general')}>Change Password</a>
@@ -54,6 +59,8 @@ function AdminProfile() {
            )
           : selectedItem === 'add' ? (
             <AddTopic/>
+          ): selectedItem === 'profile' ? (
+            <Profile/>
           ): selectedItem === 'reportedUser' ? (
             <ReportedUsers/>
           ) :(
