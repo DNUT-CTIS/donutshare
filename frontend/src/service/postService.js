@@ -12,6 +12,17 @@ const sendPost = (username, text, opinion) => {
     }, config).then(console.log(text));
 };
 
+const reportUser = (offender, text, reportType) => {
+  return axios.post(API_URL + "/report/", {
+    offender, text, reportType
+  }, config).then(console.log(text)).catch(error => {
+    console.log(error.response)
+    toast.error(error.response.data.message)
+    return error
+  });
+};
+
+
 const reportPost = (id, text, reportType) => {
     return axios.post(API_URL + "/report/post", {
         id, text, reportType
@@ -61,6 +72,7 @@ const postService = {
     upvotePost,
     downvotePost,
     deletePost,
+    reportUser,
     reportPost,
     getAllReportedPosts,
 };
