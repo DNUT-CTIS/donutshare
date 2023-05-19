@@ -16,6 +16,7 @@ import React from "react";
 import { ForgotPassword } from './pages/auth/forgotpassword';
 import { ForgotPasswordEmail } from './pages/auth/forgotPasswordEmail';
 import 'react-toastify/dist/ReactToastify.css';
+import {Profile} from "./pages/dashboard/Profile"
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/forgotpassword" element={<ForgotPassword/>}/>
           <Route path="/forgotpasswordemail" element={<ForgotPasswordEmail/>}/>
           <Route path="/dashboard-test" element={<DashboardTest/>}/>
+          <Route path="/profile" element={<Profile/>}/>
           <Route path="/dashboard/verified" element={<DashboardVerified/>}/>
           <Route path="/dashboard/already-verified" element={<DashboardAlreadyVerified/>}/>
           <Route path="/" element={<Navigate to="/dashboard"/>}/>
