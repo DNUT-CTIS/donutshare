@@ -7,7 +7,7 @@ import postService from "../../../service/postService";
 
 
   
-function ReportedPosts(){
+function ReportedUsers(){
     const [searchTerm, setSearchTerm] = useState('');
     const [user, setUser] = useState([]);
     const [isclicked,setisclicked] = useState(false)
@@ -82,7 +82,7 @@ return(
       </div>
       <div className="flex flex-col space-y-2 dark:bg-zinc-900">
       {filteredUsernames
-  .filter((reason) => reason.reportType === "post")
+  .filter((reason) => reason.reportType === "user")
   .map((reason) => (
     <div
       key={reason}
@@ -151,4 +151,4 @@ return(
   
   
 )};
-export default ReportedPosts
+export default ReportedUsers
