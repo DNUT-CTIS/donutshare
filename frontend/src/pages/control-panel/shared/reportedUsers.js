@@ -89,10 +89,8 @@ return(
       className="flex items-center justify-between px-4 py-2 bg-white border border-gray-300 rounded-md"
     >
       <p>
-        <b>Post Topic:</b> {reason.topicContent}<br/>
-        <b>Post context:</b> {reason.postContext}<br/>
         <b>Complainant username:</b> {reason.complainant}<br/>
-        <b>Written reason:</b> {reason.text}
+        <b>Offender:</b> {reason.offender}
       </p>
       <button
         onClick={() => {

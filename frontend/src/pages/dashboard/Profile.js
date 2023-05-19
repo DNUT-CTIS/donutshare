@@ -3,7 +3,7 @@ import { Navbar } from "../../shared/Navbar";
 import { useNavigate } from "react-router-dom";
 
 
-export function Profile(props) {
+export function Profile() {
     const handleProfile = async (event) => {
         event.preventDefault()
         if (userData === "debater") {
@@ -31,7 +31,6 @@ export function Profile(props) {
 
 
         <div>
-            <Navbar />
             <section className="bg-gray-50 dark:bg-zinc-900">
                 <div class="flex justify-center gap-16 mt-16">
                     <div class="flex-none w-full h-fit max-w-sm  bg-black dark:shadow-md border-4 border-gray-500/50 rounded-lg shadow dark:bg-gray-800">
@@ -76,8 +75,6 @@ export function Profile(props) {
                             <div class="mb-6 ">
                                 <label for="base-input" class="w-52 block mb-2 text-sm font-medium text-gray-900 dark:text-white">PASSWORD</label>
                                 <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="******" disabled />
-
-                                <a href="#" class="ml-10 font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={handleProfile}>Change Password</a>
 
                             </div>
 

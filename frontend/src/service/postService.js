@@ -13,14 +13,19 @@ const sendPost = (username, text, opinion) => {
 };
 
 const reportUser = (offender, text, reportType) => {
-  return axios.post(API_URL + "/report/", {
-    offender, text, reportType
-  }, config).then(console.log(text)).catch(error => {
-    console.log(error.response)
-    toast.error(error.response.data.message)
-    return error
-  });
-};
+    return axios.post(API_URL + "/report/", {
+      offender, text, reportType
+    }, config)
+      .then(response => {
+        console.log(response.data); // Logging the response data
+        toast.success("Report submitted successfully"); // Displaying success toast
+      })
+      .catch(error => {
+        console.log(error.response);
+        toast.error(error.response.data.message);
+        return error;
+      });
+  };
 
 
 const reportPost = (id, text, reportType) => {
