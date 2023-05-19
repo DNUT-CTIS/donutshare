@@ -10,6 +10,11 @@ const reportUser = asyncHandler(async (req, res) => {
     throw new Error("Please add a text field");
   }
 
+  if (!req.body.offender) {
+    res.status(400);
+    throw new Error("You can't report a user before the chat starts!");
+  }
+
   const topic = await Topic.findOne({ isCurrent: true });
 
   const report = await Report.create({
