@@ -28,6 +28,7 @@ export function Topic() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [found, setFound] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [notopic, setNoTopic] = useState(false);
 
   const navigate = useNavigate();
 
@@ -47,9 +48,12 @@ export function Topic() {
           setTopic(response.topic)
           setTimeLeft(response.timeleft)
           setLoading(false);
+          setNoTopic(false)
         },
         (error) => {
+          setLoading(false);
           console.log(error);
+          setNoTopic(true)
         }
       );
     } catch (err) {
@@ -94,55 +98,54 @@ export function Topic() {
     <div class="flex flex-col text-center p-4 leading-normal ">
       {loading ? (
 
+
+        <div class="errorContainer">
+
+          <img src={donutImage} alt="" />
+
+        </div>
+
+      ) : notopic ? (
         <div class="errorContainer place-content-center ">
-          
+
           <h1 className="text-center text-3xl font-extrabold text-pink-500 py-2">No Topic avaliable !</h1>
           <h1 className="text-center text-2xl font-extrabold text-orange-300 py-2">Donut worry, we'll return you to the sweet stuff soon!</h1>
           <div class="donut classic "><span class="icing"></span></div>
 
+
+        </div>
+      ) : (<>
+        <div class="mx-3 dark:text-white">
+          <p class="font-mono text-2xl subpixel-antialiased font-medium tracking-wide mb-8">TODAY'S DONUT</p>
+
+          <CountdownTimer targetDate={dateTimeAfterThreeDays} />
         </div>
 
-      ) : (
-        <>
-          <div class="mx-3 dark:text-white">
-
-
-          
-
-            
-
-            <p class="font-mono text-2xl subpixel-antialiased font-medium tracking-wide mb-8">TODAY'S DONUT</p>
-
-            <CountdownTimer targetDate={dateTimeAfterThreeDays} />
+        <h1 class="mb-3 text-3xl font-bold text-gray-900 dark:text-white pt-6">
+          {topic}
+        </h1>
+        <ModalContainer isOpen={found}>
+          <FoundMatch></FoundMatch>
+        </ModalContainer>
+        {token ? (
+          <div class="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 p-8">
+            <div class="buttons">
+              <button onClick={handleAgreeClick}>Agree</button>
+              <ModalContainer isOpen={isModalOpen} onClose={handleModalClose}>
+                <SearchModal></SearchModal>
+                <div className="flex justify-center">
+                  <button className=" bg-pink-600 text-black active:bg-pink-800 font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" onClick={handleModalClose}>Cancel</button>
+                </div>
+              </ModalContainer>
+              <button onClick={handleDisagreeClick}>Disagree</button>
+            </div>
           </div>
-          
-          <h1 class="mb-3 text-3xl font-bold text-gray-900 dark:text-white pt-6">
-            {topic}
-          </h1>
-          <ModalContainer isOpen={found}>
-            <FoundMatch></FoundMatch>
-          </ModalContainer>
-          {token ? (
-            <div class="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 p-8">
-              <div class="buttons">
-                <button onClick={handleAgreeClick}>Agree</button>
-                <ModalContainer isOpen={isModalOpen} onClose={handleModalClose}>
-                  <SearchModal></SearchModal>
-                  <div className="flex justify-center">
-                    <button className=" bg-pink-600 text-black active:bg-pink-800 font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" onClick={handleModalClose}>Cancel</button>
-                  </div>
-                </ModalContainer>
-                <button onClick={handleDisagreeClick}>Disagree</button>
-              </div>
-            </div>
-          ) : (
-            <div style={{ display: "none" }}>
-              Hidden when token is not present
-            </div>
-          )}
-        </>
-      )}
+        ) : (
+          <div style={{ display: "none" }}>
+            Hidden when token is not present
+          </div>
+        )}
+      </>)}
     </div>
-
   );
 }

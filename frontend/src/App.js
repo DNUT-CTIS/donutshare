@@ -13,6 +13,8 @@ import {DashboardAlreadyVerified} from "./pages/dashboard/DashboardAlreadyVerifi
 import Chat from "./pages/chat/Chat";
 import {ToastContainer} from "react-toastify";
 import React from "react";
+import { ForgotPassword } from './pages/auth/forgotpassword';
+import { ForgotPasswordEmail } from './pages/auth/forgotPasswordEmail';
 import 'react-toastify/dist/ReactToastify.css';
 import {Profile} from "./pages/dashboard/Profile"
 
@@ -31,6 +33,8 @@ function App() {
             <Route path="/chat/:roomName" element={<Chat/>} />
           </Route>
           <Route path="/dashboard" element={<Dashboard/>}/>
+          <Route path="/forgotpassword" element={<ForgotPassword/>}/>
+          <Route path="/forgotpasswordemail" element={<ForgotPasswordEmail/>}/>
           <Route path="/dashboard-test" element={<DashboardTest/>}/>
           <Route path="/profile" element={<Profile/>}/>
           <Route path="/dashboard/verified" element={<DashboardVerified/>}/>

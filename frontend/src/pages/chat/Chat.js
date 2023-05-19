@@ -11,6 +11,7 @@ import {generateRandomAvatarOptions} from '../dashboard/randomAvatar';
 import {PostModal} from "./PostModal";
 import {useNavigate} from "react-router-dom";
 import Peer from "peerjs";
+import postService from "../../service/postService";
 
 
 
@@ -24,7 +25,6 @@ const Chat = ({ match }) => {
   const navigate = useNavigate();
   const messagesEndRef = useRef(null)
   const peer = new Peer()
-
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "start"});

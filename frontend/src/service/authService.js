@@ -29,6 +29,23 @@ const signup = (username, email, password) => {
       });
 };
 
+
+const forgotpassword = (email) => {
+  return axios
+      .put(API_URL + "/user/forgotPassword", {
+          email
+      })
+      .then((response) => {
+              console.log(response.data)
+              toast.success(response.data)
+          return response;
+      }).catch(error => {
+      console.log(error.response)
+      toast.error(error.response.data.message)
+      return error
+    });
+};
+
 const login = (email, password) => {
     return axios
         .post(API_URL + "/user/login", {
@@ -104,9 +121,8 @@ const authService = {
     logout,
     resend,
     getCurrentUser,
-    changePassword
-  
-    
+    changePassword,
+    forgotpassword
 };
 
 export default authService;
