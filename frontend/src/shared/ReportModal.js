@@ -23,6 +23,8 @@ const ReportModal = (props) => {
         } catch (err) {
             console.log(err);
         }
+
+        setShowModal(false)
     };
     return (
         <>

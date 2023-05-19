@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import socket from "../../socket/socket";
 import classNames from "classnames";
 import {Navbar} from "../../shared/Navbar"
@@ -12,6 +12,7 @@ import {PostModal} from "./PostModal";
 import {useNavigate} from "react-router-dom";
 import Peer from "peerjs";
 import postService from "../../service/postService";
+import {WarningModal} from "../../shared/WarningModal";
 
 
 
@@ -25,6 +26,8 @@ const Chat = ({ match }) => {
   const navigate = useNavigate();
   const messagesEndRef = useRef(null)
   const peer = new Peer()
+
+  const [isWarningModalOpen, setIsWarningModalOpen] = useState(false);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "start"});
@@ -123,6 +126,11 @@ const Chat = ({ match }) => {
     setIsModalOpen(true);
   };
 
+
+  const handleReportClick = () => {
+    setIsWarningModalOpen(true);
+  };
+
   const handleSendMessage = (event) => {
     event.preventDefault();
     const message = inputValue.trim();
@@ -148,6 +156,11 @@ const Chat = ({ match }) => {
         <button>SUBmit</button>
       </ModalContainer>
 
+      <ModalContainer isOpen={isWarningModalOpen}>
+        <WarningModal></WarningModal>
+        <button></button>
+      </ModalContainer>
+
       <div className="flex flex-row dark:bg-zinc-700">
         <div className="dark:bg-zinc-800 h-screen flex flex-col w-2/4 dark:text-white">
           <div className="text-center text-xl font-extrabold my-6">
@@ -169,7 +182,7 @@ const Chat = ({ match }) => {
             <button
               className="bg-pink-600 text-black active:bg-pink-800
         font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mb-1"
-            >
+            onClick={handleReportClick} >
               Report
             </button>
           </div>
@@ -220,7 +233,13 @@ const Chat = ({ match }) => {
               placeholder="Type a message"
               className="flex-1 rounded-full dark:bg-zinc-700 dark:text-white dark:focus:border-pink-700 border-gray-600 px-4 py-2 mr-2"
             />
-            <button id="push-to-talk">voice</button>
+
+            <button id="push-to-talk" className="bg-pink-500 rounded-full text-white font-medium px-2 py-2 mx-2">
+              <svg fill="none" stroke="currentColor" className="w-6 h-6" strokeWidth="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"></path>
+              </svg>
+            </button>
+
             <button
               type="submit"
               className="bg-pink-500 rounded-full text-white font-medium px-4 py-2"
