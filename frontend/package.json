@@ -26,6 +26,7 @@
     "react-upvote": "0.0.2",
     "seedrandom": "^3.0.5",
     "socket.io-client": "^4.6.1",
+    "soundtouchjs": "^0.1.30",
     "talkjs": "^0.15.6",
     "unique-names-generator": "^4.7.1",
     "universal-cookie": "^4.0.4",

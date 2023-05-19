@@ -14,7 +14,47 @@ function ReportedPosts(){
     const [showModal,setShowModal] = useState(false)
     const [deletedPost,setdeletedPost]=useState("")
 
-    
+    const [filteredResponses, setFilteredResponses] = useState([]);
+
+    const filterByDateRange = (startDate, endDate) => {
+      const filtered = user.filter((item) => {
+        const itemDate = new Date(item.createdAt);
+        return itemDate >= startDate && itemDate <= endDate;
+      });
+      setFilteredResponses(filtered);
+    };
+
+    const handleYesterdayFilter = () => {
+      const today = new Date();
+      const yesterday = new Date(today);
+      yesterday.setDate(today.getDate() - 1);
+      filterByDateRange(yesterday, today);
+    };
+
+  const handleTodayFilter = () => {
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 0);
+    filterByDateRange(yesterday, today);
+  };
+
+    const handle7DaysAgoFilter = () => {
+      const today = new Date();
+      const sevenDaysAgo = new Date(today);
+      sevenDaysAgo.setDate(today.getDate() - 7);
+      filterByDateRange(sevenDaysAgo, today);
+    };
+
+  const handle30DaysAgoFilter = () => {
+    const today = new Date();
+    const thirtyDaysAgo = new Date(today);
+    thirtyDaysAgo.setDate(today.getDate() - 30);
+    filterByDateRange(thirtyDaysAgo, today);
+  };
+
+
+
+
     const filteredUsernames = user.filter((item) =>
       item.text.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -27,10 +67,8 @@ function ReportedPosts(){
                 // check for token and user already exists with 200
                 //   console.log("Sign up successfully", response);
         //    console.log(response.userArr)
-           
-            
+            console.log(response.reportArr)
             setUser(response.reportArr)
-          
 
 
             },
@@ -80,32 +118,30 @@ return(
           onChange={(event) => setSearchTerm(event.target.value)}
         />
       </div>
+      <button className="text-white bg-gradient-to-r from-pink-600 via-pink-600 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" onClick={handleTodayFilter}>Today</button>
+      <button className="text-white bg-gradient-to-r from-pink-600 via-pink-600 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" onClick={handleYesterdayFilter}>Yesterday</button>
+      <button className="text-white bg-gradient-to-r from-pink-600 via-pink-600 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" onClick={handle7DaysAgoFilter}>7 Days Ago</button>
+
+
       <div className="flex flex-col space-y-2 dark:bg-zinc-900">
-      {filteredUsernames
-  .filter((reason) => reason.reportType === "post")
-  .map((reason) => (
-    <div
-      key={reason}
-      className="flex items-center justify-between px-4 py-2 bg-white border border-gray-300 rounded-md"
-    >
-      <p>
-        <b>Post Topic:</b> {reason.topicContent}<br/>
-        <b>Post context:</b> {reason.postContext}<br/>
-        <b>Complainant username:</b> {reason.complainant}<br/>
-        <b>Written reason:</b> {reason.text}
-      </p>
-      <button
-        onClick={() => {
-          setdeletedPost(reason.postId);
-          setShowModal(true);
-        }}
-        type="button"
-        className="text-white bg-gradient-to-r from-pink-600 via-pink-600 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-      >
-        Delete Post
-      </button>
-    </div>
-  ))}
+        {filteredResponses.map((reason) => (
+          <div
+            key={reason}
+            className="flex items-center justify-between px-4 py-2 bg-white border border-gray-300 rounded-md"
+          >
+            {console.log(reason.text)}
+            <p><b>Post context:</b> {reason.postContext}<br/>
+              <b>Complainant username:</b> {reason.complainant}<br/>
+              <b>Written reason:</b> {reason.text}</p>
+            <button onClick={() => {
+              setdeletedPost(reason.postId);
+              setShowModal(true)
+            }} type="button"
+                    className="text-white bg-gradient-to-r from-pink-600 via-pink-600 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Delete
+              Post
+            </button>
+          </div>
+        ))}
       </div>
     </div>
     {showModal ? (

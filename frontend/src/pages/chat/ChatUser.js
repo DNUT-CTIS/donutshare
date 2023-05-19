@@ -5,7 +5,8 @@ import { generateRandomAvatarOptions } from "../dashboard/randomAvatar";
 
 const ChatUser = () => {
   const avatarOptions = generateRandomAvatarOptions();
-  const name = <RandomName />;
+  const randomName = <RandomName />;
+  const name = randomName + "(Anonymous)"
 
   return (
     <div className="mx-auto text-center">

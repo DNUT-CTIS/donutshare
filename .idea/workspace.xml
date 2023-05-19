@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="da5314df-7f70-4900-b5c2-0593070a3e26" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/control-panel/shared/addTopic.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/control-panel/shared/addTopic.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/service/topicService.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/service/topicService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/chat/Chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/chat/Chat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/control-panel/shared/ReportedPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/control-panel/shared/ReportedPosts.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,11 +38,11 @@
                 <list>
                   <RecentBranch>
                     <option name="branchName" value="yusuf-v9" />
-                    <option name="lastUsedInstant" value="1683881258" />
+                    <option name="lastUsedInstant" value="1684244915" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="main" />
-                    <option name="lastUsedInstant" value="1683879955" />
+                    <option name="lastUsedInstant" value="1683884813" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="yusuf-v2" />
