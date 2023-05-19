@@ -13,6 +13,7 @@ import {useNavigate} from "react-router-dom";
 import Peer from "peerjs";
 import postService from "../../service/postService";
 import {WarningModal} from "../../shared/WarningModal";
+import PostService from "../../service/postService";
 
 
 
@@ -28,6 +29,8 @@ const Chat = ({ match }) => {
   const peer = new Peer()
 
   const [isWarningModalOpen, setIsWarningModalOpen] = useState(false);
+
+  const username = JSON.parse(localStorage.getItem("username"));
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "start"});
@@ -94,6 +97,12 @@ const Chat = ({ match }) => {
 
     socket.on("chatMessage", (message) => {
       setMessages((messages) => [...messages, message]);
+
+      const isSentByCurrentUser = username === message.username;
+      if (!isSentByCurrentUser) {
+        setUser(message.username);
+      }
+      console.log(user);
     });
 
     socket.on("leaveChat", () => {
@@ -127,9 +136,25 @@ const Chat = ({ match }) => {
   };
 
 
-  const handleReportClick = () => {
-    setIsWarningModalOpen(true);
-  };
+    const handleReportClick = async (event) => {
+      event.preventDefault()
+      try {
+        await PostService.reportUser(user , "yes", "user" ).then(
+          (response) => {
+            // check for token and user already exists with 200
+            //   console.log("Sign up successfully", response);
+
+
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      } catch (err) {
+        console.log(err);
+      }
+
+    };
 
   const handleSendMessage = (event) => {
     event.preventDefault();
@@ -200,8 +225,6 @@ const Chat = ({ match }) => {
         >
           <div className="flex-1 overflow-y-scroll p-4">
             {messages.map((message, index) => {
-              const username = JSON.parse(localStorage.getItem("username"));
-
               const isSentByCurrentUser = username === message.username;
               console.log(isSentByCurrentUser);
               console.log(message.username);
