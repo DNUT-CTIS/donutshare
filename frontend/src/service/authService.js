@@ -30,6 +30,24 @@ const signup = (username, email, password) => {
 };
 
 
+const changePasswordWithoutToken = (userId,newPassword) => {
+  return axios
+      .put(API_URL + "/user/changePasswordWithoutToken", { 
+          userId,
+          newPassword
+      })
+      .then((response) => {
+              console.log(response.data.message + " please login ")
+          toast.success(response.data.message)
+          return response;
+      }).catch(error => {
+      console.log(error.response)
+      toast.error(error.response.data.message)
+      return error
+    });
+};
+
+
 const forgotpassword = (email) => {
   return axios
       .put(API_URL + "/user/forgotPassword", {
@@ -117,6 +135,7 @@ const getCurrentUser = () => {
 
 const authService = {
     signup,
+    changePasswordWithoutToken,
     login,
     logout,
     resend,

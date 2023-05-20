@@ -33,7 +33,7 @@ function App() {
             <Route path="/chat/:roomName" element={<Chat/>} />
           </Route>
           <Route path="/dashboard" element={<Dashboard/>}/>
-          <Route path="/forgotpassword" element={<ForgotPassword/>}/>
+          <Route path="/forgotpassword/:id" element={<ForgotPassword/>}/>
           <Route path="/forgotpasswordemail" element={<ForgotPasswordEmail/>}/>
           <Route path="/dashboard-test" element={<DashboardTest/>}/>
           <Route path="/profile" element={<Profile/>}/>

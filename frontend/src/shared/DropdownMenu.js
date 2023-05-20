@@ -73,14 +73,25 @@ const DropdownMenu = ({ options }) => {
           data-placement= "bottom"
           alt="User dropdown"
           onClick={toggleDropdown}>
-          {userData === "moderator" ? (<img
-            src="https://icons.iconarchive.com/icons/pictogrammers/material-alphabet/128/alpha-m-circle-icon.png" />)
-            : userData === "admin" ? (<img
-              src="https://icons.iconarchive.com/icons/pictogrammers/material-alphabet/128/alpha-a-circle-icon.png" />)
-              : (<img className="w-12"
-                src="https://icons.iconarchive.com/icons/pictogrammers/material-alphabet/128/alpha-d-circle-icon.png" />
-              )
-          }
+      {userData === "moderator" ? (
+  <img
+    className="w-12"
+    src="https://icons.iconarchive.com/icons/pictogrammers/material-alphabet/128/alpha-m-circle-icon.png"
+    alt="Moderator"
+  />
+) : userData === "admin" ? (
+  <img
+    className="w-12"
+    src="https://icons.iconarchive.com/icons/pictogrammers/material-alphabet/128/alpha-a-circle-icon.png"
+    alt="Admin"
+  />
+) : (
+  <img
+    className="w-12"
+    src="https://icons.iconarchive.com/icons/pictogrammers/material-alphabet/128/alpha-d-circle-icon.png"
+    alt="User"
+  />
+)}
           <span class="sr-only">Open user menu</span>
 
           <div class="p-1 font-medium dark:text-white">

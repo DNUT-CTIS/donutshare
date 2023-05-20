@@ -66,6 +66,10 @@ export function Topic() {
   const dateTimeAfterThreeDays = NOW_IN_MS + timeleft;
 
   const token = localStorage.getItem("token");
+  const usertype = localStorage.getItem("userType")
+
+  console.log(usertype)
+
   socket.emit("setUsername", username);
 
   function handleAgreeClick() {
@@ -127,24 +131,24 @@ export function Topic() {
         <ModalContainer isOpen={found}>
           <FoundMatch></FoundMatch>
         </ModalContainer>
-        {token ? (
-          <div class="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 p-8">
-            <div class="buttons">
-              <button onClick={handleAgreeClick}>Agree</button>
-              <ModalContainer isOpen={isModalOpen} onClose={handleModalClose}>
-                <SearchModal></SearchModal>
-                <div className="flex justify-center">
-                  <button className=" bg-pink-600 text-black active:bg-pink-800 font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" onClick={handleModalClose}>Cancel</button>
-                </div>
-              </ModalContainer>
-              <button onClick={handleDisagreeClick}>Disagree</button>
-            </div>
-          </div>
-        ) : (
-          <div style={{ display: "none" }}>
-            Hidden when token is not present
-          </div>
-        )}
+        {token && usertype === '"debater"' ? (
+  <div className="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 p-8">
+    <div className="buttons">
+      <button onClick={handleAgreeClick}>Agree</button>
+      <ModalContainer isOpen={isModalOpen} onClose={handleModalClose}>
+        <SearchModal></SearchModal>
+        <div className="flex justify-center">
+          <button className="bg-pink-600 text-black active:bg-pink-800 font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" onClick={handleModalClose}>Cancel</button>
+        </div>
+      </ModalContainer>
+      <button onClick={handleDisagreeClick}>Disagree</button>
+    </div>
+  </div>
+) : (
+  <div style={{ display: "none" }}>
+    Hidden when token is not present
+  </div>
+)}
       </>)}
     </div>
   );
