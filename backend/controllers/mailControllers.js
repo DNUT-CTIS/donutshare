@@ -4,7 +4,6 @@ const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
 const User = require("../models/userModel");
 const Token = require("../models/tokenModel");
-const axios = require("axios");
 
 dotenv.config();
 

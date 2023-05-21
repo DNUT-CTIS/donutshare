@@ -8,6 +8,7 @@ const postRoutes = require("./routes/postRoutes");
 const reportRoutes = require("./routes/reportRoutes");
 const topicRoutes = require("./routes/topicRoutes");
 const mailRoutes = require("./routes/mailRoutes");
+const testRoutes = require("./test/routes/topicTestRoutes");
 const topicTimer = require("./config/timer")
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const cors = require("cors");
@@ -34,6 +35,7 @@ app.use("/api/post", postRoutes);
 app.use("/api/report", reportRoutes);
 app.use("/api/topic", topicRoutes);
 app.use("/api/mail", mailRoutes);
+app.use("/api/test", testRoutes);
 
 app.get("/api/chat", (req, res) => {
   res.send(chats);
