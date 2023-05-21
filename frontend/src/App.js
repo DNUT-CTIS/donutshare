@@ -17,6 +17,7 @@ import { ForgotPassword } from './pages/auth/forgotpassword';
 import { ForgotPasswordEmail } from './pages/auth/forgotPasswordEmail';
 import 'react-toastify/dist/ReactToastify.css';
 import {Profile} from "./pages/dashboard/Profile"
+import TestTopic from "./shared/TestTopic";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="/control-panel/profile" element={<DebaterProfile/>}/>
             <Route path="/chat/:roomName" element={<Chat/>} />
           </Route>
+          <Route path="/test" element={<TestTopic/>}/>
           <Route path="/dashboard" element={<Dashboard/>}/>
           <Route path="/forgotpassword/:id" element={<ForgotPassword/>}/>
           <Route path="/forgotpasswordemail" element={<ForgotPasswordEmail/>}/>
