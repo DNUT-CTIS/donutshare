@@ -3,6 +3,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import DebaterService from '../../../service/moderatorService';
 import PostService from '../../../service/postService';
 import { toast } from 'react-toastify';
+import donutImage from '../../dashboard/donut.png';
 
 function ReportedUsers() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -10,8 +11,8 @@ function ReportedUsers() {
   const [isclicked, setisclicked] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [deletedUser, setdeletedUser] = useState('');
-  const [revokedUser, setrevokedUser] = useState('');
   const [bannedOffenders, setBannedOffenders] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const filteredUsernames = user.filter((item) =>
     item.text.toLowerCase().includes(searchTerm.toLowerCase())
@@ -19,12 +20,15 @@ function ReportedUsers() {
 
   useEffect(() => {
     try {
+      
       PostService.getAllReportedPosts().then(
         (response) => {
           setUser(response.reportArr);
+          setLoading(false)
         },
         (error) => {
           console.log(error);
+          setLoading(false)
         }
       );
     } catch (err) {
@@ -33,8 +37,10 @@ function ReportedUsers() {
   }, [isclicked]);
 
   const handleDelete = (username) => {
+    setLoading(true)
     DebaterService.DeleteDebater(username)
       .then((data) => {
+        setLoading(false)
         console.log(user);
         console.log(user);
         toast.success(`User ${username} banned successfully, to unban the user go to Debater List`)
@@ -43,6 +49,7 @@ function ReportedUsers() {
         setdeletedUser('');
       })
       .catch((error) => {
+        setLoading(false)
         console.log(error);
       });
   };
@@ -134,6 +141,14 @@ function ReportedUsers() {
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
+       {loading && (
+        <div
+          className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-900 bg-opacity-75 z-50"
+          style={{ backdropFilter: 'blur(4px)' }}
+        >
+          <img src={donutImage} alt="Loading" className="w-32 h-32" />
+        </div>
+      )}
     </div>
   );
 }

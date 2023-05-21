@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import topicService from '../../../service/topicService';
 import { ToastContainer } from 'react-toastify';
+import donutImage from '../../dashboard/donut.png';
 
 
 function AddTopic() {
   const [topic, setTopic] = useState('');
   const [allTopics, setAllTopics] = useState([]);
   const [showModal, setShowModal] = useState(false)
+  const [loading, setLoading] = useState(true);
 
 
 
 
   const handleSubmit = (event) => {
+    setLoading(true)
     topicService.postTopic(event)
       .then((data) => {
-        // Success message or perform any other action
+        setLoading(false)
       })
       .catch((error) => {
-        // Error message or perform any other action
+        setLoading(false)
       });
 
     console.log('Submitted topic:', topic);
@@ -28,9 +31,7 @@ function AddTopic() {
     try {
       topicService.getAllTopics().then(
         (response) => {
-          // check for token and user already exists with 200
-          //   console.log("Sign up successfully", response);
-          //    console.log(response.userArr)
+          setLoading(false)
           setAllTopics(response.map((topic, index) => ({ content: topic.content, index })));
 
         },
@@ -113,6 +114,14 @@ function AddTopic() {
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
+       {loading && (
+        <div
+          className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-900 bg-opacity-75 z-50"
+          style={{ backdropFilter: 'blur(4px)' }}
+        >
+          <img src={donutImage} alt="Loading" className="w-32 h-32" />
+        </div>
+      )}
     </div>
 
 
