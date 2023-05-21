@@ -176,7 +176,6 @@ const Chat = ({ match }) => {
       <ModalContainer isOpen={isModalOpen}>
         {console.log(opinion)}
         <PostModal side={opinion}></PostModal>
-        <button>SUBmit</button>
       </ModalContainer>
 
       <ModalContainer isOpen={isWarningModalOpen}>
