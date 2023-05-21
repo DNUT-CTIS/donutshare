@@ -1,4 +1,6 @@
 const { AudioContext } = require("web-audio-api");
+const speech = require("@google-cloud/speech");
+
 
 module.exports = function (server) {
   const io = require("socket.io")(server, {
@@ -55,13 +57,15 @@ module.exports = function (server) {
 
           io.to(roomName).emit("matched", roomName);
 
-          agreeSocket.on("audioData", (data) => {
-            disagreeSocket.emit("processedAudio", data);
-          });
+         agreeSocket.on("audioData", async (data) => {
+          await processAudioData(data.audioBuffer);
+           disagreeSocket.emit("processedAudio", data.audioData);
+         });
 
-          disagreeSocket.on("audioData", (data) => {
-             agreeSocket.emit("processedAudio", data);
-          });
+         disagreeSocket.on("audioData", async (data) => {
+         await processAudioData(data.audioBuffer);
+           agreeSocket.emit("processedAudio", data.audioData);
+         });
 
           agreeSocket.on("withdrawChat", () => {
             agreeSocket.emit("withdrawChat", {
@@ -183,3 +187,34 @@ module.exports = function (server) {
   });
 };
 
+async function processAudioData(audioData) {
+  try {
+    const client = new speech.SpeechClient();
+   const audioBytes = audioData.toString('base64');
+
+    // Configure the speech recognition request
+    const audio = {
+      content: audioBytes
+    };
+    const config = {
+      encoding: "MP3",
+      sampleRateHertz: 44100,
+      languageCode: "en-US",
+    };
+    const request = {
+      audio: audio,
+      config: config
+    };
+
+    // Perform speech recognition using the Google Speech-to-Text API
+    const [response] = await client.recognize(request);
+    const transcription = response.results
+      .map(result => result.alternatives[0].transcript)
+      .join('\n');
+
+    console.log('Transcription:');
+    console.log(transcription);
+  } catch (error) {
+    console.error('Failed to stop recording or transcribe:', error);
+  }
+};
