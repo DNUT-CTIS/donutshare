@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Navbar } from '../../../shared/Navbar';
 import authService from '../../../service/authService';
 import {toast, ToastContainer} from 'react-toastify';
+import donutImage from '../../dashboard/donut.png';
 function ChangePassword() {
 
  
@@ -9,10 +10,17 @@ function ChangePassword() {
   const [newPassword, setNewPassword] = useState("");
   const [showModal,setShowModal] = useState(false)
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handlePasswordChange = (e) => {
 
+
     if (password.length < 6) {
+      toast.error("Password should be at least 6 characters long");
+      return;
+    }
+
+    if (newPassword.length < 6) {
       toast.error("Password should be at least 6 characters long");
       return;
     }
@@ -24,13 +32,16 @@ function ChangePassword() {
     e.preventDefault();
     console.log(password)
     console.log(newPassword)
+    setLoading(true)
     authService.changePassword(password, newPassword)
       .then((response) => {
         console.log(response.data);
         setShowModal(false)
+        setLoading(false)
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false)
       });
 
     setPassword('');
@@ -128,7 +139,16 @@ function ChangePassword() {
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
-  </div>
+      {loading && (
+        <div
+          className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-900 bg-opacity-75 z-50"
+          style={{ backdropFilter: 'blur(4px)' }}
+        >
+          <img src={donutImage} alt="Loading" className="w-32 h-32" />
+        </div>
+      )}
+    </div>
+  
   );
 }
 

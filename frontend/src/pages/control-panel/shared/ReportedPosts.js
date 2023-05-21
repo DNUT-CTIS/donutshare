@@ -3,6 +3,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import DebaterService from '../../../service/moderatorService';
 import PostService from '../../../service/postService';
 import postService from "../../../service/postService";
+import donutImage from '../../dashboard/donut.png';
 
 
 
@@ -13,6 +14,7 @@ function ReportedPosts(){
     const [isclicked,setisclicked] = useState(false)
     const [showModal,setShowModal] = useState(false)
     const [deletedPost,setdeletedPost]=useState("")
+    const [loading, setLoading] = useState(true);
 
     const [filteredResponses, setFilteredResponses] = useState([]);
 
@@ -65,18 +67,20 @@ function ReportedPosts(){
    
     useEffect(() => {
       try {
+       
         postService.getAllReportedPosts().then(
             (response) => {
                 // check for token and user already exists with 200
                 //   console.log("Sign up successfully", response);
-        //    console.log(response.userArr)
+            setLoading(false)
             console.log(response.reportArr)
             setUser(response.reportArr)
 
 
             },
             (error) => {
-                console.log(error);
+              setLoading(false)
+              console.log(error);
             }
         );
     } catch (err) {
@@ -87,14 +91,16 @@ function ReportedPosts(){
   
 
   const handleDelete = async (id) => {
-
+    setLoading(true)
     try {
       await PostService.deletePost(id).then(
         (response) => {
           setisclicked(!isclicked)
+          setLoading(false)
         },
         (error) => {
           console.log(error);
+          setLoading(false)
         }
       );
     } catch (err) {
@@ -192,6 +198,14 @@ return(
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
+       {loading && (
+        <div
+          className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-900 bg-opacity-75 z-50"
+          style={{ backdropFilter: 'blur(4px)' }}
+        >
+          <img src={donutImage} alt="Loading" className="w-32 h-32" />
+        </div>
+      )}
     
   </div>
   

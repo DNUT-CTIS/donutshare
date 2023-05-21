@@ -7,10 +7,6 @@ import authService from '../../service/authService';
 
 
 export function ForgotPassword(props) {
-  const [loading, setLoading] = useState(false);
-  const [counter, setCounter] = useState(25);
-  const [users, setUsers] = useState([])
-  const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [showModal,setShowModal] = useState(false)
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -20,7 +16,9 @@ export function ForgotPassword(props) {
 
   function handleForgotPassword(password,id) {
 
-    if (password.length < 6) {
+ 
+
+    if (newPassword.length < 6) {
       toast.error("Password should be at least 6 characters long");
       return;
     }
@@ -29,7 +27,6 @@ export function ForgotPassword(props) {
       toast.error("Passwords do not match!");
       return;
     }
-    console.log(password)
     console.log(newPassword)
          authService.changePasswordWithoutToken(id, password)
        .then((response) => {
@@ -39,8 +36,6 @@ export function ForgotPassword(props) {
        .catch((error) => {
         console.log(error);
       });
-
-    setPassword('');
     setNewPassword('');
   };
 
@@ -56,21 +51,9 @@ export function ForgotPassword(props) {
       <div className="flex flex-col items-center">
     <form className="w-full max-w-sm" onSubmit={(e) => {
       e.preventDefault();
-  setShowModal(true);
+       setShowModal(true);
 }}>
-      <div className="mb-4">
-        <label htmlFor="password" className="block text-gray-700 font-bold mb-2 dark:text-white">
-          Password
-        </label>
-        <input
-          type="password"
-          id="password"
-          className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-zinc-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-purple-500"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-
+      
       <div className="mb-4">
         <label htmlFor="newPassword" className="block text-gray-700 font-bold mb-2 dark:text-white">
           New Password

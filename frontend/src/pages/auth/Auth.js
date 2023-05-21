@@ -5,6 +5,7 @@ import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AuthService from "../../service/authService";
 import {AnimatePresence, motion} from "framer-motion";
+import donutImage from '../dashboard/donut.png'
 
 export function Auth() {
 
@@ -35,6 +36,7 @@ export function Auth() {
     try {
       await AuthService.login(email, password).then(
         (response) => {
+          setLoading(false)
 
           localStorage.setItem("userType", JSON.stringify(response.userType))
           localStorage.setItem("username", JSON.stringify(response.username))
@@ -49,15 +51,18 @@ export function Auth() {
           }
         },
         (error) => {
+          setLoading(false)
           console.log(error);
         }
       );
     } catch (err) {
+      setLoading(false)
       console.log(err);
     }
   };
 
   const resendHandler = async (event) => {
+    setLoading(true)
     event.preventDefault()
 
     try {
@@ -65,15 +70,17 @@ export function Auth() {
         (response) => {
           // check for token and user already exists with 200
           //   console.log("Sign up successfully", response);
-
+          setLoading(false)
         },
       )
     } catch (err) {
+      setLoading(false)
       console.log(err);
     }
   }
 
   const registerHandler = async (event) => {
+    setLoading(true)
     event.preventDefault()
 
     if (password.length < 6) {
@@ -88,6 +95,7 @@ export function Auth() {
     try {
       await AuthService.signup(user, email, password).then(
         (response) => {
+          setLoading(false)
           // check for token and user already exists with 200
           //   console.log("Sign up successfully", response);
           console.log(response)
@@ -99,6 +107,7 @@ export function Auth() {
         },
       )
     } catch (err) {
+      setLoading(false)
       console.log(err);
     }
   };
@@ -286,6 +295,15 @@ export function Auth() {
         </div>)
           ) : null}
         </AnimatePresence>
+         {loading && (
+        <div
+          className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-900 bg-opacity-75 z-50"
+          style={{ backdropFilter: 'blur(4px)' }}
+        >
+          <img src={donutImage} alt="Loading" className="w-32 h-32" />
+        </div>
+      )}
     </div>
+    
   );
 }

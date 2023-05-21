@@ -41,9 +41,10 @@ function AdminProfile() {
               <a href="#" className="dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 font-bold hover:text-pink-700 block py-2 px-4 rounded-md"
                 onClick={() => setSelectedItem('reportedReason')}>Reported Reasons</a>
             </li>
-            <li className={`mb-4 ${selectedItem === 'reportedReason' ? 'bg-yellow-300 rounded-md' : ''}`}>
+            <li className={`mb-4 ${selectedItem === 'reportedUser' ? 'bg-gray-300' : ''}`}>
               <a href="#" className="dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 font-bold hover:text-pink-700 block py-2 px-4 rounded-md"
-                onClick={() => setSelectedItem('reportedUsers')}>Reported Users</a>
+                onClick={() => setSelectedItem('reportedUser')}>Reported Users</a>
+
             </li>
           </ul>
         </div>
