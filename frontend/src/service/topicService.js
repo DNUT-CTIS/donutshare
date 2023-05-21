@@ -27,6 +27,22 @@ const getCurrentTopic = (content) => {
         });
 };
 
+const topicTimer = (topic1, topic2, duration) => {
+  return axios.post(API_URL + "/test/topicTimer", {
+    topic1, topic2, duration,
+  }).then(console.log("Test"));
+};
+
+const getTestTopic = (content) => {
+  return axios
+    .get(API_URL + "/test/currentTopic", {
+      content
+    })
+    .then((response) => {
+      return response.data;
+    });
+};
+
 const getAllTopics = (content) => {
     return axios
       .get(API_URL + "/topic/allTopics", {
@@ -40,7 +56,9 @@ const getAllTopics = (content) => {
 const topicService = {
     postTopic,
     getCurrentTopic,
-    getAllTopics
+    getAllTopics,
+    getTestTopic,
+    topicTimer
 };
 
 export default topicService;
