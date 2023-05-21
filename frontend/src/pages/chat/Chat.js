@@ -14,6 +14,7 @@ import Peer from "peerjs";
 import postService from "../../service/postService";
 import {WarningModal} from "../../shared/WarningModal";
 import PostService from "../../service/postService";
+import {LeftModal} from "./LeftModal";
 
 
 
@@ -23,6 +24,7 @@ const Chat = ({ match }) => {
   const [inputValue, setInputValue] = useState("");
   const [user, setUser] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLeftModalOpen, setIsLeftModalOpen] = useState(false);
   const [opinion, setOpinion] = useState("");
   const navigate = useNavigate();
   const messagesEndRef = useRef(null)
@@ -98,6 +100,9 @@ const Chat = ({ match }) => {
     socket.on("chatMessage", (message) => {
       setMessages((messages) => [...messages, message]);
 
+      if (message.username === "System") {
+        setIsLeftModalOpen(true);
+      }
       const isSentByCurrentUser = username === message.username;
       if (!isSentByCurrentUser) {
         setUser(message.username);
@@ -184,6 +189,10 @@ const Chat = ({ match }) => {
       <ModalContainer isOpen={isWarningModalOpen}>
         <WarningModal></WarningModal>
         <button></button>
+      </ModalContainer>
+
+      <ModalContainer isOpen={isLeftModalOpen}>
+        <LeftModal></LeftModal>
       </ModalContainer>
 
       <div className="flex flex-row dark:bg-zinc-700">
