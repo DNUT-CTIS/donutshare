@@ -149,6 +149,13 @@ const changePassword = asyncHandler(async (req, res) => {
   const user = await User.findById(userId);
 
   if (user && (await user.matchPassword(currentPassword))) {
+    if (currentPassword === newPassword) {
+      res.status(400);
+      throw new Error(
+        "New password must be different from the current password"
+      );
+    }
+
     user.password = newPassword;
     await user.save();
 
@@ -158,6 +165,7 @@ const changePassword = asyncHandler(async (req, res) => {
     throw new Error("Invalid Password");
   }
 });
+
 
 const changePasswordWithoutToken = asyncHandler(async (req, res) => {
   const { userId, newPassword } = req.body;
