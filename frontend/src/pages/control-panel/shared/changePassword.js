@@ -12,7 +12,13 @@ function ChangePassword() {
 
   const handlePasswordChange = (e) => {
 
+
     if (password.length < 6) {
+      toast.error("Password should be at least 6 characters long");
+      return;
+    }
+
+    if (newPassword.length < 6) {
       toast.error("Password should be at least 6 characters long");
       return;
     }
