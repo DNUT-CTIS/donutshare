@@ -1,23 +1,22 @@
-import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import socket from "../../socket/socket";
 import classNames from "classnames";
-import {Navbar} from "../../shared/Navbar"
+import { Navbar } from "../../shared/Navbar";
 import Avatar from "avataaars";
-import donutStatic from '../dashboard/donut.jpg';
-import {RandomName} from "../dashboard/RandomName";
+import donutStatic from "../dashboard/donut.jpg";
+import { RandomName } from "../dashboard/RandomName";
 import donutBackground from "./donut_patern.png";
 import ModalContainer from "../../shared/ModalContainer";
-import {generateRandomAvatarOptions} from '../dashboard/randomAvatar';
-import {PostModal} from "./PostModal";
-import {useNavigate} from "react-router-dom";
-import Peer from "peerjs";
+import { generateRandomAvatarOptions } from "../dashboard/randomAvatar";
+import { PostModal } from "./PostModal";
+import { useNavigate } from "react-router-dom";
+import Recorder from "mic-recorder-to-mp3";
 import postService from "../../service/postService";
 import {WarningModal} from "../../shared/WarningModal";
 import PostService from "../../service/postService";
-import {LeftModal} from "./LeftModal";
+import {LeftModal} from "./LeftModal"
 
-
-
+const recorder = new Recorder({ bitRate: 128, sampleRateHertz: 44100 });
 
 const Chat = ({ match }) => {
   const [messages, setMessages] = useState([]);
@@ -27,74 +26,25 @@ const Chat = ({ match }) => {
   const [isLeftModalOpen, setIsLeftModalOpen] = useState(false);
   const [opinion, setOpinion] = useState("");
   const navigate = useNavigate();
-  const messagesEndRef = useRef(null)
-  const peer = new Peer()
+  const messagesEndRef = useRef(null);
+  const [isRecording, setIsRecording] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(null);
 
   const [isWarningModalOpen, setIsWarningModalOpen] = useState(false);
 
   const username = JSON.parse(localStorage.getItem("username"));
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "start"});
-  }
+    messagesEndRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
   useEffect(() => {
     socket.on("connect", () => {
       console.log("this is chat");
       console.log(`Connected to server with ID ${socket.id}`);
-    });
-
-    let audioConnection = null;
-    let audioStream = null;
-    let destPeer = null;
-    let call = null;
-
-    peer.on("open", (peerId) => {
-      console.log(`Connected to peer server with ID ${peerId}`);
-      socket.emit("peer-connection", peer.id);
-    });
-
-    socket.on("peer-bond", async (destPeerId) => {
-      console.log("opponents peer id: " + destPeerId);
-
-      audioConnection = peer.connect(destPeerId);
-      audioConnection.on("open", async () => {
-        console.log("Connected to remote-peer-id!");
-
-        // Save the destination peer ID
-        destPeer = destPeerId;
-      });
-    });
-
-    const pushToTalkButton = document.getElementById("push-to-talk");
-
-    pushToTalkButton.addEventListener("click", async () => {
-      // Get the user's audio stream
-      audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-
-      // Create a new PeerJS MediaConnection for the audio stream
-      call = peer.call(destPeer, audioStream);
-
-      // Play the audio stream from the other peer when it's received
-      call.on("stream", (stream) => {
-        const audioElement = document.createElement("audio");
-        audioElement.srcObject = stream;
-        audioElement.play();
-      });
-    });
-
-    peer.on("call", function (incomingCall) {
-      // Answer the call, providing our mediaStream
-      incomingCall.answer(audioStream);
-
-      // Enable audio track
-      audioStream.getAudioTracks()[0].enabled = true;
-
-      // Play the audio stream from the other peer when it's received
-      incomingCall.on("stream", (stream) => {
-        const audioElement = document.createElement("audio");
-        audioElement.srcObject = stream;
-        audioElement.play();
-      });
     });
 
     socket.on("chatMessage", (message) => {
@@ -107,7 +57,11 @@ const Chat = ({ match }) => {
       if (!isSentByCurrentUser) {
         setUser(message.username);
       }
-      console.log(user);
+    });
+
+    socket.on("processedAudio", (data) => {
+      console.log("got the audio")
+      playAudioStream(data, -6);
     });
 
     socket.on("leaveChat", () => {
@@ -122,12 +76,52 @@ const Chat = ({ match }) => {
     };
   }, [messages]);
 
+  const handlePushToTalk = async () => {
+    if (!isRecording) {
+      setIsRecording(true);
+      recorder.start();
+    } else {
+      setIsRecording(false);
+      const [buffer, blob] = await recorder.stop().getMp3();
+      sendAudioData(blob, buffer);
+    }
+  };
+
+
+  const sendAudioData = (data, buffer) => {
+    socket.emit("audioData", { audioData: data, audioBuffer: buffer });
+  };
+
+  const playAudioStream = (data, pitchShift) => {
+    const audioContext = new AudioContext();
+    const audioSource = audioContext.createBufferSource();
+    audioContext.decodeAudioData(data, (buffer) => {
+      audioSource.buffer = buffer;
+
+      // Apply pitch shift
+      const detuneValue = pitchShift * 100; // Adjust the pitch shift value as needed
+      audioSource.detune.value = detuneValue;
+
+      audioSource.connect(audioContext.destination);
+      audioSource.start();
+    });
+  };
+
+
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
+
   const handleInputChange = useCallback((event) => {
     setInputValue(event.target.value);
   }, []);
 
   const handleModalClose = () => {
-
     socket.on("leaveChat", () => {
       console.log("Disconnected from server");
     });
@@ -140,26 +134,25 @@ const Chat = ({ match }) => {
     setIsModalOpen(true);
   };
 
+  const handleReportClick = async (event) => {
+    event.preventDefault()
+    try {
+      await PostService.reportUser(user , "yes", "user" ).then(
+        (response) => {
+          // check for token and user already exists with 200
+          //   console.log("Sign up successfully", response);
 
-    const handleReportClick = async (event) => {
-      event.preventDefault()
-      try {
-        await PostService.reportUser(user , "yes", "user" ).then(
-          (response) => {
-            // check for token and user already exists with 200
-            //   console.log("Sign up successfully", response);
 
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
 
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
-      } catch (err) {
-        console.log(err);
-      }
-
-    };
+  };
 
   const handleSendMessage = (event) => {
     event.preventDefault();
@@ -169,7 +162,7 @@ const Chat = ({ match }) => {
       socket.emit("chatMessage", message);
     }
   };
-  socket.on("withdrawChat", (side)=>{
+  socket.on("withdrawChat", (side) => {
     setOpinion(side);
     setIsModalOpen(true);
   });
@@ -216,7 +209,8 @@ const Chat = ({ match }) => {
             <button
               className="bg-pink-600 text-black active:bg-pink-800
         font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mb-1"
-            onClick={handleReportClick} >
+              onClick={handleReportClick}
+            >
               Report
             </button>
           </div>
@@ -234,6 +228,8 @@ const Chat = ({ match }) => {
         >
           <div className="flex-1 overflow-y-scroll p-4">
             {messages.map((message, index) => {
+              const username = JSON.parse(localStorage.getItem("username"));
+
               const isSentByCurrentUser = username === message.username;
               console.log(isSentByCurrentUser);
               console.log(message.username);
@@ -266,16 +262,15 @@ const Chat = ({ match }) => {
               className="flex-1 rounded-full dark:bg-zinc-700 dark:text-white dark:focus:border-pink-700 border-gray-600 px-4 py-2 mr-2"
             />
 
-            <button id="push-to-talk" className="bg-pink-500 rounded-full text-white font-medium px-2 py-2 mx-2">
-              <svg fill="none" stroke="currentColor" className="w-6 h-6" strokeWidth="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"></path>
-              </svg>
-            </button>
-
-            <button
-              type="submit"
-              className="bg-pink-500 rounded-full text-white font-medium px-4 py-2"
-            >
+            <div>
+              <div>
+                <button id="push-to-talk" onClick={handlePushToTalk}>
+                  {isRecording ? "Stop" : "Push to Talk"}
+                </button>
+                {isPlaying && <p>Opponent is speaking...</p>}
+              </div>
+            </div>
+            <button className="bg-pink-500 rounded-full text-white font-medium px-4 py-2">
               Send
             </button>
           </form>
