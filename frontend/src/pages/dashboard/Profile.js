@@ -31,9 +31,9 @@ export function Profile() {
 
 
         <div>
-            <section className="bg-gray-50 dark:bg-zinc-900">
-                <div class="flex justify-center gap-16 mt-16">
-                    <div class="flex-none w-full h-fit max-w-sm  bg-black dark:shadow-md border-4 border-gray-500/50 rounded-lg shadow dark:bg-gray-800">
+            <section className="bg-gray-50 dark:bg-zinc-900 ">
+                <div class="dark flex justify-center gap-16 mt-16 flex-col items-center">
+                    <div class="flex-none w-full h-fit max-w-sm   bg-black rounded-lg shadow dark:shadow-md border-4 border-pink-500/50 dark:bg-zinc-800">
                         <div class="flex justify-end px-4 pt-4">
 
 
@@ -53,13 +53,13 @@ export function Profile() {
 
                         </div>
                     </div>
-                    <div class="flex-none w-full h-full max-w-sm md:max-w-3xl  b bg-gray dark:shadow-md border-4 border-gray-500/50 rounded-lg shadow dark:bg-gray-800">
+                    <div class="dark flex-none w-full h-full max-w-sm md:max-w-2xl   bg-black rounded-lg shadow dark:shadow-md border-4 border-pink-500/50 dark:bg-zinc-800">
                         <div class="flex justify-end px-4 pt-4">
 
 
 
                         </div>
-                        <div class="flex flex-col items-center pb-10">
+                        <div class="flex flex-col items-center pb-10 ">
 
                             <h5 class="m-4 mb-8 text-xl font-medium text-gray-900 dark:text-white">PROFILE</h5>
 
@@ -85,6 +85,7 @@ export function Profile() {
 
 
                     </div>
+                    
                 </div>
             </section>
         </div>
