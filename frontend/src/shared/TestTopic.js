@@ -12,6 +12,7 @@ function TestTopic() {
   const [duration, setDuration] = useState('');
   const [allTopics, setAllTopics] = useState([]);
   const [showModal, setShowModal] = useState(false)
+  const [remaining, setRemaining] = useState('');
 
 
   const handleSubmit = (event) => {
@@ -19,10 +20,12 @@ function TestTopic() {
     topicService.topicTimer(topic1, topic2, duration)
       .then((data) => {
         // Success message or perform any other action
+        window.location.reload(false);
       })
       .catch((error) => {
         // Error message or perform any other action
       });
+
 
 
     // Add your logic to handle the submission here
@@ -38,7 +41,7 @@ function TestTopic() {
           //    console.log(response.userArr)
           console.log(response)
           setTopic(response.currentTopic);
-
+          setRemaining(response.remainingTime);
         },
         (error) => {
           console.log(error);
@@ -92,6 +95,13 @@ function TestTopic() {
             </p>
           </div>
         </div>
+      <div className="border rounded-md shadow shadow-xl dark:bg-zinc-800 dark:border-zinc-700 w-64 flex flex-row my-4">
+        <div className="mx-auto my-4 items-center flex flex-col gap-4 sm:w-fit w-48">
+          <p className="max-h-60 my-2 dark:text-white text-center">
+            {remaining}
+          </p>
+        </div>
+      </div>
       <ToastContainer />
     </div>
 
