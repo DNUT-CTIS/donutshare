@@ -15,11 +15,13 @@ import postService from "../../service/postService";
 import {WarningModal} from "../../shared/WarningModal";
 import PostService from "../../service/postService";
 import {LeftModal} from "./LeftModal"
+import topicService from "../../service/topicService";
 
 const recorder = new Recorder({ bitRate: 128, sampleRateHertz: 44100 });
 
 const Chat = ({ match }) => {
   const [messages, setMessages] = useState([]);
+  const [topic, setTopic] = useState('');
   const [inputValue, setInputValue] = useState("");
   const [user, setUser] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -42,6 +44,23 @@ const Chat = ({ match }) => {
     });
   };
   useEffect(() => {
+    try {
+      topicService.getCurrentTopic().then(
+        (response) => {
+          // check for token and user already exists with 200
+          //   console.log("Sign up successfully", response);
+          //    console.log(response.userArr)
+          setTopic(response.topic)
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } catch (err) {
+
+      console.log(err);
+    }
+
     socket.on("connect", () => {
       console.log("this is chat");
       console.log(`Connected to server with ID ${socket.id}`);
@@ -199,14 +218,14 @@ const Chat = ({ match }) => {
             ></Avatar>
             {randomName}
             <button
-              className="bg-pink-600 text-black active:bg-pink-800
+              className="bg-pink-500 text-white active:bg-pink-800 rounded-full
         font-bold my-6 px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-32 mb-1"
               onClick={handleWithdrawClick}
             >
               Withdraw
             </button>
             <button
-              className="bg-pink-600 text-black active:bg-pink-800
+              className="bg-pink-500 text-white rounded-full active:bg-pink-800
         font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mb-1"
               onClick={handleReportClick}
             >
@@ -216,7 +235,7 @@ const Chat = ({ match }) => {
           <div className="text-center mx-auto my-16">
             <p className="font-extrabold text-xl">Todays donut</p>
             <h2>
-              Burası contexlen passlanır heralde
+              {topic}
               <img src={donutStatic} alt="" />
             </h2>
           </div>
@@ -263,8 +282,15 @@ const Chat = ({ match }) => {
 
             <div>
               <div>
-                <button id="push-to-talk" onClick={handlePushToTalk}>
-                  {isRecording ? "Stop" : "Push to Talk"}
+                <button id="push-to-talk" onClick={handlePushToTalk} className="bg-pink-500 rounded-full text-white font-medium px-2 py-2 mx-2">
+                  {
+                    !isRecording ? <svg fill="none" stroke="currentColor" className="w-6 h-6" strokeWidth="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"></path>
+                    </svg> :
+                      <svg fill="none" stroke="currentColor" stroke-width="1.5" className="w-6 h-6" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 7.5A2.25 2.25 0 017.5 5.25h9a2.25 2.25 0 012.25 2.25v9a2.25 2.25 0 01-2.25 2.25h-9a2.25 2.25 0 01-2.25-2.25v-9z"></path>
+                      </svg>
+                  }
                 </button>
                 {isPlaying && <p>Opponent is speaking...</p>}
               </div>
