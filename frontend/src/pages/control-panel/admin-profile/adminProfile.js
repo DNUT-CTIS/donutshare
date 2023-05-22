@@ -17,27 +17,27 @@ function AdminProfile() {
       <div className="dark flex flex-row flex-1">
         <div className="w-1/6 h-full p-4  bg-black  shadow dark:shadow-md border-2 border-gray-700 dark:bg-zinc-800">
         <ul>
-            <li className={`mb-4 ${selectedItem === 'profile' ? 'bg-yellow-300 rounded-md' : ''}`}>
+            <li className={`mb-4 ${selectedItem === 'profile' ? 'bg-pink-500 rounded-md' : ''}`}>
               <a href="#" className="dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 font-bold hover:text-pink-700 block py-2 px-4 rounded-md"
                 onClick={() => setSelectedItem('profile')}>Profile</a>
             </li>
-            <li className={`mb-4 ${selectedItem === 'general' ? 'bg-yellow-300 rounded-md' : ''}`}>
+            <li className={`mb-4 ${selectedItem === 'general' ? 'bg-pink-500 rounded-md' : ''}`}>
               <a href="#" className="dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 font-bold hover:text-pink-700 block py-2 px-4 rounded-md"
                 onClick={() => setSelectedItem('general')}>Change Password</a>
             </li>
-            <li className={`mb-4 ${selectedItem === 'dblist' ? 'bg-yellow-300 rounded-md' : ''}`}>
+            <li className={`mb-4 ${selectedItem === 'dblist' ? 'bg-pink-500 rounded-md' : ''}`}>
               <a href="#" className="dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 font-bold hover:text-pink-700 block py-2 px-4 rounded-md"
                 onClick={() => setSelectedItem('dblist')}>Debater List</a>
             </li>
-            <li className={`mb-4 ${selectedItem === 'add' ? 'bg-yellow-300 rounded-md' : ''}`}>
+            <li className={`mb-4 ${selectedItem === 'add' ? 'bg-pink-500 rounded-md' : ''}`}>
               <a href="#" className="dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 font-bold hover:text-pink-700 block py-2 px-4 rounded-md"
                 onClick={() => setSelectedItem('add')}>Add Topic</a>
             </li>
-            <li className={`mb-4 ${selectedItem === 'modlist' ? 'bg-yellow-300 rounded-md' : ''}`}>
+            <li className={`mb-4 ${selectedItem === 'modlist' ? 'bg-pink-500 rounded-md' : ''}`}>
               <a href="#" className="dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 font-bold hover:text-pink-700 block py-2 px-4 rounded-md"
                 onClick={() => setSelectedItem('modlist')}>Moderator List</a>
             </li>
-            <li className={`mb-4 ${selectedItem === 'reportedReason' ? 'bg-yellow-300 rounded-md' : ''}`}>
+            <li className={`mb-4 ${selectedItem === 'reportedReason' ? 'bg-pink-500 rounded-md' : ''}`}>
               <a href="#" className="dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 font-bold hover:text-pink-700 block py-2 px-4 rounded-md"
                 onClick={() => setSelectedItem('reportedReason')}>Reported Reasons</a>
             </li>
