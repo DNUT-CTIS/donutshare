@@ -96,6 +96,7 @@ const Chat = ({ match }) => {
   }, [messages]);
 
   const handlePushToTalk = async () => {
+
     if (!isRecording) {
       setIsRecording(true);
       recorder.start();
@@ -279,10 +280,7 @@ const Chat = ({ match }) => {
               placeholder="Type a message"
               className="flex-1 rounded-full dark:bg-zinc-700 dark:text-white dark:focus:border-pink-700 border-gray-600 px-4 py-2 mr-2"
             />
-
-            <div>
-              <div>
-                <button id="push-to-talk" onClick={handlePushToTalk} className="bg-pink-500 rounded-full text-white font-medium px-2 py-2 mx-2">
+                <button type="button" id="push-to-talk" onClick={handlePushToTalk} className="bg-pink-500 rounded-full text-white font-medium px-2 py-2 mx-2">
                   {
                     !isRecording ? <svg fill="none" stroke="currentColor" className="w-6 h-6" strokeWidth="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"></path>
@@ -293,8 +291,6 @@ const Chat = ({ match }) => {
                   }
                 </button>
                 {isPlaying && <p>Opponent is speaking...</p>}
-              </div>
-            </div>
             <button className="bg-pink-500 rounded-full text-white font-medium px-4 py-2">
               Send
             </button>
