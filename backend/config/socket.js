@@ -58,12 +58,12 @@ module.exports = function (server) {
           io.to(roomName).emit("matched", roomName);
 
          agreeSocket.on("audioData", async (data) => {
-          await processAudioData(data.audioBuffer);
+         // await processAudioData(data.audioBuffer);
            disagreeSocket.emit("processedAudio", data.audioData);
          });
 
          disagreeSocket.on("audioData", async (data) => {
-         await processAudioData(data.audioBuffer);
+       //  await processAudioData(data.audioBuffer);
            agreeSocket.emit("processedAudio", data.audioData);
          });
 
