@@ -18,8 +18,14 @@ import { ForgotPasswordEmail } from './pages/auth/forgotPasswordEmail';
 import 'react-toastify/dist/ReactToastify.css';
 import {Profile} from "./pages/dashboard/Profile"
 import TestTopic from "./shared/TestTopic";
+import DebaterRoutes from "./shared/DebaterRoutes";
+import ModeratorRoutes from "./shared/ModeratorRoutes";
+import AdminRoutes from "./shared/AdminRoutes";
 
 function App() {
+
+  const userType = JSON.parse(localStorage.getItem("userType"));
+
   return (
 
     <div>
@@ -27,11 +33,17 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<PrivateRoutes/>}>
-            <Route path="/control-panel/admin-profile" element={<AdminProfile/>}></Route>
-            <Route path="/control-panel/mod-profile" element={<ModeratorProfile/>}/>
-            <Route path="/control-panel/signup-mod" element={<SignupMod/>}></Route>
-            <Route path="/control-panel/profile" element={<DebaterProfile/>}/>
-            <Route path="/chat/:roomName" element={<Chat/>} />
+             <Route element={<DebaterRoutes/>}>
+               <Route element={<ModeratorRoutes/>}>
+                 <Route path="/control-panel/mod-profile" element={<ModeratorProfile/>}/>
+               </Route>
+               <Route element={<AdminRoutes/>}>
+                 <Route path="/control-panel/admin-profile" element={<AdminProfile/>}></Route>
+                 <Route path="/control-panel/signup-mod" element={<SignupMod/>}></Route>
+               </Route>
+               <Route path="/control-panel/profile" element={<DebaterProfile/>}/>
+               <Route path="/chat/:roomName" element={<Chat/>} />
+             </Route>
           </Route>
           <Route path="/test" element={<TestTopic/>}/>
           <Route path="/dashboard" element={<Dashboard/>}/>
@@ -44,8 +56,6 @@ function App() {
           <Route path="/" element={<Navigate to="/dashboard"/>}/>
           <Route path='*' element={<ErrorPage/>}/>
         </Routes>
-
-
       </BrowserRouter>
     </div>
 
