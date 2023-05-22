@@ -138,7 +138,7 @@ export function Topic() {
       <ModalContainer isOpen={isModalOpen} onClose={handleModalClose}>
         <SearchModal></SearchModal>
         <div className="flex justify-center">
-          <button className="bg-pink-600 text-black active:bg-pink-800 font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" onClick={handleModalClose}>Cancel</button>
+          <button className="bg-pink-600 text-white rounded-full active:bg-pink-800 font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1" onClick={handleModalClose}>Cancel</button>
         </div>
       </ModalContainer>
       <button onClick={handleDisagreeClick}>Disagree</button>

@@ -7,8 +7,8 @@ export function FoundMatch() {
   const constraintsRef = useRef(null)
 
   return (
-    <motion.div className="w-[600px] h-[500px]">
-      <p className="animate-pulse mx-auto text-center dark:text-white">Found someone</p>
+    <motion.div className="w-[600px] h-[200px]">
+      <p className="animate-pulse mx-auto text-xl text-center dark:text-white">Found someone</p>
       <div className="flex justify-between items-center">
         <motion.img className="" src={donutStatic}
                     animate={{
